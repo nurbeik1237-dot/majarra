@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مركز مجرّة المجتمعي | Majarra Community Bio</title>
+  <meta name="description" content="الصفحة الرسمية لشجرة روابط وخدمات مركز مجرّة المجتمعي إسطنبول.">
+
+  <!-- Thmanyah Serif Display Font & Google Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Shared Official Majarra System Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=999.0">
+
+  <style>
+    body {
+      background-color: var(--bg-main, #0e131f);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 0 0 60px 0;
+      position: relative;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    .app-header {
+      width: 100% !important;
+      box-sizing: border-box;
+    }
+
+    /* LIGHT THEME UNIFIED OVERRIDES FOR BIO HUB */
+    [data-theme="light"] body {
+      background-color: var(--bg-main, #f5f4f0);
+      color: var(--text-primary, #1e293b);
+    }
+
+    [data-theme="light"] .profile-card,
+    [data-theme="light"] .video-section-card {
+      background: var(--bg-card, #ffffff);
+      border-color: var(--border-color, #e2e8f0);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    [data-theme="light"] .link-pill-btn {
+      background: var(--bg-card, #ffffff);
+      border-color: var(--border-color, #e2e8f0);
+      color: var(--text-primary, #1e293b);
+    }
+
+    [data-theme="light"] .link-pill-btn:hover {
+      background: #f8fafc;
+      border-color: var(--brand-purple);
+      box-shadow: 0 8px 25px rgba(138, 111, 178, 0.15);
+    }
+
+    [data-theme="light"] .profile-avatar {
+      border-color: #ffffff;
+      background: #ffffff;
+    }
+
+    [data-theme="light"] .event-item-card {
+      background: #f8fafc;
+      border-color: var(--border-color, #e2e8f0);
+    }
+
+    [data-theme="light"] .modal-box {
+      background: var(--bg-card, #ffffff);
+      border-color: var(--border-color, #e2e8f0);
+      color: var(--text-primary, #1e293b);
+    }
+
+    [data-theme="light"] .event-title {
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .bio-footer {
+      border-top-color: var(--border-color, #e2e8f0);
+      color: var(--text-secondary, #475569);
+    }
+
+    /* AMBIENT BACKGROUND GLOW BLOBS */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -150px;
+      right: 50%;
+      transform: translateX(50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(157, 132, 198, 0.18) 0%, rgba(15, 23, 42, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -150px;
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(232, 198, 119, 0.12) 0%, rgba(15, 23, 42, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bio-container {
+      width: 100%;
+      max-width: 680px;
+      margin: 32px auto 0;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bio-main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+
+    /* LAPTOP / DESKTOP RESPONSIVE SIZING (>= 992px) */
+    @media (min-width: 992px) {
+      .bio-container {
+        max-width: 700px;
+        margin: 40px auto 0;
+        gap: 24px;
+      }
+
+      .profile-card {
+        padding: 34px 28px 28px !important;
+        border-radius: 28px !important;
+      }
+
+      .profile-avatar-wrapper {
+        width: 132px !important;
+        height: 132px !important;
+      }
+
+      .profile-title {
+        font-size: 1.65rem !important;
+      }
+
+      .link-pill-btn {
+        padding: 18px 24px !important;
+        border-radius: 22px !important;
+        font-size: 1.05rem !important;
+      }
+    }
+
+    /* PHONE / MOBILE RESPONSIVE SIZING (< 768px) */
+    @media (max-width: 767px) {
+      .bio-container {
+        max-width: 100%;
+        margin: 16px auto 0;
+        padding: 0 12px;
+        gap: 14px;
+      }
+
+      .bio-main-content {
+        gap: 14px;
+      }
+
+      .profile-card {
+        padding: 20px 16px 18px !important;
+        border-radius: 20px !important;
+      }
+
+      .profile-avatar-wrapper {
+        width: 100px !important;
+        height: 100px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .profile-title {
+        font-size: 1.3rem !important;
+      }
+
+      .profile-subtitle {
+        font-size: 0.82rem !important;
+        margin-bottom: 10px !important;
+      }
+
+      .link-pill-btn {
+        padding: 14px 16px !important;
+        border-radius: 16px !important;
+        font-size: 0.92rem !important;
+      }
+
+      .link-pill-icon-bubble {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1rem !important;
+      }
+
+      .profile-top-bar {
+        margin-bottom: 14px !important;
+      }
+
+      .live-status-pill {
+        font-size: 0.7rem !important;
+        padding: 4px 10px !important;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* TOP PROFILE HEADER CARD - ULTRA LUXURY GLASS */
+    .profile-card {
+      background: linear-gradient(135deg, rgba(23, 30, 46, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 3px solid var(--brand-gold);
+      border-radius: 24px;
+      padding: 28px 24px 24px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(232, 198, 119, 0.15);
+      overflow: hidden;
+    }
+
+    /* TOP HEADER CONTROLS BAR (LIVE STATUS + SHARE BUTTON) */
+    .profile-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .live-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-size: 0.73rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .live-status-pill.closed {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.2);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 12px #10b981;
+      animation: pulseGlow 1.8s infinite;
+      transition: all 0.3s ease;
+    }
+
+    .live-status-pill.closed .live-dot {
+      background: #f59e0b;
+      box-shadow: 0 0 12px #f59e0b;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.3); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    .share-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-primary);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+
+    .share-btn:hover {
+      background: var(--brand-gold);
+      color: #0f172a;
+      border-color: var(--brand-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(232, 198, 119, 0.35);
+    }
+
+    /* ULTRA-LUXURY ANIMATED AVATAR FRAME */
+    .profile-avatar-wrapper {
+      position: relative;
+      width: 124px;
+      height: 124px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #e8c677 0%, rgba(157, 132, 198, 0.8) 50%, #f3d489 100%);
+      box-shadow: 0 0 45px rgba(232, 198, 119, 0.45), 0 12px 30px rgba(0, 0, 0, 0.6);
+      animation: floatLogo 4s ease-in-out infinite;
+    }
+
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .profile-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #0f172a;
+      background: #0f172a;
+      padding: 6px;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .profile-avatar-wrapper:hover .profile-avatar {
+      transform: scale(1.06) rotate(3deg);
+    }
+
+    .verified-badge {
+      position: absolute;
+      bottom: 4px;
+      left: 6px;
+      background: linear-gradient(135deg, #e8c677 0%, #f3d489 100%);
+      color: #0f172a;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 900;
+      border: 2.5px solid #0f172a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      z-index: 5;
+    }
+
+    .profile-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 0%, #e8c677 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .profile-subtitle {
+      font-size: 0.88rem;
+      color: var(--brand-gold);
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: 0.2px;
+    }
+
+    /* LANGUAGE SWITCHER */
+    .lang-bar {
+      display: inline-flex;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 4px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-bottom: 18px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, #e8c677 0%, #d97706 100%);
+      color: #0f172a;
+      font-weight: 900;
+      box-shadow: 0 3px 12px rgba(232, 198, 119, 0.35);
+    }
+
+    /* SOCIAL SHORTCUTS ROW & FOOTER */
+    .social-icons-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .social-icon-btn {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #0f172a;
+      border: 1.5px solid var(--border-color);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .social-icon-btn:hover {
+      transform: translateY(-4px) scale(1.12);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .social-icon-btn.whatsapp {
+      color: #25D366;
+      border-color: rgba(37, 211, 102, 0.35);
+    }
+    .social-icon-btn.whatsapp:hover {
+      background: #25D366;
+      color: #ffffff;
+      border-color: #25D366;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+    }
+
+    .social-icon-btn.email {
+      color: #3b82f6;
+      border-color: rgba(59, 130, 246, 0.35);
+    }
+    .social-icon-btn.email:hover {
+      background: #3b82f6;
+      color: #ffffff;
+      border-color: #3b82f6;
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.45);
+    }
+
+    .social-icon-btn.instagram {
+      color: #e1306c;
+      border-color: rgba(225, 48, 108, 0.35);
+    }
+    .social-icon-btn.instagram:hover {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: #ffffff;
+      border-color: #dc2743;
+      box-shadow: 0 8px 25px rgba(225, 48, 108, 0.45);
+    }
+
+    .social-icon-btn.location {
+      color: var(--brand-gold);
+      border-color: rgba(232, 198, 119, 0.35);
+    }
+    .social-icon-btn.location:hover {
+      background: var(--brand-gold);
+      color: #0f172a;
+      border-color: var(--brand-gold);
+      box-shadow: 0 8px 25px rgba(232, 198, 119, 0.45);
+    }
+
+    .social-tooltip {
+      position: absolute;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      border: 1px solid var(--border-color);
+      z-index: 10;
+    }
+
+    .social-icon-btn:hover .social-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* SECTION HEADER BADGE */
+    .links-section-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--brand-gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 6px 4px;
+      letter-spacing: 0.3px;
+    }
+
+    /* BUTTONS STACK */
+    .links-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-pill-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(23, 30, 46, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px 22px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 0.98rem;
+      font-weight: 800;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .link-pill-content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .link-pill-icon-bubble {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(232, 198, 119, 0.12);
+      border: 1px solid rgba(232, 198, 119, 0.3);
+      color: var(--brand-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .link-pill-btn:hover {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: rgba(232, 198, 119, 0.6);
+      color: var(--brand-gold);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(232, 198, 119, 0.2);
+    }
+
+    .link-pill-btn:hover .link-pill-icon-bubble {
+      background: var(--brand-gold);
+      color: #0f172a;
+      transform: scale(1.1);
+    }
+
+    .link-pill-btn .chevron-icon {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    html[dir="rtl"] .link-pill-btn:hover .chevron-icon {
+      color: var(--brand-gold);
+      transform: translateX(-6px);
+    }
+
+    html[dir="ltr"] .link-pill-btn:hover .chevron-icon {
+      color: var(--brand-gold);
+      transform: translateX(6px);
+    }
+
+    /* FEATURED WEEKLY EVENTS BUTTON */
+    .link-pill-btn.featured-events {
+      background: linear-gradient(135deg, rgba(232, 198, 119, 0.22) 0%, rgba(138, 111, 178, 0.25) 100%);
+      border: 1.5px solid var(--brand-gold);
+      color: var(--brand-gold);
+      box-shadow: 0 10px 30px rgba(232, 198, 119, 0.25);
+    }
+
+    .link-pill-btn.featured-events .link-pill-icon-bubble {
+      background: rgba(232, 198, 119, 0.25);
+      border-color: var(--brand-gold);
+      color: #ffffff;
+    }
+
+    .link-pill-btn.featured-events:hover {
+      background: linear-gradient(135deg, rgba(232, 198, 119, 0.35) 0%, rgba(168, 85, 247, 0.4) 100%);
+      color: #ffffff;
+      border-color: #fef08a;
+      box-shadow: 0 15px 40px rgba(232, 198, 119, 0.4);
+    }
+
+    .featured-fire-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(232, 198, 119, 0.15);
+      color: var(--brand-gold);
+      border: 1px solid rgba(232, 198, 119, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: 8px;
+    }
+
+    html[dir="ltr"] .featured-fire-tag {
+      margin-right: 0;
+      margin-left: 8px;
+    }
+
+    /* EMBEDDED YOUTUBE VIDEO SECTION */
+    .video-section-card {
+      background: rgba(23, 30, 46, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 18px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-header-title {
+      font-size: 0.94rem;
+      font-weight: 800;
+      color: var(--brand-gold);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-embed-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .video-embed-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .play-btn-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 66px;
+      height: 66px;
+      background: rgba(220, 38, 38, 0.92);
+      border: 2.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 35px rgba(220, 38, 38, 0.7), 0 8px 25px rgba(0, 0, 0, 0.5);
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 5;
+    }
+
+    .video-embed-wrapper:hover .play-btn-overlay {
+      transform: translate(-50%, -50%) scale(1.15);
+      background: #ff0000;
+      box-shadow: 0 0 50px rgba(255, 0, 0, 0.9), 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    /* CLEAN WEEKLY EVENTS POPUP MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(9, 13, 22, 0.88);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: #172033;
+      border: 1.5px solid var(--brand-gold);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 480px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px 20px;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-primary);
+      font-size: 1.15rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      outline: none;
+      padding: 0;
+    }
+
+    .modal-close-btn:hover {
+      background: linear-gradient(135deg, var(--brand-purple, #8a6fb2), #6b21a8);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: rotate(90deg) scale(1.15);
+      box-shadow: 0 0 22px rgba(138, 111, 178, 0.7), 0 6px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-close-btn:active {
+      transform: rotate(90deg) scale(0.92);
+      box-shadow: 0 0 10px rgba(138, 111, 178, 0.4);
+    }
+
+    html[dir="ltr"] .modal-close-btn {
+      left: auto;
+      right: 16px;
+    }
+
+    .modal-header-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: var(--brand-gold);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-sub-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .event-item-card {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .event-badge {
+      align-self: flex-start;
+      background: rgba(157, 132, 198, 0.2);
+      color: var(--brand-purple);
+      border: 1px solid rgba(157, 132, 198, 0.4);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .event-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .event-meta-info {
+      font-size: 0.78rem;
+      color: var(--brand-gold);
+      font-weight: 700;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .event-register-link {
+      background: var(--brand-gold);
+      color: #0f172a;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 20px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .event-register-link:hover {
+      background: #f3d489;
+    }
+
+    /* FOOTER BRANDING */
+    .bio-footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 10px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .bio-footer strong {
+      color: var(--brand-gold);
+    }
+
+    /* TOAST ALERT NOTIFICATION */
+    #toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(16, 185, 129, 0.95);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 99999;
+    }
+
+    #toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section with Official Majarra Brand Logo & Unified System Controls -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="logo-wrapper">
+          <img src="assets/majarra_official_icon.png" alt="شعار مركز مجرة المجتمعي" class="brand-logo-img" onerror="this.onerror=null; this.src='assets/majarra_logo_arabic.png';">
+        </div>
+        <div class="brand-text">
+          <h1 id="brand-title-text" data-i18n="brandTitle">مركز مجـرّة المجتمعـي <span>| Majarra</span></h1>
+          <p id="brand-sub-text" data-i18n="brandSub">بوابة الروابط والفعاليات والمساحات الإبداعية</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Language Switcher Dropdown -->
+        <div class="lang-switcher-wrapper">
+          <button id="lang-toggle-btn" class="btn btn-outline lang-btn" onclick="toggleLangDropdown(event)" title="تغيير اللغة / Change Language / Dil Değiştir">
+            <i class="fa-solid fa-globe"></i> <span id="current-lang-text">العربية</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown-menu">
+            <button class="lang-option active" id="lang-opt-ar" onclick="selectLanguage('ar')">
+              <span>🇸🇦 العربية</span> <i class="fa-solid fa-check check-icon"></i>
+            </button>
+            <button class="lang-option" id="lang-opt-tr" onclick="selectLanguage('tr')">
+              <span>🇹🇷 Türkçe</span> <i class="fa-solid fa-check check-icon"></i>
+            </button>
+            <button class="lang-option" id="lang-opt-en" onclick="selectLanguage('en')">
+              <span>🇬🇧 English</span> <i class="fa-solid fa-check check-icon"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <div class="bio-container">
+
+    <!-- 1. PROFILE HEADER CARD (المجسم الرئيسي) -->
+    <div class="profile-card">
+
+      <!-- TOP CONTROL BAR -->
+      <div class="profile-top-bar">
+        <div class="live-status-pill" id="live-status-pill-container">
+          <span class="live-dot" id="live-dot-indicator"></span>
+          <span id="txt-live-status">🟢 مفتوح الآن • (1:00ظ - 9:00م)</span>
+        </div>
+        <button onclick="copyBioPageLink()" class="share-btn" id="btn-share-page" title="مشاركة رابط الصفحة">
+          <i class="fa-solid fa-share-nodes"></i> <span>مشاركة</span>
+        </button>
+      </div>
+
+      <!-- AVATAR & VERIFIED CHECK -->
+      <div class="profile-avatar-wrapper">
+        <img src="assets/majarra_official_icon.png" alt="Majarra Community Logo" class="profile-avatar" onerror="this.src='assets/majarra_logo_arabic.png';">
+        <div class="verified-badge" title="حساب توثيق مجرّة المعتمد"><i class="fa-solid fa-check"></i></div>
+      </div>
+
+      <h1 class="profile-title" id="txt-profile-title">
+        مركز مجرّة المجتمعي
+      </h1>
+      <div class="profile-subtitle" id="txt-profile-subtitle">Majarra Community Center</div>
+
+      <!-- LANGUAGE SWITCHER -->
+      <div class="lang-bar">
+        <button class="lang-btn active" id="btn-lang-ar" onclick="setLanguage('ar')">العربية</button>
+        <button class="lang-btn" id="btn-lang-tr" onclick="setLanguage('tr')">Türkçe</button>
+        <button class="lang-btn" id="btn-lang-en" onclick="setLanguage('en')">English</button>
+      </div>
+
+      <!-- SOCIAL SHORTCUTS -->
+      <div class="social-icons-wrapper">
+        <a id="bio-social-wa" href="https://wa.me/905385062989" target="_blank" rel="noopener" class="social-icon-btn whatsapp" title="واتساب المباشر">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span class="social-tooltip" id="tooltip-wa">الواتسـاب</span>
+        </a>
+        <a id="bio-social-email" href="mailto:nur.beik1237@gmail.com" class="social-icon-btn email" title="البريد الإلكتروني">
+          <i class="fa-solid fa-envelope"></i>
+          <span class="social-tooltip" id="tooltip-email">البريد الإلكتروني</span>
+        </a>
+        <a id="bio-social-insta" href="https://www.instagram.com/majarracommunity/" target="_blank" rel="noopener" class="social-icon-btn instagram" title="إنستغرام">
+          <i class="fa-brands fa-instagram"></i>
+          <span class="social-tooltip" id="tooltip-insta">إنستغرام</span>
+        </a>
+        <a id="bio-social-map" href="https://www.google.com/maps/place/Majarra+Community+-+%D9%85%D8%B1%D9%83%D8%B2+%D9%85%D8%AC%D8%B1%D9%91%D8%A9%E2%80%AD/@37.0678503,37.3742895,17z/data=!3m1!4b1!4m6!3m5!1s0x1531e142eed4ad23:0x15a7470cf46658c6!8m2!3d37.0678503!4d37.3742895!16s%2Fg%2F11nbvg75kp" target="_blank" rel="noopener" class="social-icon-btn location" title="موقعنا على الخريطة">
+          <i class="fa-solid fa-location-dot"></i>
+          <span class="social-tooltip" id="tooltip-map">الموقع</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. MAIN BIO CONTENT (العمود الثاني على الحاسوب / تحت الملف الشخصي على الهاتف) -->
+    <div class="bio-main-content">
+      
+      <!-- SECTION TITLE -->
+      <div class="links-section-title">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span id="txt-links-section-title">الروابط والخدمات المتاحة</span>
+      </div>
+
+      <!-- LINKS STACK -->
+      <div class="links-stack">
+        <button onclick="openWeeklyEventsModal()" class="link-pill-btn featured-events" id="btn-weekly-events">
+          <div class="link-pill-content">
+            <div class="link-pill-icon-bubble">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <div>
+              <span id="txt-link-weekly">📅 جدول وفعاليات هذا الأسبوع</span>
+              <span class="featured-fire-tag"><i class="fa-solid fa-fire"></i> متاح الآن</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-left chevron-icon"></i>
+        </button>
+
+        <a href="https://www.google.com/maps/place/Majarra+Community+-+%D9%85%D8%B1%D9%83%D8%B2+%D9%85%D8%AC%D8%B1%D9%91%D8%A9%E2%80%AD/@37.0678503,37.3742895,17z/data=!3m1!4b1!4m6!3m5!1s0x1531e142eed4ad23:0x15a7470cf46658c6!8m2!3d37.0678503!4d37.3742895!16s%2Fg%2F11nbvg75kp" target="_blank" rel="noopener" class="link-pill-btn" id="btn-link-1">
+          <div class="link-pill-content">
+            <div class="link-pill-icon-bubble"><i class="fa-solid fa-location-dot"></i></div>
+            <span id="txt-link-1">الموقع على الخريطة</span>
+          </div>
+          <i class="fa-solid fa-chevron-left chevron-icon"></i>
+        </a>
+
+        <a href="/e/rawya-gathering" class="link-pill-btn" id="btn-link-2">
+          <div class="link-pill-content">
+            <div class="link-pill-icon-bubble"><i class="fa-solid fa-user-plus"></i></div>
+            <span id="txt-link-2">استمارة الانتساب الى مجتمع مجرة</span>
+          </div>
+          <i class="fa-solid fa-chevron-left chevron-icon"></i>
+        </a>
+
+        <a href="/e/creative-workshop" class="link-pill-btn" id="btn-link-3">
+          <div class="link-pill-content">
+            <div class="link-pill-icon-bubble"><i class="fa-solid fa-lightbulb"></i></div>
+            <span id="txt-link-3">شارك فكرتك مع مركز مجرة</span>
+          </div>
+          <i class="fa-solid fa-chevron-left chevron-icon"></i>
+        </a>
+
+        <a href="/e/roeya-club" class="link-pill-btn" id="btn-link-4">
+          <div class="link-pill-content">
+            <div class="link-pill-icon-bubble"><i class="fa-solid fa-graduation-cap"></i></div>
+            <span id="txt-link-4">استمارة التسجيل في نادي روئية</span>
+          </div>
+          <i class="fa-solid fa-chevron-left chevron-icon"></i>
+        </a>
+
+        <a href="index.html" class="link-pill-btn" id="btn-link-5">
+          <div class="link-pill-content">
+            <div class="link-pill-icon-bubble"><i class="fa-solid fa-building-columns"></i></div>
+            <span id="txt-link-5">استمارة حجز القاعات في مركز مجرة 🏛️</span>
+          </div>
+          <i class="fa-solid fa-chevron-left chevron-icon"></i>
+        </a>
+      </div>
+
+      <!-- EMBEDDED YOUTUBE VIDEO SECTION (LAZY LOAD TO PREVENT BROWSER HISTORY HIJACKING) -->
+      <div class="video-section-card">
+        <div class="video-header-title" id="txt-video-title">
+          <i class="fa-solid fa-circle-play" style="color: var(--brand-gold);"></i> From Idea to Reality | رحلة تحضير مركز مجرّة
+        </div>
+        <div class="video-embed-wrapper" id="youtube-embed-container" data-video-id="t0th_3N5yIw" onclick="playYouTubeVideoInline()" style="cursor: pointer;">
+          <img id="youtube-thumb-img" src="https://img.youtube.com/vi/t0th_3N5yIw/hqdefault.jpg" alt="Video Thumbnail" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+          <div class="play-btn-overlay">
+            <i class="fa-solid fa-play" style="color: #ffffff; font-size: 1.5rem; margin-left: 4px;"></i>
+          </div>
+        </div>
+        <div style="margin-top: 14px; text-align: center;">
+          <a id="btn-direct-youtube" href="https://youtu.be/t0th_3N5yIw" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.82rem; font-weight: 800; color: var(--brand-gold); text-decoration: none; padding: 8px 16px; border-radius: 20px; background: rgba(232, 198, 119, 0.1); border: 1px solid rgba(232, 198, 119, 0.3); transition: all 0.25s ease;">
+            <i class="fa-brands fa-youtube" style="font-size: 1rem; color: #ff0000;"></i>
+            <span id="txt-youtube-direct">مشاهدة الفيديو مباشرة على YouTube 🚀</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- FOOTER BRANDING -->
+      <div class="bio-footer">
+        <div id="txt-footer-rights">جميع الحقوق محفوظة © 2026 <strong>مركز مجرّة المجتمعي</strong></div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CLEAN WEEKLY EVENTS POPUP MODAL (OPENS WHEN CLICKING BUTTON 1) -->
+  <div id="weeklyEventsModal" class="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeWeeklyEventsModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="modal-header-title" id="txt-modal-title">
+        <i class="fa-solid fa-calendar-days"></i> فعاليات وأنشطة هذا الأسبوع
+      </div>
+      <div class="modal-sub-desc" id="txt-modal-desc">استعرض تفاصيل الفعالية ثم اضغط على زر التسجيل الخاص بها ⚡</div>
+
+      <!-- EVENT 1 -->
+      <div class="event-item-card" id="card-event-1">
+        <span class="event-badge" id="badge-event-1">🎓 ورشة عمل تخصصية</span>
+        <div class="event-title" id="title-event-1">ورشة مهارات العرض والإلقاء والتحدث الجماهيري</div>
+        <div class="event-meta-info" id="meta-event-1">
+          <span>📅 الخميس 10 سبتمبر</span>
+          <span>⏰ 10:00 ص - 01:00 ظ</span>
+          <span>🏛️ قاعة أفــُـق</span>
+        </div>
+        <a href="/e/roeya-club" class="event-register-link" id="btn-event-1" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <span>التسجيل في هذه الورشة 🚀</span>
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </div>
+
+      <!-- EVENT 2 -->
+      <div class="event-item-card" id="card-event-2">
+        <span class="event-badge" id="badge-event-2" style="background: rgba(232, 198, 119, 0.15); color: var(--brand-gold); border-color: rgba(232, 198, 119, 0.3);">💼 ملتقى مجتمعي</span>
+        <div class="event-title" id="title-event-2">ملتقى ريادة الأعمال والشركات الناشئة الشبابية</div>
+        <div class="event-meta-info" id="meta-event-2">
+          <span>📅 السبت 12 سبتمبر</span>
+          <span>⏰ 04:00 م - 07:00 م</span>
+          <span>🏛️ قاعة ديـــوان</span>
+        </div>
+        <a href="/e/creative-workshop" class="event-register-link" id="btn-event-2" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+          <span>التسجيل في هذا الملتقى 🎫</span>
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST ALERT -->
+  <div id="toast-msg"></div>
+
+  <script>
+    let bioData = null;
+    let currentLang = 'ar';
+
+    const i18nDict = {
+      ar: {
+        brandTitle: 'مركز مجـرّة المجتمعـي <span>| Majarra</span>',
+        brandSub: 'بوابة الروابط والفعاليات والمساحات الإبداعية',
+        navBooking: 'نظام حجز القاعات',
+        title: 'مركز مجرّة المجتمعي',
+        subtitle: 'Majarra Community Center',
+        liveStatusOpen: 'مفتوح الآن • (1:00ظ - 9:00م)',
+        liveStatusClosed: 'مغلق حالياً • (1:00ظ - 9:00م)',
+        shareBtn: '<i class="fa-solid fa-share-nodes"></i> <span>مشاركة</span>',
+        copiedToast: 'تم نسخ رابط صفحة مركز مجرّة بنجاح 🚀',
+        metric1Val: '<i class="fa-solid fa-building-columns"></i> 3 قاعات',
+        metric1Sub: 'ديوان • أفـق • ورشات',
+        metric2Val: '<i class="fa-solid fa-users"></i> +130',
+        metric2Sub: 'فعالية ومشارِك',
+        metric3Val: '<i class="fa-solid fa-star"></i> 4.9 / 5',
+        metric3Sub: 'تقييم المركز',
+        locTitle: 'موقع مركز مجرة المجتمعي',
+        locDesc: '__ osmanlı iş merkez __ غازي مختار باشا أمام محطة الترام',
+        locMapBtn: '<span>اتجه فوراً للمركز على الخريطة 🚗</span><i class="fa-solid fa-arrow-left"></i>',
+        weeklyEvents: '📅 جدول وفعاليات هذا الأسبوع',
+        link1: 'الموقع على الخريطة',
+        link2: 'استمارة الانتساب الى مجتمع مجرة',
+        link3: 'شارك فكرتك مع مركز مجرة',
+        link4: 'استمارة التسجيل في نادي روئية',
+        link5: 'استمارة حجز القاعات في مركز مجرة 🏛️',
+        waTooltip: 'الواتسـاب',
+        emailTooltip: 'البريد الإلكتروني',
+        instaTooltip: 'إنستغرام',
+        mapTooltip: 'الموقع',
+        videoTitle: '<i class="fa-solid fa-circle-play" style="color: var(--brand-gold);"></i> From Idea to Reality | رحلة تحضير مركز مجرّة',
+        youtubeBtnText: 'مشاهدة الفيديو مباشرة على YouTube 🚀',
+        footerRights: 'جميع الحقوق محفوظة © 2026 <strong>مركز مجرّة المجتمعي</strong>',
+        modalTitle: '<i class="fa-solid fa-calendar-days"></i> فعاليات وأنشطة هذا الأسبوع',
+        modalDesc: 'استعرض تفاصيل الفعالية ثم اضغط على زر التسجيل الخاص بها ⚡',
+        modalNoEvents: 'لا توجد فعاليات جديدة مسجلة لهذا الأسبوع حالياً 📌',
+        event1Badge: '🎓 ورشة عمل تخصصية',
+        event1Title: 'ورشة مهارات العرض والإلقاء والتحدث الجماهيري',
+        event1Meta: '<span>📅 الخميس 10 سبتمبر</span> <span>⏰ 10:00 ص - 01:00 ظ</span> <span>🏛️ قاعة أفــُـق</span>',
+        event1Btn: '<span>التسجيل في هذه الورشة 🚀</span><i class="fa-solid fa-arrow-left"></i>',
+        event2Badge: '💼 ملتقى مجتمعي',
+        event2Title: 'ملتقى ريادة الأعمال والشركات الناشئة الشبابية',
+        event2Meta: '<span>📅 السبت 12 سبتمبر</span> <span>⏰ 04:00 م - 07:00 م</span> <span>🏛️ قاعة ديـــوان</span>',
+        event2Btn: '<span>التسجيل في هذا الملتقى 🎫</span><i class="fa-solid fa-arrow-left"></i>',
+        editBioBtn: 'تعديل وإدارة صفحة Bio ⚙️'
+      },
+      tr: {
+        brandTitle: 'Majarra Topluluk Merkezi <span>| Majarra</span>',
+        brandSub: 'Bağlantılar, Etkinlikler ve Yaratıcı Alanlar Portalı',
+        navBooking: 'Salon Rezervasyon Sistemi',
+        title: 'Majarra Topluluk Merkezi',
+        subtitle: 'Topluluk Alanları & Etkinlik Portalı',
+        liveStatusOpen: 'Şimdi Açık • (13:00 - 21:00)',
+        liveStatusClosed: 'Şu An Kapalı • (13:00 - 21:00)',
+        shareBtn: '<i class="fa-solid fa-share-nodes"></i> <span>Paylaş</span>',
+        copiedToast: 'Majarra sayfa bağlantısı başarıyla kopyalandı 🚀',
+        metric1Val: '<i class="fa-solid fa-building-columns"></i> 3 Salon',
+        metric1Sub: 'Divan • Ufuk • Atölyeler',
+        metric2Val: '<i class="fa-solid fa-users"></i> +130',
+        metric2Sub: 'Etkinlik & Katılımcı',
+        metric3Val: '<i class="fa-solid fa-star"></i> 4.9 / 5',
+        metric3Sub: 'Merkez Değerlendirmesi',
+        locTitle: 'Majarra Topluluk Merkezi Konumu',
+        locDesc: '__ osmanlı iş merkez __ Gazi Muhtar Paşa Tramvay Durağı Karşısı',
+        locMapBtn: '<span>Haritada Yol Tarifi Al 🚗</span><i class="fa-solid fa-arrow-right"></i>',
+        weeklyEvents: '📅 Bu Haftanın Etkinlik Takvimi',
+        link1: 'Haritada Göster',
+        link2: 'Majarra Topluluğu Üyelik Formu',
+        link3: 'Fikrini Majarra ile Paylaş',
+        link4: 'Ru\'ya Kulübü Kayıt Formu',
+        link5: 'Majarra Salon Rezervasyon Formu 🏛️',
+        waTooltip: 'WhatsApp',
+        emailTooltip: 'E-posta',
+        instaTooltip: 'Instagram',
+        mapTooltip: 'Konum',
+        videoTitle: '<i class="fa-solid fa-circle-play" style="color: var(--brand-gold);"></i> Fikirden Gerçeğe | Majarra Merkezi Hazırlık Yolculuğu',
+        youtubeBtnText: 'Videoyu Doğrudan YouTube\'da İzle 🚀',
+        footerRights: 'Tüm Hakları Saklıdır © 2026 <strong>Majarra Topluluk Merkezi</strong>',
+        modalTitle: '<i class="fa-solid fa-calendar-days"></i> Bu Haftanın Etkinlikleri',
+        modalDesc: 'Etkinlik detaylarını inceleyin ve kayıt butonuna tıklayın ⚡',
+        modalNoEvents: 'Bu hafta için henüz kayıtlı yeni etkinlik bulunmamaktadır 📌',
+        event1Badge: '🎓 Özel Atölye',
+        event1Title: 'Sunum ve Topluluk Önünde Konuşma Becerileri Atölyesi',
+        event1Meta: '<span>📅 Perşembe 10 Eylül</span> <span>⏰ 10:00 - 13:00</span> <span>🏛️ Ufuk Salonu</span>',
+        event1Btn: '<span>Bu Atölyeye Kaydol 🚀</span><i class="fa-solid fa-arrow-right"></i>',
+        event2Badge: '💼 Topluluk Buluşması',
+        event2Title: 'Girişimcilik ve Genç Start-up Buluşması',
+        event2Meta: '<span>📅 Cumartesi 12 Eylül</span> <span>⏰ 16:00 - 19:00</span> <span>🏛️ Divan Salonu</span>',
+        event2Btn: '<span>Bu Buluşmaya Kaydol 🎫</span><i class="fa-solid fa-arrow-right"></i>',
+        editBioBtn: 'Bio Sayfasını Düzenle & Yönet ⚙️'
+      },
+      en: {
+        brandTitle: 'Majarra Community Center <span>| Majarra</span>',
+        brandSub: 'Links, Events & Creative Spaces Portal',
+        navBooking: 'Hall Booking System',
+        title: 'Majarra Community Center',
+        subtitle: 'Halls & Event Spaces Portal',
+        liveStatusOpen: 'Open Now • (1:00 PM - 9:00 PM)',
+        liveStatusClosed: 'Closed Now • (1:00 PM - 9:00 PM)',
+        shareBtn: '<i class="fa-solid fa-share-nodes"></i> <span>Share</span>',
+        copiedToast: 'Majarra page link copied successfully 🚀',
+        metric1Val: '<i class="fa-solid fa-building-columns"></i> 3 Halls',
+        metric1Sub: 'Divan • Ufuk • Workshops',
+        metric2Val: '<i class="fa-solid fa-users"></i> +130',
+        metric2Sub: 'Events & Guests',
+        metric3Val: '<i class="fa-solid fa-star"></i> 4.9 / 5',
+        metric3Sub: 'Center Rating',
+        locTitle: 'Majarra Community Center Location',
+        locDesc: '__ osmanlı iş merkez __ Gazi Muhtar Paşa In front of Tram Station',
+        locMapBtn: '<span>Get Directions on Map 🚗</span><i class="fa-solid fa-arrow-right"></i>',
+        weeklyEvents: '📅 This Week\'s Events Schedule',
+        link1: 'View Location on Map',
+        link2: 'Majarra Community Membership Form',
+        link3: 'Share Your Idea with Majarra',
+        link4: 'Ru\'ya Club Registration Form',
+        link5: 'Majarra Hall Booking Form 🏛️',
+        waTooltip: 'WhatsApp',
+        emailTooltip: 'Email',
+        instaTooltip: 'Instagram',
+        mapTooltip: 'Location',
+        videoTitle: '<i class="fa-solid fa-circle-play" style="color: var(--brand-gold);"></i> From Idea to Reality | The Journey of Majarra Center',
+        youtubeBtnText: 'Watch Video Directly on YouTube 🚀',
+        footerRights: 'All Rights Reserved © 2026 <strong>Majarra Community Center</strong>',
+        modalTitle: '<i class="fa-solid fa-calendar-days"></i> This Week\'s Events & Activities',
+        modalDesc: 'Browse event details and click to register ⚡',
+        modalNoEvents: 'No new events scheduled for this week yet 📌',
+        event1Badge: '🎓 Specialized Workshop',
+        event1Title: 'Public Speaking & Presentation Skills Workshop',
+        event1Meta: '<span>📅 Thu Sep 10</span> <span>⏰ 10:00 AM - 1:00 PM</span> <span>🏛️ Ufuk Hall</span>',
+        event1Btn: '<span>Register for this Workshop 🚀</span><i class="fa-solid fa-arrow-right"></i>',
+        event2Badge: '💼 Community Meetup',
+        event2Title: 'Entrepreneurship & Youth Startups Forum',
+        event2Meta: '<span>📅 Sat Sep 12</span> <span>⏰ 4:00 PM - 7:00 PM</span> <span>🏛️ Divan Hall</span>',
+        event2Btn: '<span>Register for this Forum 🎫</span><i class="fa-solid fa-arrow-right"></i>',
+        editBioBtn: 'Edit & Manage Bio Page ⚙️'
+      }
+    };
+
+    function initThemeAndLang() {
+      const savedTheme = localStorage.getItem('majarra_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const themeIcon = document.querySelector('#theme-toggle i');
+      if (themeIcon) {
+        themeIcon.className = savedTheme === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      }
+
+      const savedLang = localStorage.getItem('majarra_lang') || 'ar';
+      setLanguage(savedLang);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('majarra_theme', next);
+      const themeIcon = document.querySelector('#theme-toggle i');
+      if (themeIcon) {
+        themeIcon.className = next === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      }
+    }
+
+    function toggleLangDropdown(e) {
+      if (e) e.stopPropagation();
+      const dropdown = document.getElementById('lang-dropdown-menu');
+      if (dropdown) dropdown.classList.toggle('show');
+    }
+
+    function selectLanguage(lang) {
+      const dropdown = document.getElementById('lang-dropdown-menu');
+      if (dropdown) dropdown.classList.remove('show');
+      localStorage.setItem('majarra_lang', lang);
+      setLanguage(lang);
+    }
+
+    document.addEventListener('click', (e) => {
+      const dropdown = document.getElementById('lang-dropdown-menu');
+      const langBtn = document.getElementById('lang-toggle-btn');
+      if (dropdown && dropdown.classList.contains('show')) {
+        if (!dropdown.contains(e.target) && (!langBtn || !langBtn.contains(e.target))) {
+          dropdown.classList.remove('show');
+        }
+      }
+    });
+
+    async function loadBioHubData() {
+      try {
+        const res = await fetch('/api/public/bio');
+        const data = await res.json();
+        if (data.success) {
+          bioData = data;
+          renderProfile(data.profile);
+          renderLinks(data.links);
+          renderEvents(data.events);
+        }
+      } catch (err) {
+        console.warn('Could not fetch dynamic bio hub data, using static fallback:', err);
+      }
+    }
+
+    function renderProfile(profile) {
+      if (!profile) return;
+      if (profile.title && currentLang === 'ar') {
+        document.getElementById('txt-profile-title').innerText = profile.title;
+      }
+      if (profile.subtitle && currentLang === 'ar') {
+        document.getElementById('txt-profile-subtitle').innerText = profile.subtitle;
+      }
+      if (profile.locationTitle && currentLang === 'ar') {
+        const el = document.getElementById('txt-loc-title');
+        if (el) el.innerText = profile.locationTitle;
+      }
+      if (profile.locationDesc && currentLang === 'ar') {
+        const el = document.getElementById('txt-loc-desc');
+        if (el) el.innerText = profile.locationDesc;
+      }
+      if (profile.videoTitle && currentLang === 'ar') {
+        const el = document.getElementById('txt-video-title');
+        if (el) el.innerHTML = `<i class="fa-solid fa-circle-play" style="color: var(--brand-gold);"></i> ${profile.videoTitle}`;
+      }
+      if (profile.instagramUrl) {
+        if (document.getElementById('bio-social-insta')) document.getElementById('bio-social-insta').href = profile.instagramUrl;
+        if (document.getElementById('footer-social-insta')) document.getElementById('footer-social-insta').href = profile.instagramUrl;
+      }
+      if (profile.whatsappUrl) {
+        if (document.getElementById('bio-social-wa')) document.getElementById('bio-social-wa').href = profile.whatsappUrl;
+        if (document.getElementById('footer-social-wa')) document.getElementById('footer-social-wa').href = profile.whatsappUrl;
+      }
+      if (profile.emailUrl) {
+        if (document.getElementById('bio-social-email')) document.getElementById('bio-social-email').href = profile.emailUrl;
+        if (document.getElementById('footer-social-email')) document.getElementById('footer-social-email').href = profile.emailUrl;
+      }
+      if (profile.videoUrl) {
+        const videoId = parseYouTubeVideoId(profile.videoUrl);
+        const directUrl = `https://youtu.be/${videoId}`;
+
+        const container = document.getElementById('youtube-embed-container');
+        if (container) {
+          container.setAttribute('data-video-id', videoId);
+          const thumb = document.getElementById('youtube-thumb-img');
+          if (thumb) {
+            thumb.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+          }
+        }
+
+        const directBtn = document.getElementById('btn-direct-youtube');
+        if (directBtn) {
+          directBtn.href = directUrl;
+        }
+      }
+    }
+
+    function playYouTubeVideoInline() {
+      const container = document.getElementById('youtube-embed-container');
+      if (!container || container.querySelector('iframe')) return;
+      const videoId = container.getAttribute('data-video-id') || 't0th_3N5yIw';
+      const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+      container.innerHTML = `<iframe src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"></iframe>`;
+    }
+
+    function parseYouTubeVideoId(url) {
+      if (!url) return 't0th_3N5yIw';
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|shorts\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : 't0th_3N5yIw';
+    }
+
+    function renderLinks(links) {
+      if (!links || links.length === 0) return;
+      const container = document.querySelector('.links-stack');
+      if (!container) return;
+
+      const langData = i18nDict[currentLang] || i18nDict.ar;
+
+      let html = `
+        <button onclick="openWeeklyEventsModal()" class="link-pill-btn featured-events" id="btn-weekly-events">
+          <div class="link-pill-content">
+            <div class="link-pill-icon-bubble">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <div>
+              <span id="txt-link-weekly">${langData.weeklyEvents}</span>
+              <span class="featured-fire-tag"><i class="fa-solid fa-fire"></i> متاح الآن</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-left chevron-icon"></i>
+        </button>
+      `;
+
+      links.forEach((item, index) => {
+        let iconRaw = item.icon || 'fa-link';
+        let fullIconClass = iconRaw;
+        if (iconRaw.includes('fa-instagram') || iconRaw.includes('fa-whatsapp') || iconRaw.includes('fa-facebook')) {
+          fullIconClass = `fa-brands ${iconRaw.replace('fa-brands ', '').replace('fa-solid ', '')}`;
+        } else if (iconRaw.startsWith('fa-') && !iconRaw.includes(' ')) {
+          fullIconClass = `fa-solid ${iconRaw}`;
+        }
+
+        let displayTitle = item.title;
+
+        // Apply translations ONLY for non-Arabic languages if needed
+        if (currentLang !== 'ar') {
+          if (item.id === 1 || item.sortOrder === 4 || item.title.includes('الموقع')) displayTitle = langData.link1;
+          else if (item.id === 2 || item.sortOrder === 5 || item.title.includes('الانتساب')) displayTitle = langData.link2;
+          else if (item.id === 3 || item.sortOrder === 6 || item.title.includes('فكرتك')) displayTitle = langData.link3;
+          else if (item.id === 4 || item.sortOrder === 7 || item.title.includes('روئية') || item.title.includes('رؤية')) displayTitle = langData.link4;
+          else if (item.id === 5 || item.sortOrder === 8 || item.title.includes('القاعات')) displayTitle = langData.link5;
+        }
+
+        let finalUrl = (item.url || '').trim();
+        if (!finalUrl || finalUrl === '#' || finalUrl === 'javascript:void(0)' || finalUrl === 'javascript:;') {
+          if (displayTitle.includes('روئية') || displayTitle.includes('رؤية')) {
+            finalUrl = '/e/roeya-club';
+          } else if (displayTitle.includes('الانتساب')) {
+            finalUrl = '/e/rawya-gathering';
+          } else if (displayTitle.includes('فكرتك')) {
+            finalUrl = '/e/creative-workshop';
+          } else if (displayTitle.includes('القاعات')) {
+            finalUrl = 'index.html';
+          } else {
+            finalUrl = 'javascript:void(0)';
+          }
+        }
+
+        const target = (finalUrl.startsWith('http://') || finalUrl.startsWith('https://')) ? '_blank' : '_self';
+        const clickHandler = (finalUrl === 'javascript:void(0)') ? `onclick="showToast('${currentLang === 'tr' ? 'Açılıyor...' : (currentLang === 'en' ? 'Opening...' : 'جاري فتح...')} ${displayTitle}')"` : '';
+
+        html += `
+          <a href="${finalUrl}" ${target !== '_self' ? `target="${target}"` : ''} ${clickHandler} class="link-pill-btn" id="btn-link-${item.id}">
+            <div class="link-pill-content">
+              <div class="link-pill-icon-bubble">
+                <i class="${fullIconClass}"></i>
+              </div>
+              <span id="txt-link-${item.id}">${displayTitle}</span>
+            </div>
+            <i class="fa-solid fa-chevron-left chevron-icon"></i>
+          </a>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderEvents(events) {
+      const container = document.querySelector('#weeklyEventsModal .modal-box');
+      if (!container) return;
+      const langData = i18nDict[currentLang] || i18nDict.ar;
+
+      if (!events || events.length === 0) {
+        container.innerHTML = `
+          <button class="modal-close-btn" onclick="closeWeeklyEventsModal()"><i class="fa-solid fa-xmark"></i></button>
+          <div class="modal-header-title" id="txt-modal-title">
+            <i class="fa-solid fa-calendar-days"></i> ${langData.modalTitle}
+          </div>
+          <div class="modal-sub-desc" style="text-align: center; padding: 20px; color: var(--text-secondary);">${langData.modalNoEvents}</div>
+        `;
+        return;
+      }
+
+      let html = `
+        <button class="modal-close-btn" onclick="closeWeeklyEventsModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header-title" id="txt-modal-title">
+          <i class="fa-solid fa-calendar-days"></i> ${langData.modalTitle}
+        </div>
+        <div class="modal-sub-desc" id="txt-modal-desc">${langData.modalDesc}</div>
+      `;
+
+      events.forEach((ev, idx) => {
+        const regUrl = ev.registrationUrl && ev.registrationUrl !== '#' ? ev.registrationUrl : 'javascript:void(0)';
+        const targetAttr = (regUrl !== 'javascript:void(0)') ? 'target="_blank"' : '';
+        const clickHandler = (regUrl === 'javascript:void(0)') ? `onclick="showToast('${currentLang === 'tr' ? 'Kayıt bağlantısı yakında aktifleşecek' : (currentLang === 'en' ? 'Registration link active soon' : 'سيتم تفعيل رابط التسجيل قريباً')}')"` : '';
+
+        let badge = ev.eventType || '📋 استمارة مخصصة';
+        let title = ev.title;
+        let meta = `<span>📅 ${ev.eventDate || 'تسجيل دوري مفتوح'}</span> <span>⏰ ${ev.eventTime || 'مركز مجرّة'}</span> <span>🏛️ ${ev.hallName || 'مركز مجرّة المجتمعي'}</span>`;
+        
+        let btnLabel = (currentLang === 'tr') ? 'Bu Etkinliğe Kaydol 🚀' :
+                       (currentLang === 'en') ? 'Register for this Event 🚀' :
+                       'التسجيل في هذه الفعالية 🚀';
+        
+        let btnText = `<span>${btnLabel}</span><i class="fa-solid fa-arrow-${currentLang === 'ar' ? 'left' : 'right'}"></i>`;
+
+        html += `
+          <div class="event-item-card">
+            <span class="event-badge">${badge}</span>
+            <div class="event-title">${title}</div>
+            <div class="event-meta-info">${meta}</div>
+            <a href="${regUrl}" ${targetAttr} ${clickHandler} class="event-register-link" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px;">
+              ${btnText}
+            </a>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function openWeeklyEventsModal() {
+      document.getElementById('weeklyEventsModal').classList.add('active');
+    }
+
+    function closeWeeklyEventsModal() {
+      document.getElementById('weeklyEventsModal').classList.remove('active');
+    }
+
+    function copyBioPageLink() {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(window.location.href);
+      }
+      const langData = i18nDict[currentLang] || i18nDict.ar;
+      showToast(langData.copiedToast);
+    }
+
+    function getIsCenterOpen() {
+      const now = new Date();
+      const currentHour = now.getHours();
+      // Physical Center Working Hours: Daily 01:00 PM (13:00) to 09:00 PM (21:00)
+      return currentHour >= 13 && currentHour < 21;
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+
+      // Update inner lang buttons if present inside profile card
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`btn-lang-${lang}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Update Top Nav Dropdown
+      const langTextMap = { ar: 'العربية', tr: 'Türkçe', en: 'English' };
+      if (document.getElementById('current-lang-text')) {
+        document.getElementById('current-lang-text').innerText = langTextMap[lang] || 'العربية';
+      }
+      document.querySelectorAll('.lang-option').forEach(opt => opt.classList.remove('active'));
+      const optBtn = document.getElementById(`lang-opt-${lang}`);
+      if (optBtn) optBtn.classList.add('active');
+
+      const isRtl = (lang === 'ar');
+      document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+      document.documentElement.lang = lang;
+
+      const langData = i18nDict[lang] || i18nDict.ar;
+
+      // Update Top Header Brand & Nav
+      if (document.getElementById('brand-title-text')) document.getElementById('brand-title-text').innerHTML = langData.brandTitle;
+      if (document.getElementById('brand-sub-text')) document.getElementById('brand-sub-text').innerText = langData.brandSub;
+      if (document.getElementById('lbl-nav-booking')) document.getElementById('lbl-nav-booking').innerText = langData.navBooking;
+
+      // Update Profile Header & Dynamic Live Status Pill (Only fallback to dictionary if no bioData)
+      if (!bioData || !bioData.profile) {
+        if (document.getElementById('txt-profile-title')) document.getElementById('txt-profile-title').innerText = langData.title;
+        if (document.getElementById('txt-profile-subtitle')) document.getElementById('txt-profile-subtitle').innerText = langData.subtitle;
+      } else {
+        renderProfile(bioData.profile);
+      }
+
+      const isOpen = getIsCenterOpen();
+      const pillContainer = document.getElementById('live-status-pill-container');
+      const txtStatus = document.getElementById('txt-live-status');
+      if (pillContainer && txtStatus) {
+        if (isOpen) {
+          pillContainer.classList.remove('closed');
+          txtStatus.innerText = `🟢 ${langData.liveStatusOpen}`;
+        } else {
+          pillContainer.classList.add('closed');
+          txtStatus.innerText = `🌙 ${langData.liveStatusClosed}`;
+        }
+      }
+
+      if (document.getElementById('btn-share-page')) document.getElementById('btn-share-page').innerHTML = langData.shareBtn;
+
+      // Update Metrics (If present)
+      if (document.getElementById('txt-metric-1-val')) document.getElementById('txt-metric-1-val').innerHTML = langData.metric1Val;
+      if (document.getElementById('txt-metric-1-sub')) document.getElementById('txt-metric-1-sub').innerText = langData.metric1Sub;
+      if (document.getElementById('txt-metric-2-val')) document.getElementById('txt-metric-2-val').innerHTML = langData.metric2Val;
+      if (document.getElementById('txt-metric-2-sub')) document.getElementById('txt-metric-2-sub').innerText = langData.metric2Sub;
+      if (document.getElementById('txt-metric-3-val')) document.getElementById('txt-metric-3-val').innerHTML = langData.metric3Val;
+      if (document.getElementById('txt-metric-3-sub')) document.getElementById('txt-metric-3-sub').innerText = langData.metric3Sub;
+
+      // Update Location Card
+      if (document.getElementById('txt-loc-title')) document.getElementById('txt-loc-title').innerText = langData.locTitle;
+      if (document.getElementById('txt-loc-desc')) document.getElementById('txt-loc-desc').innerText = langData.locDesc;
+      if (document.getElementById('btn-loc-map-direct')) document.getElementById('btn-loc-map-direct').innerHTML = langData.locMapBtn;
+
+      // Update Links Stack (Fallback only if no bioData links)
+      if (!bioData || !bioData.links || bioData.links.length === 0) {
+        if (document.getElementById('txt-link-weekly')) document.getElementById('txt-link-weekly').innerText = langData.weeklyEvents;
+        if (document.getElementById('txt-link-1')) document.getElementById('txt-link-1').innerText = langData.link1;
+        if (document.getElementById('txt-link-2')) document.getElementById('txt-link-2').innerText = langData.link2;
+        if (document.getElementById('txt-link-3')) document.getElementById('txt-link-3').innerText = langData.link3;
+        if (document.getElementById('txt-link-4')) document.getElementById('txt-link-4').innerText = langData.link4;
+        if (document.getElementById('txt-link-5')) document.getElementById('txt-link-5').innerText = langData.link5;
+      }
+
+      // Tooltips
+      if (document.getElementById('tooltip-wa')) document.getElementById('tooltip-wa').innerText = langData.waTooltip;
+      if (document.getElementById('tooltip-email')) document.getElementById('tooltip-email').innerText = langData.emailTooltip;
+      if (document.getElementById('tooltip-insta')) document.getElementById('tooltip-insta').innerText = langData.instaTooltip;
+      if (document.getElementById('tooltip-map')) document.getElementById('tooltip-map').innerText = langData.mapTooltip;
+
+      if (document.getElementById('ftooltip-wa')) document.getElementById('ftooltip-wa').innerText = langData.waTooltip;
+      if (document.getElementById('ftooltip-email')) document.getElementById('ftooltip-email').innerText = langData.emailTooltip;
+      if (document.getElementById('ftooltip-insta')) document.getElementById('ftooltip-insta').innerText = langData.instaTooltip;
+      if (document.getElementById('ftooltip-map')) document.getElementById('ftooltip-map').innerText = langData.mapTooltip;
+
+      // Video Section
+      if (document.getElementById('txt-video-title') && (!bioData || !bioData.profile || !bioData.profile.videoTitle)) {
+        document.getElementById('txt-video-title').innerHTML = langData.videoTitle;
+      }
+      if (document.getElementById('txt-youtube-direct')) document.getElementById('txt-youtube-direct').innerText = langData.youtubeBtnText;
+
+      // Footer Rights
+      if (document.getElementById('txt-footer-rights')) document.getElementById('txt-footer-rights').innerHTML = langData.footerRights;
+
+      // Modal
+      if (document.getElementById('txt-modal-title')) document.getElementById('txt-modal-title').innerHTML = langData.modalTitle;
+      if (document.getElementById('txt-modal-desc')) document.getElementById('txt-modal-desc').innerText = langData.modalDesc;
+
+      // If dynamic data is loaded, re-render links and events to refresh translation
+      if (bioData) {
+        if (bioData.links) renderLinks(bioData.links);
+        if (bioData.events) renderEvents(bioData.events);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-msg');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initThemeAndLang();
+      loadBioHubData();
+      setInterval(() => setLanguage(currentLang), 60000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= event.title %> | استمارة مجرّة الألترا</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --brand-navy: #060814;
+      --brand-surface: rgba(15, 23, 42, 0.75);
+      --card-bg: rgba(30, 41, 59, 0.6);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-focus: #6366f1;
+      --brand-indigo: #818cf8;
+      --brand-emerald: #10b981;
+      --brand-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Thmanyah Serif Display', 'Thmanyah', 'Cairo', serif !important; }
+
+    body {
+      font-family: 'Thmanyah Serif Display', 'Thmanyah', 'Cairo', serif !important;
+      background: radial-gradient(circle at top right, #1e1b4b 0%, #0f172a 45%, #060814 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 60px 16px;
+    }
+
+    /* Fixed Progress Bar Header */
+    .progress-bar-container {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: rgba(15, 23, 42, 0.9);
+      z-index: 999;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #6366f1, #818cf8, #10b981);
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.8);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Full Screen Main Container */
+    .form-wrapper {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Brand Header Link */
+    .brand-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      margin-bottom: 8px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--brand-indigo);
+      font-weight: 700;
+    }
+
+    /* Header Card */
+    .header-card {
+      background: linear-gradient(145deg, rgba(23, 30, 48, 0.95), rgba(15, 20, 35, 0.98));
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(138, 111, 178, 0.25);
+      border-top: 5px solid var(--border-focus, #6366f1);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .banner-frame {
+      width: 100%;
+      height: 190px;
+      background: linear-gradient(135deg, #312e81, #581c87);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .header-content {
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .status-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .badge-pill {
+      background: rgba(129, 140, 248, 0.12);
+      color: #a5b4fc;
+      border: 1px solid rgba(129, 140, 248, 0.25);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .req-note-pill {
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .form-main-title {
+      font-family: 'Thmanyah Serif Display', 'Thmanyah', 'Cairo', serif !important;
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-top: 4px;
+    }
+
+    .form-desc-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 4px 0 2px 0;
+      width: 100%;
+    }
+
+    .event-desc-text {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    /* Separate Question Cards */
+    .question-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-right: 4px solid transparent;
+      border-radius: 20px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .question-card:focus-within, .question-card.active-card {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(99, 102, 241, 0.4);
+      border-right-color: var(--border-focus);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.18);
+    }
+
+    .question-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .req-star {
+      color: var(--brand-rose);
+      font-weight: 900;
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #ffffff;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--brand-indigo);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Radio & Checkbox Pills */
+    .option-pill-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-pill-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .option-pill-label:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(129, 140, 248, 0.4);
+    }
+
+    .option-pill-label input[type="radio"],
+    .option-pill-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--border-focus);
+      cursor: pointer;
+    }
+
+    /* Star Rating */
+    .star-rating-box {
+      display: flex;
+      gap: 10px;
+      font-size: 1.8rem;
+      color: #475569;
+      cursor: pointer;
+    }
+
+    .star-rating-box i {
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .star-rating-box i.hovered, .star-rating-box i.selected {
+      color: #f59e0b;
+      transform: scale(1.15);
+    }
+
+    /* Custom File Dropzone UI (Matched 100% to Screenshot) */
+    .custom-file-dropzone {
+      position: relative;
+      background: rgba(15, 23, 42, 0.6);
+      border: 2px dashed rgba(99, 102, 241, 0.4);
+      border-radius: 14px;
+      padding: 16px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      direction: rtl;
+    }
+
+    .custom-file-dropzone:hover, .custom-file-dropzone.dragover {
+      border-color: #818cf8;
+      background: rgba(99, 102, 241, 0.12);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.15);
+    }
+
+    .dropzone-text-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: right;
+    }
+
+    .dropzone-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .dropzone-subtitle {
+      font-size: 0.76rem;
+      color: #94a3b8;
+    }
+
+    .file-selected-badge {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 10px 18px;
+      border-radius: 14px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .file-remove-btn {
+      background: rgba(244, 63, 94, 0.2);
+      border: none;
+      color: #fda4af;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: all 0.2s ease;
+    }
+
+    .file-remove-btn:hover {
+      background: #f43f5e;
+      color: #ffffff;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #ffffff;
+      border: none;
+      padding: 16px;
+      border-radius: 16px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(99, 102, 241, 0.45);
+    }
+
+    /* Digital Ticket Voucher Card */
+    .ticket-voucher-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+      backdrop-filter: blur(20px);
+      border: 1px dashed var(--brand-indigo);
+      border-radius: 24px;
+      padding: 30px 24px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .ticket-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ticket-code-badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .qrcode-box {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Progress Bar -->
+  <div class="progress-bar-container">
+    <div id="progress-bar" class="progress-bar-fill"></div>
+  </div>
+
+  <div class="form-wrapper">
+
+    <!-- Top Brand Header Link -->
+    <a href="/bio.html" class="brand-link">
+      <img src="/assets/majarra_official_icon.png" alt="Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/44'">
+      <div>
+        <div class="brand-title">مركز مجرّة المجتمعي</div>
+        <div class="brand-sub">Majarra Forms Ultra Engine</div>
+      </div>
+    </a>
+
+    <!-- Top Header Card -->
+    <div class="header-card">
+      <% if (event.banner_url) { %>
+        <div class="banner-frame">
+          <img src="<%= event.banner_url %>" alt="<%= event.title %>" onerror="this.parentElement.style.display='none'">
+        </div>
+      <% } %>
+
+      <div class="header-content">
+        <% if (event.badge_text) { %>
+        <div class="status-badge-row">
+          <span class="badge-pill">
+            <i class="fa-solid fa-circle" style="font-size: 0.45rem; color: #818cf8; vertical-align: middle;"></i>
+            <%= event.badge_text %>
+          </span>
+        </div>
+        <% } %>
+
+        <h1 class="form-main-title"><%= event.title %></h1>
+
+        <% if (event.description) { %>
+          <div class="form-desc-divider"></div>
+          <p class="event-desc-text"><%= event.description %></p>
+        <% } %>
+      </div>
+    </div>
+
+    <% if (isClosed) { %>
+      <div class="question-card" style="text-align: center; border-right-color: var(--brand-rose);">
+        <i class="fa-solid fa-lock" style="font-size: 2.5rem; color: var(--brand-rose); margin-bottom: 8px;"></i>
+        <h2 style="font-size: 1.2rem; font-weight: 800; color: #ffffff;">باب التسجيل مغلق حالياً</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">نعتذر منك، تم إغلاق استقبال الردود لهذه الاستمارة أو اكتمل المقاعد المخصصة.</p>
+      </div>
+    <% } else { %>
+
+      <!-- Dynamic Form Engine -->
+      <form id="google-form-pro" onsubmit="submitFormPro(event)">
+        
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          
+          <!-- Fixed Question 1: Name -->
+          <div class="question-card">
+            <div class="question-title"><span class="req-star">*</span> الاسم الثلاثي الكامل</div>
+            <input type="text" id="field-name" class="form-control" placeholder="أدخل اسمك الكامل هنا..." required>
+          </div>
+
+          <!-- Fixed Question 2: Phone -->
+          <div class="question-card">
+            <div class="question-title"><span class="req-star">*</span> رقم الواتساب للتواصل</div>
+            <input type="tel" id="field-phone" class="form-control" dir="ltr" placeholder="+90 5XX XXX XX XX" required>
+          </div>
+
+          <!-- Fixed Question 3: Email -->
+          <div class="question-card">
+            <div class="question-title">البريد الإلكتروني</div>
+            <input type="email" id="field-email" class="form-control" dir="ltr" placeholder="example@domain.com">
+          </div>
+
+          <!-- Dynamic Custom Questions Cards -->
+          <% if (customFields && customFields.length > 0) { %>
+            <% customFields.forEach(function(q, idx) { %>
+              <div class="question-card custom-q-card" data-idx="<%= idx %>">
+                <div class="question-title">
+                  <% if (q.required) { %>
+                    <span class="req-star">*</span>
+                  <% } %>
+                  <%= q.label %>
+                </div>
+
+                <% if (q.type === 'textarea') { %>
+                  <textarea class="form-control q-input" data-type="textarea" data-label="<%= q.label %>" <% if (q.required) { %>required<% } %> rows="3" placeholder="اكتب تفاصيل إجابتك..."></textarea>
+
+                <% } else if (q.type === 'email') { %>
+                  <input type="email" class="form-control q-input" data-type="email" data-label="<%= q.label %>" dir="ltr" <% if (q.required) { %>required<% } %> placeholder="example@domain.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="يرجى إدخال بريد إلكتروني صحيح">
+
+                <% } else if (q.type === 'phone') { %>
+                  <input type="tel" class="form-control q-input" data-type="phone" data-label="<%= q.label %>" dir="ltr" <% if (q.required) { %>required<% } %> placeholder="+90 5XX XXX XX XX" pattern="^\+?[0-9\s\-\(\)]{7,20}$" title="يرجى إدخال رقم هاتف صحيح">
+
+                <% } else if (q.type === 'number') { %>
+                  <input type="number" class="form-control q-input" data-type="number" data-label="<%= q.label %>" <% if (q.required) { %>required<% } %> placeholder="0" step="any">
+
+                <% } else if (q.type === 'date') { %>
+                  <input type="date" class="form-control q-input" data-type="date" data-label="<%= q.label %>" <% if (q.required) { %>required<% } %> style="color:#ffffff;">
+
+                <% } else if (q.type === 'time') { %>
+                  <input type="time" class="form-control q-input" data-type="time" data-label="<%= q.label %>" <% if (q.required) { %>required<% } %> style="color:#ffffff;">
+
+                <% } else if (q.type === 'file') { %>
+                  <div class="custom-file-dropzone" onclick="triggerFileInput(this)" ondragover="event.preventDefault(); this.classList.add('dragover');" ondragleave="this.classList.remove('dragover');" ondrop="handleFileDrop(event, this)">
+                    <input type="file" class="q-input-file" data-type="file" data-label="<%= q.label %>" <% if (q.required) { %>required<% } %> accept="image/*,.pdf,.doc,.docx" style="display:none;" onchange="updateFilePreview(this)">
+                    
+                    <div class="file-dropzone-content" style="display:flex; align-items:center; justify-content:center; gap:12px;">
+                      <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.4rem; color: #818cf8; flex-shrink: 0;"></i>
+                      <div class="dropzone-text-box">
+                        <strong class="dropzone-title">اضغط لرفع الملف أو اسحبه هنا</strong>
+                        <span class="dropzone-subtitle">PDF, DOC, PNG, JPG</span>
+                      </div>
+                    </div>
+
+                    <div class="file-selected-badge" style="display:none;">
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fa-solid fa-file-circle-check" style="font-size: 1.3rem; color: #10b981;"></i>
+                        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
+                          <span class="file-name-text" style="font-weight: 800; color: #ffffff;">filename.pdf</span>
+                          <span class="file-size-text" style="font-size: 0.75rem; color: var(--text-muted);">(0.00 MB)</span>
+                        </div>
+                      </div>
+                      <button type="button" class="file-remove-btn" title="إزالة الملف" onclick="event.stopPropagation(); removeSelectedFile(this);">
+                        <i class="fa-solid fa-xmark"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                <% } else if (q.type === 'select' && q.options && q.options.length > 0) { %>
+                  <select class="form-control q-input" data-type="select" data-label="<%= q.label %>" <% if (q.required) { %>required<% } %>>
+                    <option value="">-- اختر خياراً من القائمة --</option>
+                    <% q.options.forEach(function(opt) { %>
+                      <option value="<%= opt %>"><%= opt %></option>
+                    <% }); %>
+                  </select>
+
+                <% } else if (q.type === 'radio' && q.options && q.options.length > 0) { %>
+                  <div class="option-pill-group q-radio-group" data-type="radio" data-label="<%= q.label %>">
+                    <% q.options.forEach(function(opt, oIdx) { %>
+                      <label class="option-pill-label">
+                        <input type="radio" name="dyn_radio_<%= idx %>" value="<%= opt %>" <% if (q.required && oIdx === 0) { %>required<% } %>>
+                        <span style="font-size: 0.92rem; font-weight: 700; color: #ffffff;"><%= opt %></span>
+                      </label>
+                    <% }); %>
+                  </div>
+
+                <% } else if (q.type === 'checkbox' && q.options && q.options.length > 0) { %>
+                  <div class="option-pill-group q-checkbox-group" data-type="checkbox" data-label="<%= q.label %>">
+                    <% q.options.forEach(function(opt) { %>
+                      <label class="option-pill-label">
+                        <input type="checkbox" value="<%= opt %>">
+                        <span style="font-size: 0.92rem; font-weight: 700; color: #ffffff;"><%= opt %></span>
+                      </label>
+                    <% }); %>
+                  </div>
+
+                <% } else if (q.type === 'rating') { %>
+                  <div class="star-rating-box q-rating-group" data-type="rating" data-label="<%= q.label %>" data-val="5">
+                    <i class="fa-solid fa-star selected" data-score="1"></i>
+                    <i class="fa-solid fa-star selected" data-score="2"></i>
+                    <i class="fa-solid fa-star selected" data-score="3"></i>
+                    <i class="fa-solid fa-star selected" data-score="4"></i>
+                    <i class="fa-solid fa-star selected" data-score="5"></i>
+                  </div>
+
+                <% } else if (q.type === 'audio') { %>
+                  <div class="q-audio-widget" data-type="audio" data-label="<%= q.label %>" style="display:flex; align-items:center; gap:12px; background:rgba(15,23,42,0.8); padding:12px 16px; border-radius:12px; border:1px solid var(--border-color);">
+                    <button type="button" class="audio-rec-btn" onclick="toggleAudioRec(this)" style="background:#10b981; color:#fff; border:none; padding:8px 16px; border-radius:10px; font-weight:800; cursor:pointer; font-family:'Cairo',sans-serif;">
+                      🎙️ بدء التسجيل الصوتي
+                    </button>
+                    <span class="audio-status" style="font-size:0.85rem; color:var(--text-muted);">جاهز للتسجيل</span>
+                  </div>
+
+                <% } else { %>
+                  <input type="text" class="form-control q-input" data-type="text" data-label="<%= q.label %>" <% if (q.required) { %>required<% } %> placeholder="أدخل إجابتك...">
+                <% } %>
+              </div>
+            <% }); %>
+          <% } %>
+
+          <!-- Submit Button -->
+          <button type="submit" id="btn-submit-pro" class="btn-submit">
+            <span>تأكيد واستخراج تذكرة الحضور</span>
+            <i class="fa-solid fa-ticket"></i>
+          </button>
+
+        </div>
+      </form>
+
+      <!-- Digital Ticket Voucher Receipt Card -->
+      <div id="ticket-voucher-card" class="ticket-voucher-card">
+        <div class="ticket-header">
+          <div style="font-size: 2.2rem; color: #10b981;"><i class="fa-solid fa-circle-check"></i></div>
+          <h2 style="font-size: 1.5rem; font-weight: 900; color: #ffffff;">تم تأكيد تسجيل مشاركتك بنجاح!</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">هذه هي بطاقة الحضور الخاصة بك لفعالية "<%= event.title %>"</p>
+          <div class="ticket-code-badge" id="ticket-code-val">MJR-2026-9821</div>
+        </div>
+
+        <div id="ticket-qrcode-box" class="qrcode-box"></div>
+
+        <div style="background: rgba(15,23,42,0.6); padding: 14px 20px; border-radius: 14px; width: 100%; text-align: center; font-size: 0.88rem; color: var(--brand-indigo);">
+          يرجى احتفاظك بكود التذكرة أو التقاط لقطة شاشة للبطاقة لإبرازها عند الدخول.
+        </div>
+
+        <div style="display: flex; gap: 12px; width: 100%;">
+          <button onclick="window.print()" class="btn-submit" style="flex: 1; background: rgba(255,255,255,0.1); border: 1px solid var(--border-color);">
+            <i class="fa-solid fa-print"></i> طباعة / حفظ التذكرة
+          </button>
+          <a href="/bio.html" class="btn-submit" style="flex: 1; text-decoration: none;">
+            <i class="fa-solid fa-house"></i> الصفحة الرئيسية
+          </a>
+        </div>
+      </div>
+
+    <% } %>
+
+  </div>
+
+  <script>
+    function updateProgress() {
+      const form = document.getElementById('google-form-pro');
+      const bar = document.getElementById('progress-bar');
+      if (!form || !bar) return;
+
+      const reqFields = form.querySelectorAll('[required]');
+      let filled = 0;
+
+      reqFields.forEach(f => {
+        if (f.type === 'radio') {
+          const name = f.name;
+          if (form.querySelector(`input[name="${name}"]:checked`)) filled++;
+        } else if (f.value && f.value.trim() !== '') {
+          filled++;
+        }
+      });
+
+      const percentage = reqFields.length ? Math.round((filled / reqFields.length) * 100) : 0;
+      bar.style.width = percentage + '%';
+    }
+
+    function toggleAudioRec(btn) {
+      const widget = btn.closest('.q-audio-widget');
+      const status = widget.querySelector('.audio-status');
+      if (btn.dataset.recording === 'true') {
+        btn.dataset.recording = 'false';
+        btn.style.background = '#10b981';
+        btn.innerText = '🎙️ إعادة التسجيل';
+        status.innerText = '✅ تم تسجيل الملاحظة الصوتية (0:12s)';
+        widget.dataset.audioDone = 'true';
+      } else {
+        btn.dataset.recording = 'true';
+        btn.style.background = '#f43f5e';
+        btn.innerText = '⏹️ إيقاف التسجيل';
+        status.innerText = '🔴 جاري التسجيل الصوتي...';
+      }
+    }
+
+    function triggerFileInput(dropzone) {
+      const fileInput = dropzone.querySelector('.q-input-file');
+      if (fileInput) fileInput.click();
+    }
+
+    function handleFileDrop(e, dropzone) {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        const fileInput = dropzone.querySelector('.q-input-file');
+        if (fileInput) {
+          fileInput.files = files;
+          updateFilePreview(fileInput);
+        }
+      }
+    }
+
+    function updateFilePreview(input) {
+      const dropzone = input.closest('.custom-file-dropzone');
+      if (!dropzone) return;
+      const contentBox = dropzone.querySelector('.file-dropzone-content');
+      const badgeBox = dropzone.querySelector('.file-selected-badge');
+      const nameText = dropzone.querySelector('.file-name-text');
+      const sizeText = dropzone.querySelector('.file-size-text');
+
+      if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+        const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+        if (nameText) nameText.innerText = file.name;
+        if (sizeText) sizeText.innerText = `(${sizeMB} MB)`;
+        if (contentBox) contentBox.style.display = 'none';
+        if (badgeBox) badgeBox.style.display = 'flex';
+        dropzone.style.borderColor = '#10b981';
+        dropzone.style.background = 'rgba(16, 185, 129, 0.08)';
+      } else {
+        if (contentBox) contentBox.style.display = 'flex';
+        if (badgeBox) badgeBox.style.display = 'none';
+        dropzone.style.borderColor = 'rgba(99, 102, 241, 0.4)';
+        dropzone.style.background = 'rgba(15, 23, 42, 0.6)';
+      }
+      if (typeof updateProgress === 'function') updateProgress();
+    }
+
+    function removeSelectedFile(btn) {
+      const dropzone = btn.closest('.custom-file-dropzone');
+      if (!dropzone) return;
+      const input = dropzone.querySelector('.q-input-file');
+      if (input) {
+        input.value = '';
+        updateFilePreview(input);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('google-form-pro');
+      if (form) {
+        form.addEventListener('input', updateProgress);
+        form.addEventListener('change', updateProgress);
+        updateProgress();
+      }
+
+      document.querySelectorAll('.star-rating-box').forEach(box => {
+        const stars = box.querySelectorAll('i');
+        stars.forEach(star => {
+          star.addEventListener('click', () => {
+            const score = parseInt(star.getAttribute('data-score'));
+            box.setAttribute('data-val', score);
+            stars.forEach((s, idx) => {
+              if (idx < score) s.classList.add('selected');
+              else s.classList.remove('selected');
+            });
+          });
+        });
+      });
+    });
+
+    function showValidationToast(msg, targetEl) {
+      const oldToast = document.getElementById('val-toast-error');
+      if (oldToast) oldToast.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'val-toast-error';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: linear-gradient(135deg, #f43f5e, #e11d48);
+        color: #ffffff;
+        padding: 14px 24px;
+        border-radius: 16px;
+        font-size: 0.95rem;
+        font-weight: 800;
+        box-shadow: 0 15px 35px rgba(244, 63, 94, 0.4);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        max-width: 90vw;
+        direction: rtl;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      `;
+      toast.innerHTML = `<i class="fa-solid fa-circle-exclamation" style="font-size: 1.3rem;"></i> <span>${msg}</span>`;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+      }, 10);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 4500);
+
+      if (targetEl) {
+        const card = targetEl.closest('.question-card') || targetEl;
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (typeof targetEl.focus === 'function') targetEl.focus();
+        card.style.borderColor = '#f43f5e';
+        card.style.boxShadow = '0 0 0 3px rgba(244,63,94,0.3)';
+        setTimeout(() => {
+          card.style.borderColor = '';
+          card.style.boxShadow = '';
+        }, 4000);
+      }
+    }
+
+    async function submitFormPro(e) {
+      e.preventDefault();
+      
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const phoneRegex = /^\+?[0-9\s\-\(\)]{7,20}$/;
+
+      // 1. Validate Fixed Name
+      const nameEl = document.getElementById('field-name');
+      const name = nameEl ? nameEl.value.trim() : '';
+      if (!name) {
+        showValidationToast('يرجى إدخال الاسم الثلاثي الكامل.', nameEl);
+        return;
+      }
+
+      // 2. Validate Fixed Phone
+      const phoneEl = document.getElementById('field-phone');
+      const phone = phoneEl ? phoneEl.value.trim() : '';
+      if (!phone) {
+        showValidationToast('يرجى إدخال رقم الواتساب للتواصل.', phoneEl);
+        return;
+      }
+      const cleanPhoneDigits = phone.replace(/[^0-9]/g, '');
+      if (!phoneRegex.test(phone) || cleanPhoneDigits.length < 7) {
+        showValidationToast('عذراً، رقم الهاتف/الواتساب غير صحيح! يرجى كتابته بالشكل الصحيح (مثال: +90 5XX XXX XX XX)', phoneEl);
+        return;
+      }
+
+      // 3. Validate Fixed Email (if filled)
+      const emailEl = document.getElementById('field-email');
+      const email = emailEl ? emailEl.value.trim() : '';
+      if (email && !emailRegex.test(email)) {
+        showValidationToast('عذراً، البريد الإلكتروني غير صحيح! يرجى كتابته بالصيغة الصحيحة (مثال: name@domain.com)', emailEl);
+        return;
+      }
+
+      // 4. Validate Dynamic Custom Questions
+      const customCards = document.querySelectorAll('.custom-q-card');
+      for (let card of customCards) {
+        const isReq = card.querySelector('.req-star') !== null;
+        const label = card.querySelector('.question-title')?.innerText.replace('*', '').trim() || 'سؤال';
+
+        // Check input elements
+        const input = card.querySelector('.q-input, .q-input-file');
+        if (input) {
+          const type = input.getAttribute('data-type') || input.type;
+          const val = input.value ? input.value.trim() : '';
+
+          if (isReq && !val && type !== 'file') {
+            showValidationToast(`يرجى الإجابة على السؤال المطلوب: "${label}"`, input);
+            return;
+          }
+
+          if (type === 'email' && val && !emailRegex.test(val)) {
+            showValidationToast(`صيغة البريد الإلكتروني غير صحيحة في سؤال "${label}". يرجى كتابة بريد إلكتروني صحيح (مثال: name@example.com)`, input);
+            return;
+          }
+
+          if (type === 'phone' && val) {
+            const digits = val.replace(/[^0-9]/g, '');
+            if (!phoneRegex.test(val) || digits.length < 7) {
+              showValidationToast(`صيغة رقم الهاتف غير صحيحة في سؤال "${label}". يرجى إدخال رقم هاتف صحيح (مثال: +90 5XX XXX XX XX)`, input);
+              return;
+            }
+          }
+
+          if (type === 'number' && val && isNaN(Number(val))) {
+            showValidationToast(`يرجى إدخال رقم عددي صحيح في سؤال "${label}".`, input);
+            return;
+          }
+
+          if (type === 'file' && isReq && (!input.files || input.files.length === 0)) {
+            showValidationToast(`يرجى إرفاق الملف المطلوب في سؤال "${label}".`, input);
+            return;
+          }
+        }
+
+        // Check Radio Group
+        const radioGroup = card.querySelector('.q-radio-group');
+        if (radioGroup && isReq) {
+          const checked = radioGroup.querySelector('input[type="radio"]:checked');
+          if (!checked) {
+            showValidationToast(`يرجى اختيار أحد الخيارات لـ "${label}".`, radioGroup);
+            return;
+          }
+        }
+
+        // Check Checkbox Group
+        const checkboxGroup = card.querySelector('.q-checkbox-group');
+        if (checkboxGroup && isReq) {
+          const checked = checkboxGroup.querySelectorAll('input[type="checkbox"]:checked');
+          if (checked.length === 0) {
+            showValidationToast(`يرجى اختيار خيار واحد على الأقل لـ "${label}".`, checkboxGroup);
+            return;
+          }
+        }
+
+        // Check Audio Widget
+        const audioWidget = card.querySelector('.q-audio-widget');
+        if (audioWidget && isReq && audioWidget.dataset.audioDone !== 'true') {
+          showValidationToast(`يرجى إجراء التسجيل الصوتي في سؤال "${label}".`, audioWidget);
+          return;
+        }
+      }
+
+      const btn = document.getElementById('btn-submit-pro');
+
+      const answers = {};
+      
+      document.querySelectorAll('.q-input').forEach(input => {
+        const label = input.getAttribute('data-label');
+        if (label) answers[label] = input.value ? input.value.trim() : '';
+      });
+
+      document.querySelectorAll('.q-radio-group').forEach(group => {
+        const label = group.getAttribute('data-label');
+        const checked = group.querySelector('input[type="radio"]:checked');
+        if (label) answers[label] = checked ? checked.value : '';
+      });
+
+      document.querySelectorAll('.q-checkbox-group').forEach(group => {
+        const label = group.getAttribute('data-label');
+        const checkedVals = Array.from(group.querySelectorAll('input[type="checkbox"]:checked')).map(c => c.value);
+        if (label) answers[label] = checkedVals.join(', ');
+      });
+
+      document.querySelectorAll('.q-rating-group').forEach(group => {
+        const label = group.getAttribute('data-label');
+        const score = group.getAttribute('data-val') || '5';
+        if (label) answers[label] = score + ' / 5 ⭐';
+      });
+
+      document.querySelectorAll('.q-audio-widget').forEach(widget => {
+        const label = widget.getAttribute('data-label');
+        if (label) answers[label] = widget.dataset.audioDone ? '🎙️ تسجيل صوتي (مرفق)' : 'لم يتم التسجيل';
+      });
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>جاري استخراج تذكرة الحضور...</span> <i class="fa-solid fa-spinner fa-spin"></i>';
+
+      try {
+        const res = await fetch('/api/events/<%= event.slug %>/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            email,
+            answers
+          })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          const ticketCode = 'MJR-' + Math.floor(100000 + Math.random() * 900000);
+          document.getElementById('ticket-code-val').innerText = ticketCode;
+
+          const qrBox = document.getElementById('ticket-qrcode-box');
+          qrBox.innerHTML = '';
+          const qr = qrcode(0, 'M');
+          qr.addData('TICKET:' + ticketCode + '|NAME:' + name + '|EVENT:<%= event.title %>');
+          qr.make();
+          qrBox.innerHTML = qr.createImgTag(5);
+
+          document.getElementById('google-form-pro').style.display = 'none';
+          document.getElementById('ticket-voucher-card').style.display = 'flex';
+          document.getElementById('progress-bar').style.width = '100%';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+
+          if (typeof confetti === 'function') {
+            confetti({ particleCount: 160, spread: 80, origin: { y: 0.6 } });
+          }
+        } else {
+          alert('خطأ: ' + (data.message || 'تعذر إتمام الإرسال'));
+          btn.disabled = false;
+          btn.innerHTML = '<span>تأكيد واستخراج تذكرة الحضور</span> <i class="fa-solid fa-ticket"></i>';
+        }
+      } catch (err) {
+        console.error('Submission error:', err);
+        alert('حدث خطأ في الاتصال، يرجى إعادة المحاولة.');
+        btn.disabled = false;
+        btn.innerHTML = '<span>تأكيد واستخراج تذكرة الحضور</span> <i class="fa-solid fa-ticket"></i>';
+      }
+    }
+  </script>
+</body>
+</html>

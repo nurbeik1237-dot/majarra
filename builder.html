@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>استوديو نماذج مجرّة الألترا | Majarra Forms Ultra Studio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  
+  <style>
+    :root {
+      --brand-navy: #060814;
+      --brand-surface: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.75);
+      --border-color: rgba(129, 140, 248, 0.2);
+      --border-active: #6366f1;
+      --brand-purple: #818cf8;
+      --brand-emerald: #10b981;
+      --brand-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --theme-gradient: linear-gradient(135deg, #4f46e5, #6366f1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body, input, select, textarea, button, a, label, p, span, div, h1, h2, h3, h4, h5, h6 {
+      font-family: 'Thmanyah Serif Display', 'Thmanyah', 'Cairo', serif;
+    }
+
+    i, .fa, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands, [class*="fa-"] {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    }
+
+    body {
+      background: radial-gradient(circle at top right, #1e1b4b 0%, #0f172a 40%, #060814 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar Header */
+    .app-header {
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .brand-title-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1rem;
+      font-weight: 900;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--brand-purple);
+      font-weight: 700;
+    }
+
+    /* Tabs Navigation */
+    .forms-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(30, 41, 59, 0.6);
+      padding: 3px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .tab-btn {
+      padding: 6px 13px;
+      border-radius: 9px;
+      font-family: 'Thmanyah Serif Display', 'Thmanyah', 'Cairo', serif !important;
+      font-size: 0.81rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      background: var(--theme-gradient);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(99, 102, 241, 0.35);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border-radius: 9px;
+      font-family: 'Thmanyah Serif Display', 'Thmanyah', 'Cairo', serif !important;
+      font-size: 0.81rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-emerald:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Full Screen Workspace Layout */
+    .workspace-layout {
+      width: 100%;
+      max-width: 100%;
+      margin: 16px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 1080px) {
+      .workspace-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Form Panels */
+    .panel-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Floating Toolbar */
+    .floating-toolbar {
+      position: sticky;
+      top: 80px;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .input-field {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #ffffff;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--brand-purple);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Question Cards */
+    .question-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--border-color);
+      border-right: 4px solid transparent;
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.25s ease;
+    }
+
+    .question-card:focus-within, .question-card.active {
+      border-color: var(--brand-purple);
+      border-right-color: var(--brand-purple);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+    }
+
+    .q-card-top {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .q-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
+
+    .icon-btn.danger:hover {
+      background: rgba(244, 63, 94, 0.2);
+      color: #f43f5e;
+      border-color: rgba(244, 63, 94, 0.4);
+    }
+
+    /* Preview Frame & Fullscreen Mode */
+    .preview-frame {
+      background: #060814;
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      position: sticky;
+      top: 80px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .preview-frame.fullscreen-mode {
+      position: fixed;
+      inset: 15px;
+      z-index: 999;
+      max-height: calc(100vh - 30px);
+      box-shadow: 0 0 100px rgba(0, 0, 0, 0.9);
+      background: #060814;
+    }
+
+    .preview-topbar {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .preview-body-content {
+      padding: 20px;
+      max-height: calc(100vh - 160px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .preview-frame.fullscreen-mode .preview-body-content {
+      max-height: calc(100vh - 90px);
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 8, 20, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 28px;
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Premium Custom File Dropzone UI (Matched 100%) */
+    .custom-file-dropzone {
+      position: relative;
+      background: rgba(15, 23, 42, 0.6);
+      border: 2px dashed rgba(99, 102, 241, 0.4);
+      border-radius: 16px;
+      padding: 16px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+      direction: rtl;
+    }
+
+    .custom-file-dropzone:hover, .custom-file-dropzone.dragover {
+      border-color: #818cf8;
+      background: rgba(99, 102, 241, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15);
+    }
+
+    .dropzone-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      color: #818cf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .custom-file-dropzone:hover .dropzone-icon-box {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.4);
+      transform: scale(1.08);
+    }
+
+    .dropzone-text-box {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      text-align: right;
+    }
+
+    .dropzone-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .dropzone-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <img src="assets/majarra_official_icon.png" alt="Logo" class="brand-logo" onerror="this.src='https://via.placeholder.com/40'">
+      <div class="brand-title-box">
+        <span class="brand-name">استوديو نماذج مجرّة <span style="background: linear-gradient(135deg,#10b981,#059669); color: #ffffff; padding: 2px 8px; border-radius: 20px; font-size: 0.72rem;">ULTRA PRO</span></span>
+        <span class="brand-subtitle">Next-Gen Dynamic Forms System</span>
+      </div>
+    </div>
+
+    <!-- Center Navigation Tabs -->
+    <div class="forms-tabs">
+      <button type="button" class="tab-btn active" onclick="switchStudioTab('editor')">
+        <i class="fa-solid fa-pen-to-square"></i> محرر الأسئلة
+      </button>
+      <button type="button" class="tab-btn" onclick="switchStudioTab('responses')">
+        <i class="fa-solid fa-chart-pie"></i> التحليلات والردود <span id="tab-resp-count" style="background: rgba(16,185,129,0.2); color: #34d399; padding: 1px 6px; border-radius: 10px; font-size: 0.75rem;">0</span>
+      </button>
+      <button type="button" class="tab-btn" onclick="switchStudioTab('settings')">
+        <i class="fa-solid fa-sliders"></i> تخصيص المظهر والإعدادات
+      </button>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button type="button" onclick="openShareModal()" class="btn btn-secondary">
+        <i class="fa-solid fa-qrcode"></i> مشاركة ورمز QR
+      </button>
+      <button type="button" onclick="saveFormStudio()" class="btn btn-emerald">
+        <i class="fa-solid fa-cloud-arrow-up"></i> حفظ ونشر النموذج
+      </button>
+      <button type="button" onclick="goBackToPreviousPage()" class="btn btn-secondary" title="العودة للصفحة السابقة">
+        <i class="fa-solid fa-arrow-right"></i> العودة للصفحة السابقة
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container Grid -->
+  <div class="workspace-layout">
+
+    <!-- Left Main Studio Panel -->
+    <div class="panel-card" id="main-editor-panel">
+      
+      <!-- EDITOR TAB CONTENT -->
+      <div id="tab-content-editor" style="display: flex; flex-direction: column; gap: 20px;">
+        
+        <div class="floating-toolbar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div style="font-weight: 800; color: var(--brand-purple); font-size: 0.92rem; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> أدوات النمذجة المتقدمة
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <button type="button" class="btn btn-secondary" onclick="addQuestionCard()" style="padding: 7px 14px; font-size: 0.82rem; background: rgba(99,102,241,0.2); color: #a5b4fc; border-color: rgba(99,102,241,0.4);">
+              <i class="fa-solid fa-plus-circle"></i> + سؤال جديد
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="insertStandardPersonalPreset()" style="padding: 7px 14px; font-size: 0.82rem; background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(5,150,105,0.25)); color: #34d399; border-color: rgba(16,185,129,0.4);" title="إضافة قسم البيانات الشخصية والجنسية المعتمدة">
+              <i class="fa-solid fa-id-card"></i> + قسم البيانات الشخصية والجنسية
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="clearAllQuestions()" style="padding: 7px 14px; font-size: 0.82rem; background: rgba(244,63,94,0.15); color: #fda4af; border-color: rgba(244,63,94,0.3);" title="مسح جميع الحقول من الشاشة">
+              <i class="fa-solid fa-trash-can"></i> مسح الكل
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Title Header Card -->
+        <div style="background: rgba(15,23,42,0.85); border: 1px solid var(--border-color); border-top: 6px solid var(--border-active); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+          <input type="hidden" id="form-db-id" value="">
+          
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block;">عنوان الاستمارة / الفعالية *</label>
+            <input type="text" id="form-title" class="input-field" placeholder="مثال: ورشة صناعة المحتوى الإبداعي - نادي رويّة" style="font-size: 1.25rem; font-weight: 900; color: #ffffff;" oninput="onFormTitleInput(this.value); updateLivePreview();" required>
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block;">رابط التسجيل المختصر (Slug) *</label>
+            <div style="display: flex; align-items: center; background: rgba(15,23,42,0.8); border: 1px solid var(--border-color); border-radius: 12px; padding: 0 14px;">
+              <span style="color: var(--brand-purple); font-weight: 800; font-size: 0.85rem;" dir="ltr">.../e/</span>
+              <input type="text" id="form-slug" class="input-field" style="border: none; background: transparent;" placeholder="rawya-workshop" dir="ltr" oninput="updateLivePreview()" required>
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block;">وصف الاستمارة والمعلومات التوضيحية للزوار</label>
+            <textarea id="form-desc" class="input-field" placeholder="اكتب هنا تفاصيل ومواعيد وملاحظات الفعالية..." style="min-height: 80px; resize: vertical;" oninput="updateLivePreview()"></textarea>
+          </div>
+        </div>
+
+        <!-- Questions Dynamic List Container -->
+        <div id="questions-list-container" style="display: flex; flex-direction: column; gap: 16px;"></div>
+
+      </div>
+
+      <!-- RESPONSES & ANALYTICS TAB CONTENT -->
+      <div id="tab-content-responses" style="display: none; flex-direction: column; gap: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <h2 style="font-size: 1.2rem; font-weight: 900; color: #ffffff;"><i class="fa-solid fa-chart-pie" style="color: var(--brand-emerald);"></i> التحليلات البيانية والردود الحية</h2>
+          <button type="button" onclick="exportFormCSV()" class="btn btn-secondary" style="background: rgba(16,185,129,0.2); color: #34d399; border-color: rgba(16,185,129,0.4);">
+            <i class="fa-solid fa-file-csv"></i> تصدير الردود إلى Excel (CSV)
+          </button>
+        </div>
+
+        <!-- Live Chart Box -->
+        <div style="background: rgba(15,23,42,0.8); border: 1px solid var(--border-color); border-radius: 18px; padding: 20px; height: 260px; display: flex; align-items: center; justify-content: center;">
+          <canvas id="responsesChart"></canvas>
+        </div>
+
+        <div style="overflow-x: auto; border-radius: 16px; border: 1px solid var(--border-color);">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+            <thead>
+              <tr style="background: rgba(15,23,42,0.95); color: var(--brand-purple); text-align: right;">
+                <th style="padding: 12px 16px;">#</th>
+                <th style="padding: 12px 16px;">التاريخ</th>
+                <th style="padding: 12px 16px;">الاسم الكامل</th>
+                <th style="padding: 12px 16px;">الواتساب</th>
+                <th style="padding: 12px 16px;">الإجابات التفصيلية</th>
+              </tr>
+            </thead>
+            <tbody id="responses-table-body">
+              <tr>
+                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">
+                  لا توجد استجابات مسجلة لهذه الاستمارة حتى الآن.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SETTINGS & THEMES TAB CONTENT -->
+      <div id="tab-content-settings" style="display: none; flex-direction: column; gap: 20px;">
+        <h2 style="font-size: 1.2rem; font-weight: 900; color: #ffffff;"><i class="fa-solid fa-palette" style="color: var(--brand-amber);"></i> تخصيص ثيمات مظهر مجرّة الإبداعية</h2>
+
+        <!-- Color Theme Presets -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px;">
+          <button type="button" onclick="setFormTheme('indigo')" class="btn btn-secondary" style="border-right: 4px solid #6366f1; justify-content: center;">🔮 نيبولا بنفجسي</button>
+          <button type="button" onclick="setFormTheme('emerald')" class="btn btn-secondary" style="border-right: 4px solid #10b981; justify-content: center;">🌌 مجرّة زمردي</button>
+          <button type="button" onclick="setFormTheme('amber')" class="btn btn-secondary" style="border-right: 4px solid #f59e0b; justify-content: center;">🌅 الشفق الذهبي</button>
+          <button type="button" onclick="setFormTheme('rose')" class="btn btn-secondary" style="border-right: 4px solid #f43f5e; justify-content: center;">💎 سديم وردي</button>
+        </div>
+
+        <div class="form-group" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+          <label style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">حالة استقبال الردود</label>
+          <select id="setting-is-active" class="input-field" onchange="updateLivePreview()">
+            <option value="1">🟢 مفتوح للمشاركة واستقبال الردود</option>
+            <option value="0">🔴 مغلق حالياً</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+          <label style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">رابط غلاف الاستمارة (Header Banner URL)</label>
+          <input type="text" id="setting-banner-url" class="input-field" placeholder="assets/workshop.jpg" oninput="updateLivePreview()">
+        </div>
+
+        <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+          <label style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">الحد الأقصى للمشاركين (0 = مفتوح)</label>
+          <input type="number" id="setting-max-responses" class="input-field" min="0" value="0" oninput="updateLivePreview()">
+        </div>
+
+        <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+          <label style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">نص الشارة العلوية (Badge Text)</label>
+          <input type="text" id="setting-badge-text" class="input-field" placeholder="نادي رويّة • مجرّة" oninput="updateLivePreview()">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Live Phone Preview -->
+    <div class="preview-frame">
+      <div class="preview-topbar">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-weight: 800; color: #ffffff;"><i class="fa-solid fa-desktop"></i> معاينة الشاشة التفاعلية الحية</span>
+          <button type="button" id="btn-toggle-fs" onclick="toggleFullscreenPreview()" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem; background: rgba(99,102,241,0.2); color: #a5b4fc; border-color: rgba(99,102,241,0.4);">
+            <i class="fa-solid fa-expand"></i> الشاشة الكاملة
+          </button>
+        </div>
+        <a id="prev-external-link" href="#" target="_blank" style="color: var(--brand-purple); text-decoration: none; font-weight: 800;" dir="ltr">/e/slug</a>
+      </div>
+
+      <div class="preview-body-content">
+        
+        <div style="background: linear-gradient(145deg, rgba(23, 30, 48, 0.95), rgba(15, 20, 35, 0.98)); border: 1px solid rgba(138, 111, 178, 0.25); border-top: 5px solid var(--border-active); border-radius: 20px; padding: 22px 26px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+            <span style="background: rgba(129,140,248,0.12); color: #a5b4fc; border: 1px solid rgba(129,140,248,0.25); padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-circle" style="font-size: 0.45rem; color: #818cf8;"></i> <span id="prev-badge">فعالية مجتمعية</span>
+            </span>
+          </div>
+
+          <h1 id="prev-title" style="font-family: 'Thmanyah Serif Display', 'Thmanyah', 'Cairo', serif !important; font-size: 1.7rem; font-weight: 900; color: #ffffff; line-height: 1.3; margin-top: 4px;">عنوان الاستمارة</h1>
+
+          <div style="height: 1px; background: rgba(255, 255, 255, 0.08); margin: 2px 0; width: 100%;"></div>
+
+          <p id="prev-desc" style="font-size: 0.92rem; color: #cbd5e1; line-height: 1.7; white-space: pre-line;">
+            وصف الاستمارة سيظهر هنا للجمهور بنفس التنسيق التفاعلي...
+          </p>
+        </div>
+
+        <div id="preview-questions-container" style="display: flex; flex-direction: column; gap: 14px;"></div>
+
+        <button disabled class="btn btn-emerald" style="width: 100%; justify-content: center; opacity: 0.85; margin-top: 10px; padding: 14px; font-size: 1rem;">
+          تأكيد وإرسال الرد
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Share & QR Modal -->
+  <div id="shareModal" class="modal-overlay">
+    <div class="modal-card">
+      <div style="font-size: 1.2rem; font-weight: 900; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-qrcode" style="color: var(--brand-emerald);"></i> مشاركة الاستمارة ورمز QR
+      </div>
+
+      <div id="qrcode-box" style="background: #ffffff; padding: 14px; border-radius: 16px; display: flex; justify-content: center;"></div>
+
+      <input type="text" id="share-link-input" readonly class="input-field" style="text-align: center; font-weight: 800; color: var(--brand-purple);" dir="ltr">
+
+      <div style="display: flex; gap: 10px; width: 100%;">
+        <button type="button" onclick="copyShareLink()" class="btn btn-emerald" style="flex: 1; justify-content: center;">
+          <i class="fa-solid fa-copy"></i> نسخ الرابط
+        </button>
+        <button type="button" onclick="closeShareModal()" class="btn btn-secondary" style="flex: 1; justify-content: center;">
+          إغلاق
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Save & Publish Modal -->
+  <div id="successSaveModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 480px; text-align: center; padding: 32px 24px; border: 1.5px solid rgba(16, 185, 129, 0.5); box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(16,185,129,0.2);">
+      <div style="font-size: 3.8rem; color: #10b981; margin-bottom: 14px; filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      
+      <h3 style="font-size: 1.45rem; font-weight: 900; color: #ffffff; margin-bottom: 8px;">تم حفظ ونشر الاستمارة بنجاح! 🎉</h3>
+      <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">
+        تم تسجيل جميع الأسئلة والإعدادات ونشر الاستمارة لتكون جاهزة للتسجيل الفوري.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+        <button type="button" onclick="openShareModalFromSuccess()" class="btn btn-emerald" style="justify-content: center; padding: 13px; font-weight: 800; font-size: 0.95rem;">
+          <i class="fa-solid fa-share-nodes"></i> مشاركة الاستمارة ورمز QR
+        </button>
+
+        <button type="button" onclick="previewLiveFormFromSuccess()" class="btn btn-gold" style="justify-content: center; padding: 13px; font-weight: 800; font-size: 0.95rem; background: linear-gradient(135deg, #e8c677, #d4af37); color: #0f172a; border: none;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> معاينة الاستمارة الحية 🚀
+        </button>
+
+        <button type="button" onclick="goBackToPreviousPage()" class="btn btn-secondary" style="justify-content: center; padding: 11px; font-weight: 700; color: #cbd5e1; border-color: rgba(255,255,255,0.15);">
+          <i class="fa-solid fa-arrow-right"></i> العودة للصفحة السابقة
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let myChart = null;
+    let selectedTheme = 'indigo';
+
+    function goBackToPreviousPage() {
+      const savedRef = sessionStorage.getItem('builder_referrer');
+      if (savedRef && !savedRef.includes('builder.html')) {
+        window.location.href = savedRef;
+      } else if (document.referrer && !document.referrer.includes('builder.html')) {
+        window.location.href = document.referrer;
+      } else if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'admin.html?sub=dynamicEvents';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Save original referrer when entering builder (if not coming from builder itself)
+      if (document.referrer && !document.referrer.includes('builder.html')) {
+        sessionStorage.setItem('builder_referrer', document.referrer);
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const formId = params.get('id');
+
+      if (formId) {
+        loadFormForEditing(formId);
+      } else {
+        importDefaultQuestionsPreset();
+        updateLivePreview();
+      }
+    });
+
+    function setFormTheme(themeName) {
+      selectedTheme = themeName;
+      const root = document.documentElement;
+      if (themeName === 'emerald') {
+        root.style.setProperty('--border-active', '#10b981');
+        root.style.setProperty('--theme-gradient', 'linear-gradient(135deg, #059669, #10b981)');
+      } else if (themeName === 'amber') {
+        root.style.setProperty('--border-active', '#f59e0b');
+        root.style.setProperty('--theme-gradient', 'linear-gradient(135deg, #d97706, #f59e0b)');
+      } else if (themeName === 'rose') {
+        root.style.setProperty('--border-active', '#f43f5e');
+        root.style.setProperty('--theme-gradient', 'linear-gradient(135deg, #e11d48, #f43f5e)');
+      } else {
+        root.style.setProperty('--border-active', '#6366f1');
+        root.style.setProperty('--theme-gradient', 'linear-gradient(135deg, #4f46e5, #6366f1)');
+      }
+      updateLivePreview();
+    }
+
+    function switchStudioTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById('tab-content-editor').style.display = tabName === 'editor' ? 'flex' : 'none';
+      document.getElementById('tab-content-responses').style.display = tabName === 'responses' ? 'flex' : 'none';
+      document.getElementById('tab-content-settings').style.display = tabName === 'settings' ? 'flex' : 'none';
+
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => {
+        const oc = b.getAttribute('onclick');
+        return oc && oc.includes(tabName);
+      });
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (tabName === 'responses') {
+        fetchFormResponses();
+      }
+    }
+
+    function onFormTitleInput(val) {
+      const slugInput = document.getElementById('form-slug');
+      if (!slugInput.dataset.userEdited) {
+        const slugified = (val || '').trim().toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/[\s_-]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        slugInput.value = slugified || ('form-' + Math.floor(Math.random() * 1000));
+      }
+    }
+
+    function importDefaultQuestionsPreset() {
+      const container = document.getElementById('questions-list-container');
+      if (!container) return;
+      container.innerHTML = '';
+      insertStandardPersonalPreset();
+    }
+
+    function insertStandardPersonalPreset() {
+      const presets = [
+        { label: 'عنوان البريد الالكتروني', type: 'email', required: true },
+        { label: 'الاسم والكنية (بالعربي)', type: 'text', required: true },
+        { label: 'الاسم والكنية (بالإنجليزية)', type: 'text', required: true },
+        { label: 'رقم الهاتف', type: 'phone', required: true },
+        { label: 'تاريخ الميلاد', type: 'date', required: true },
+        { 
+          label: 'الجنسية', 
+          type: 'radio', 
+          options: ['سورية', 'تركية', 'سورية - تركية', 'مصرية', 'عراقية', 'فلسطينية', 'اردنية', 'يمنية', 'أخرى:'], 
+          required: true 
+        },
+        { label: 'الجنس', type: 'radio', options: ['ذكر', 'انثى'], required: true },
+        { label: 'مكان الاقامة', type: 'radio', options: ['غازي عنتاب', 'أخرى:'], required: true },
+        { label: 'المهنة أو التخصص الدراسي', type: 'text', required: true }
+      ];
+
+      const existingInputs = Array.from(document.querySelectorAll('.q-label-input'));
+      const existingLabels = existingInputs.map(inp => inp.value.trim());
+
+      let addedCount = 0;
+      presets.forEach(p => {
+        if (!existingLabels.includes(p.label)) {
+          addQuestionCard(p);
+          addedCount++;
+        }
+      });
+
+      updateLivePreview();
+
+      if (typeof showToast === 'function') {
+        if (addedCount > 0) {
+          showToast('success', `تم إدراج ${addedCount} من حقول البيانات الشخصية والجنسية المعتمدة بنجاح! ✨`);
+        } else {
+          showToast('success', 'حقول البيانات الشخصية والجنسية المعتمدة مضافة مسبقاً في هذه الاستمارة ✅');
+        }
+      }
+    }
+
+    function clearAllQuestions() {
+      if (confirm('هل أنت تأكد من مسح جميع الحقول من شاشة النمذجة؟')) {
+        const container = document.getElementById('questions-list-container');
+        if (container) container.innerHTML = '';
+        updateLivePreview();
+      }
+    }
+
+    function addQuestionCard(qData = null) {
+      const container = document.getElementById('questions-list-container');
+      if (!container) return;
+
+      const labelVal = qData ? (qData.label || '') : '';
+      const typeVal = qData ? (qData.type || 'text') : 'text';
+      const isReq = qData ? (qData.required !== false) : true;
+      const optionsVal = (qData && qData.options && Array.isArray(qData.options)) ? qData.options.join(', ') : (qData && typeof qData.options === 'string' ? qData.options : '');
+
+      const hasOptions = ['select', 'radio', 'checkbox'].includes(typeVal);
+
+      const card = document.createElement('div');
+      card.className = 'question-card';
+      card.innerHTML = `
+        <div class="q-card-top">
+          <div style="flex: 2; min-width: 200px;">
+            <label style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block;">عنوان السؤال *</label>
+            <input type="text" class="q-label-input input-field" value="${escapeHtmlAttr(labelVal)}" placeholder="اكتب سؤالك هنا..." oninput="updateLivePreview()">
+          </div>
+
+          <div style="flex: 1; min-width: 160px;">
+            <label style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; display: block;">نوع الإجابة</label>
+            <select class="q-type-select input-field" onchange="toggleOptionContainer(this); updateLivePreview();">
+              <option value="email" ${typeVal === 'email' ? 'selected' : ''}>📧 بريد إلكتروني (Email Address)</option>
+              <option value="phone" ${typeVal === 'phone' ? 'selected' : ''}>📱 رقم هاتف / واتساب (Phone/WhatsApp)</option>
+              <option value="text" ${typeVal === 'text' ? 'selected' : ''}>📝 نص قصير (Short text)</option>
+              <option value="textarea" ${typeVal === 'textarea' ? 'selected' : ''}>📄 فقرة / نص طويل (Paragraph)</option>
+              <option value="radio" ${typeVal === 'radio' ? 'selected' : ''}>🔘 اختيار واحد (Radio Pill)</option>
+              <option value="checkbox" ${typeVal === 'checkbox' ? 'selected' : ''}>☑️ خيارات متعددة (Checkbox)</option>
+              <option value="select" ${typeVal === 'select' ? 'selected' : ''}>🔽 قائمة منسدلة (Dropdown)</option>
+              <option value="number" ${typeVal === 'number' ? 'selected' : ''}>🔢 رقم عددي (Number)</option>
+              <option value="rating" ${typeVal === 'rating' ? 'selected' : ''}>⭐ تقييم بالنجوم (1-5 Stars)</option>
+              <option value="date" ${typeVal === 'date' ? 'selected' : ''}>📅 اختيار تاريخ (Date)</option>
+              <option value="time" ${typeVal === 'time' ? 'selected' : ''}>⏰ اختيار وقت (Time)</option>
+              <option value="file" ${typeVal === 'file' ? 'selected' : ''}>📎 إرفاق ملف / صورة (File Upload)</option>
+              <option value="audio" ${typeVal === 'audio' ? 'selected' : ''}>🎙️ تسجيل صوتي (Voice Note)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="q-options-wrapper" style="display: ${hasOptions ? 'block' : 'none'}; background: rgba(15,23,42,0.6); padding: 12px; border-radius: 12px; border: 1px solid var(--border-color);">
+          <label style="font-size: 0.78rem; font-weight: 800; color: var(--brand-purple); margin-bottom: 6px; display: block;">خيارات الإجابة (افصل بينها بـ فاصلة ,)</label>
+          <input type="text" class="q-options-input input-field" value="${escapeHtmlAttr(optionsVal)}" placeholder="مثال: نعم, لا, ربما" oninput="updateLivePreview()">
+        </div>
+
+        <div class="q-card-bottom">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <label style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted);">إلزامية السؤال:</label>
+            <select class="q-required-select input-field" onchange="updateLivePreview()" style="padding: 4px 10px; font-size: 0.82rem; font-weight: 800; border-radius: 10px; width: auto; background: rgba(15,23,42,0.9);">
+              <option value="true" ${isReq ? 'selected' : ''}>🔴 مطلوب (*)</option>
+              <option value="false" ${!isReq ? 'selected' : ''}>⚪ عادي</option>
+            </select>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button type="button" class="icon-btn" title="تكرار السؤال" onclick="duplicateQuestionCard(this)" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 5px 12px; width: auto; height: 32px; font-size: 0.8rem; font-weight: 700; color: #cbd5e1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; cursor: pointer;">
+              <i class="fa-solid fa-copy"></i> تكرار
+            </button>
+            <button type="button" class="icon-btn danger" title="حذف السؤال" onclick="removeQuestionCard(this)" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 5px 12px; width: auto; height: 32px; font-size: 0.8rem; font-weight: 700; color: #f43f5e; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.25); border-radius: 8px; cursor: pointer;">
+              <i class="fa-solid fa-trash"></i> حذف
+            </button>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(card);
+      updateLivePreview();
+    }
+
+    function toggleOptionContainer(selectEl) {
+      const card = selectEl.closest('.question-card');
+      if (!card) return;
+      const optWrapper = card.querySelector('.q-options-wrapper');
+      if (!optWrapper) return;
+      const val = selectEl.value;
+      optWrapper.style.display = ['select', 'radio', 'checkbox'].includes(val) ? 'block' : 'none';
+    }
+
+    function removeQuestionCard(btn) {
+      const card = btn.closest('.question-card');
+      if (card) { card.remove(); updateLivePreview(); }
+    }
+
+    function duplicateQuestionCard(btn) {
+      const card = btn.closest('.question-card');
+      if (!card) return;
+      const label = card.querySelector('.q-label-input')?.value || '';
+      const type = card.querySelector('.q-type-select')?.value || 'text';
+      const reqSel = card.querySelector('.q-required-select');
+      const required = reqSel ? (reqSel.value === 'true') : false;
+      const options = card.querySelector('.q-options-input')?.value || '';
+
+      addQuestionCard({ label: label + ' (نسخة)', type, required, options });
+    }
+
+    function serializeQuestions() {
+      const cards = document.querySelectorAll('.question-card');
+      const questions = [];
+
+      cards.forEach((card, idx) => {
+        const label = card.querySelector('.q-label-input')?.value.trim() || '';
+        const type = card.querySelector('.q-type-select')?.value || 'text';
+        const reqSel = card.querySelector('.q-required-select');
+        const required = reqSel ? (reqSel.value === 'true') : false;
+        const optionsRaw = card.querySelector('.q-options-input')?.value || '';
+
+        if (!label) return;
+
+        const qObj = {
+          id: 'q_' + (idx + 1),
+          label,
+          type,
+          required
+        };
+
+        if (['select', 'radio', 'checkbox'].includes(type)) {
+          const optsArr = optionsRaw.split(/[,،\n]/).map(o => o.trim()).filter(Boolean);
+          qObj.options = optsArr.length > 0 ? optsArr : ['خيار 1', 'خيار 2'];
+        }
+
+        questions.push(qObj);
+      });
+
+      return questions;
+    }
+
+    function toggleFullscreenPreview() {
+      const frame = document.querySelector('.preview-frame');
+      const btn = document.getElementById('btn-toggle-fs');
+      if (!frame) return;
+
+      frame.classList.toggle('fullscreen-mode');
+      const isFS = frame.classList.contains('fullscreen-mode');
+      if (btn) {
+        btn.innerHTML = isFS ? '<i class="fa-solid fa-compress"></i> تصغير الشاشة' : '<i class="fa-solid fa-expand"></i> الشاشة الكاملة';
+      }
+    }
+
+    function updateLivePreview() {
+      const title = document.getElementById('form-title')?.value.trim() || 'عنوان الاستمارة';
+      const slug = document.getElementById('form-slug')?.value.trim() || 'slug';
+      const desc = document.getElementById('form-desc')?.value.trim() || 'وصف ومعلومات الاستمارة ستظهر هنا للزوار...';
+      const isActive = (document.getElementById('setting-is-active')?.value || '1') === '1';
+      const badgeText = document.getElementById('setting-badge-text')?.value.trim() || 'فعالية مجتمعية';
+
+      document.getElementById('prev-title').innerText = title;
+      const badgeEl = document.getElementById('prev-badge');
+      if (badgeEl) badgeEl.innerText = badgeText;
+      document.getElementById('prev-external-link').href = '/e/' + slug;
+      document.getElementById('prev-external-link').innerText = '/e/' + slug;
+
+      const statusPill = document.getElementById('prev-status-pill');
+      if (statusPill) {
+        statusPill.innerText = isActive ? 'مفتوح' : 'مغلق';
+        statusPill.style.background = isActive ? 'rgba(16,185,129,0.15)' : 'rgba(244,63,94,0.15)';
+        statusPill.style.color = isActive ? '#34d399' : '#fda4af';
+        statusPill.style.borderColor = isActive ? 'rgba(16,185,129,0.3)' : 'rgba(244,63,94,0.3)';
+      }
+
+      // Render Preview Custom Questions
+      const questions = serializeQuestions();
+      const prevContainer = document.getElementById('preview-questions-container');
+      if (!prevContainer) return;
+
+      let html = '';
+      questions.forEach(q => {
+        const star = q.required ? '<span style="color:#f43f5e;">*</span> ' : '';
+        
+        let widget = '';
+        if (q.type === 'textarea') {
+          widget = `<textarea disabled placeholder="اكتب فقرة الإجابة..." class="input-field" style="font-size:0.85rem; opacity:0.7; min-height:75px; resize:none;"></textarea>`;
+        } else if (q.type === 'email') {
+          widget = `<input type="email" disabled placeholder="example@domain.com (بريد إلكتروني)" class="input-field" dir="ltr" style="font-size:0.88rem; opacity:0.7;">`;
+        } else if (q.type === 'phone') {
+          widget = `<input type="tel" disabled placeholder="+90 5XX XXX XX XX (رقم الهاتف/الواتساب)" class="input-field" dir="ltr" style="font-size:0.88rem; opacity:0.7;">`;
+        } else if (q.type === 'number') {
+          widget = `<input type="number" disabled placeholder="0 (رقم عددي)" class="input-field" style="font-size:0.88rem; opacity:0.7;">`;
+        } else if (q.type === 'date') {
+          widget = `<input type="date" disabled class="input-field" style="font-size:0.88rem; opacity:0.7; color:#fff;">`;
+        } else if (q.type === 'time') {
+          widget = `<input type="time" disabled class="input-field" style="font-size:0.88rem; opacity:0.7; color:#fff;">`;
+        } else if (q.type === 'file') {
+          widget = `
+            <div class="custom-file-dropzone" style="cursor:default;">
+              <div class="file-dropzone-content" style="display:flex; align-items:center; justify-content:center; gap:12px;">
+                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.4rem; color: #818cf8; flex-shrink: 0;"></i>
+                <div class="dropzone-text-box">
+                  <strong class="dropzone-title">اضغط لرفع الملف أو اسحبه هنا</strong>
+                  <span class="dropzone-subtitle">PDF, DOC, PNG, JPG</span>
+                </div>
+              </div>
+            </div>
+          `;
+        } else if (q.type === 'select' && q.options) {
+          widget = `<select disabled class="input-field" style="font-size:0.88rem; opacity:0.7;"><option>-- اختر خياراً من القائمة --</option>${q.options.map(o => `<option>${o}</option>`).join('')}</select>`;
+        } else if (q.type === 'radio' && q.options) {
+          widget = `<div style="display:flex; flex-direction:column; gap:8px; width:100%;">${q.options.map(o => `<label style="display:flex; align-items:center; gap:10px; font-size:0.88rem; font-weight:700; color:#ffffff; background:rgba(15,23,42,0.7); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); width:100%; cursor:pointer;"><input type="radio" disabled style="accent-color:var(--brand-purple); width:18px; height:18px;"> <span>${o}</span></label>`).join('')}</div>`;
+        } else if (q.type === 'checkbox' && q.options) {
+          widget = `<div style="display:flex; flex-direction:column; gap:8px; width:100%;">${q.options.map(o => `<label style="display:flex; align-items:center; gap:10px; font-size:0.88rem; font-weight:700; color:#ffffff; background:rgba(15,23,42,0.7); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); width:100%; cursor:pointer;"><input type="checkbox" disabled style="accent-color:var(--brand-emerald); width:18px; height:18px;"> <span>${o}</span></label>`).join('')}</div>`;
+        } else if (q.type === 'rating') {
+          widget = `<div style="display:flex; gap:8px; color:#f59e0b; font-size:1.3rem; padding:4px 0;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>`;
+        } else if (q.type === 'audio') {
+          widget = `<div style="display:flex; align-items:center; gap:10px; background:rgba(15,23,42,0.8); padding:10px 14px; border-radius:10px; font-size:0.85rem; color:#34d399; width:100%;"><i class="fa-solid fa-microphone"></i> تسجيل صوتي مدمج</div>`;
+        } else {
+          widget = `<input type="text" disabled placeholder="إجابتك..." class="input-field" style="font-size:0.88rem; opacity:0.7;">`;
+        }
+
+        html += `
+          <div style="background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 0.85rem; font-weight: 800; color: #ffffff;">${star}${q.label}</div>
+            ${widget}
+          </div>
+        `;
+      });
+
+      prevContainer.innerHTML = html;
+    }
+
+    async function loadFormForEditing(id) {
+      try {
+        const res = await fetch('/api/admin/bookings/events/' + id + '/details');
+        const data = await res.json();
+        if (data.success && data.event) {
+          const ev = data.event;
+          document.getElementById('form-db-id').value = ev.id;
+          document.getElementById('form-title').value = ev.title || '';
+          
+          const slugEl = document.getElementById('form-slug');
+          slugEl.value = ev.slug || '';
+          slugEl.dataset.userEdited = 'true';
+
+          document.getElementById('form-desc').value = ev.description || '';
+          document.getElementById('setting-banner-url').value = ev.banner_url || '';
+          document.getElementById('setting-max-responses').value = ev.max_capacity || 0;
+          document.getElementById('setting-is-active').value = ev.is_active ? '1' : '0';
+
+          let qList = [];
+          try {
+            qList = typeof ev.custom_fields === 'string' ? JSON.parse(ev.custom_fields) : ev.custom_fields;
+          } catch (e) {}
+
+          const container = document.getElementById('questions-list-container');
+          container.innerHTML = '';
+          if (Array.isArray(qList) && qList.length > 0) {
+            qList.forEach(q => addQuestionCard(q));
+          } else {
+            importDefaultQuestionsPreset();
+          }
+
+          updateLivePreview();
+        }
+      } catch (err) {
+        console.error('Error loading form for editing:', err);
+      }
+    }
+
+    async function saveFormStudio() {
+      const id = document.getElementById('form-db-id')?.value || '';
+      let title = document.getElementById('form-title')?.value.trim() || '';
+      let slug = document.getElementById('form-slug')?.value.trim() || '';
+      const description = document.getElementById('form-desc')?.value.trim() || '';
+      const banner_url = document.getElementById('setting-banner-url')?.value.trim() || '';
+      const max_capacity = parseInt(document.getElementById('setting-max-responses')?.value || '0') || 0;
+      const is_active = (document.getElementById('setting-is-active')?.value || '1') === '1';
+      const badge_text = document.getElementById('setting-badge-text')?.value.trim() || 'فعالية مجتمعية';
+      const questionsList = serializeQuestions();
+
+      if (!title) {
+        title = 'استمارة فعالية مجتمعية جديدة';
+        if (document.getElementById('form-title')) document.getElementById('form-title').value = title;
+      }
+
+      if (!slug) {
+        slug = 'rawya-workshop';
+        if (document.getElementById('form-slug')) document.getElementById('form-slug').value = slug;
+      }
+
+      const payload = {
+        title,
+        slug,
+        description,
+        banner_url,
+        max_capacity,
+        is_active,
+        badge_text,
+        custom_fields: JSON.stringify(questionsList)
+      };
+
+      const isEdit = Boolean(id);
+      const url = isEdit ? `/api/admin/bookings/events/${id}` : '/api/admin/bookings/events/create';
+      const method = isEdit ? 'PUT' : 'POST';
+
+      const token = localStorage.getItem('majarra_admin_token') || sessionStorage.getItem('majarra_admin_token');
+      const headers = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+
+      try {
+        const res = await fetch(url, {
+          method,
+          headers,
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          const savedSlug = data.slug || slug;
+          if (document.getElementById('form-slug')) document.getElementById('form-slug').value = savedSlug;
+          showSuccessSaveModal(savedSlug);
+        } else {
+          showToast('error', '⚠️ خطأ: ' + (data.message || 'تعذر حفظ البيانات'));
+        }
+      } catch (err) {
+        console.error('Error saving form:', err);
+        showToast('error', '⚠️ حدث خطأ أثناء الاتصال بالخادم.');
+      }
+    }
+
+    function showSuccessSaveModal(slug) {
+      window.lastSavedSlug = slug;
+      const modal = document.getElementById('successSaveModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function openShareModalFromSuccess() {
+      const modal = document.getElementById('successSaveModal');
+      if (modal) modal.style.display = 'none';
+      openShareModal();
+    }
+
+    function previewLiveFormFromSuccess() {
+      const slug = window.lastSavedSlug || document.getElementById('form-slug')?.value || '';
+      if (slug) {
+        window.open('/e/' + slug, '_blank');
+      }
+    }
+
+    function showToast(type, message) {
+      let toastContainer = document.getElementById('builder-toast-container');
+      if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'builder-toast-container';
+        toastContainer.style.cssText = 'position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 11000; display: flex; flex-direction: column; gap: 8px; pointer-events: none;';
+        document.body.appendChild(toastContainer);
+      }
+
+      const toast = document.createElement('div');
+      const isSuccess = type === 'success';
+      const bgColor = isSuccess ? 'rgba(16, 185, 129, 0.95)' : 'rgba(244, 63, 94, 0.95)';
+      const icon = isSuccess ? 'fa-circle-check' : 'fa-triangle-exclamation';
+
+      toast.style.cssText = `
+        background: ${bgColor};
+        color: #ffffff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-family: 'Cairo', sans-serif;
+        font-weight: 800;
+        font-size: 0.94rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        backdrop-filter: blur(12px);
+        pointer-events: auto;
+      `;
+
+      toast.innerHTML = `<i class="fa-solid ${icon}" style="font-size: 1.15rem;"></i> <span>${message}</span>`;
+      toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    async function fetchFormResponses() {
+      const formId = document.getElementById('form-db-id')?.value || '1';
+      try {
+        const res = await fetch(`/api/admin/bookings/events/${formId}/details`);
+        const data = await res.json();
+        if (data.success && data.attendees) {
+          const attendees = data.attendees || [];
+          document.getElementById('tab-resp-count').innerText = attendees.length;
+
+          renderResponsesChart(attendees.length);
+
+          const tbody = document.getElementById('responses-table-body');
+          if (attendees.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">لا توجد استجابات مسجلة حتى الآن.</td></tr>`;
+            return;
+          }
+
+          let html = '';
+          attendees.forEach((a, idx) => {
+            let details = '';
+            try {
+              const parsed = typeof a.custom_answers === 'string' ? JSON.parse(a.custom_answers) : a.custom_answers;
+              if (parsed) {
+                details = Object.entries(parsed).map(([k, v]) => `<div><strong style="color:var(--brand-purple);">${k}:</strong> ${v}</div>`).join('');
+              }
+            } catch (e) {
+              details = a.notes || '-';
+            }
+
+            html += `
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:12px 16px;">${idx + 1}</td>
+                <td style="padding:12px 16px; color:var(--text-muted);">${a.created_at || '-'}</td>
+                <td style="padding:12px 16px; font-weight:800; color:#ffffff;">${a.name || a.full_name || '-'}</td>
+                <td style="padding:12px 16px; color:#34d399;" dir="ltr">${a.phone || '-'}</td>
+                <td style="padding:12px 16px; font-size:0.82rem;">${details || '-'}</td>
+              </tr>
+            `;
+          });
+          tbody.innerHTML = html;
+        }
+      } catch (err) {
+        console.error('Error fetching responses:', err);
+      }
+    }
+
+    function renderResponsesChart(count) {
+      const ctx = document.getElementById('responsesChart');
+      if (!ctx) return;
+
+      if (myChart) myChart.destroy();
+
+      myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['إجمالي الردود المستلمة'],
+          datasets: [{
+            label: 'عدد المشاركين المسجلين',
+            data: [count],
+            backgroundColor: 'rgba(16, 185, 129, 0.6)',
+            borderColor: '#10b981',
+            borderWidth: 2,
+            borderRadius: 12
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+            x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+          }
+        }
+      });
+    }
+
+    function openShareModal() {
+      const slug = document.getElementById('form-slug')?.value.trim() || 'slug';
+      const fullUrl = window.location.origin + '/e/' + slug;
+      document.getElementById('share-link-input').value = fullUrl;
+
+      const qrcodeContainer = document.getElementById('qrcode-box');
+      qrcodeContainer.innerHTML = '';
+      const qr = qrcode(0, 'M');
+      qr.addData(fullUrl);
+      qr.make();
+      qrcodeContainer.innerHTML = qr.createImgTag(5);
+
+      document.getElementById('shareModal').style.display = 'flex';
+    }
+
+    function closeShareModal() {
+      document.getElementById('shareModal').style.display = 'none';
+    }
+
+    function copyShareLink() {
+      const input = document.getElementById('share-link-input');
+      input.select();
+      document.execCommand('copy');
+      showToast('success', 'تم نسخ رابط الاستمارة إلى الحافظة بنجاح! 📋');
+    }
+
+    function exportFormCSV() {
+      const formId = document.getElementById('form-db-id')?.value || '1';
+      window.location.href = `/api/admin/bookings/events/${formId}/export-csv`;
+    }
+
+    function escapeHtmlAttr(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+  </script>
+</body>
+</html>

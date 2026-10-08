@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>طلب حجز قاعة جديدة | مركز مجرّة المجتمعي</title>
+  
+  <!-- Thmanyah Serif Display Font & Google Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Tajwal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- html2pdf.js for Direct 1-Click A4 PDF Voucher Downloads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css?v=999.0">
+</head>
+<body class="booking-page-body">
+
+  <!-- Background Cosmic Particle Canvas -->
+  <canvas id="cosmic-particles-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; opacity: 0.4;"></canvas>
+
+  <!-- Header Bar -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="/" class="brand" style="text-decoration: none; color: inherit;">
+        <div class="logo-wrapper">
+          <img src="assets/majarra_official_icon.png" alt="شعار مركز مجرة المجتمعي" class="brand-logo-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' width=\'54\' height=\'54\'><circle cx=\'50\' cy=\'50\' r=\'46\' fill=\'%238a6fb2\' opacity=\'0.3\'/><path d=\'M50 15 L58 38 L83 38 L63 53 L70 78 L50 62 L30 78 L37 53 L17 38 L42 38 Z\' fill=\'%23e8c677\'/></svg>';">
+        </div>
+        <div class="brand-text">
+          <h1>مركز مجـرّة المجتمعـي <span>| Majarra</span></h1>
+          <p>صفحة تقديم طلبات حجز القاعات والفعاليات المباشرة</p>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <a href="/" class="btn btn-outline header-back-btn">
+          <i class="fa-solid fa-house"></i> العودة للموقع الرئيسي
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOP PROGRESS BAR CARD -->
+  <div class="progress-bar-container">
+    <div class="progress-fill" id="formProgressFill" style="width: 100%;"></div>
+  </div>
+
+  <!-- Main Booking Form Content Container -->
+  <main class="booking-standalone-container">
+
+    <!-- HEADER CARD BANNER (GOOGLE FORMS STYLE TOP CARD) -->
+    <div class="header-card">
+      <div class="header-card-top-bar"></div>
+      <div class="header-card-body">
+        <h1 class="header-card-title">طلب حجز قاعة ومساحة | مركز مجرّة المجتمعي</h1>
+        <p class="header-card-description">
+          أهلاً بكم في مركز مجرة المجتمعي. يرجى تعبئة بيانات طلبكم أدناه ليتم مراجعتها وتأكيدها فوراً.
+        </p>
+      </div>
+    </div>
+      
+    <!-- HERO HALL SHOWCASE BANNER CARD -->
+    <div class="hero-hall-banner" id="heroHallBanner">
+      <div class="hero-hall-bg">
+        <img src="assets/workshop.jpg" id="heroHallImg" alt="صورة القاعة المختارة" class="hero-hall-img">
+        <div class="hero-hall-overlay">
+          <div class="hero-hall-top-badges">
+            <span class="hero-badge-capacity" id="heroHallCapacity"><i class="fa-solid fa-users"></i> سعة القاعة: 20 شخصاً</span>
+          </div>
+          <div class="hero-hall-bottom-info">
+            <h2 id="heroHallTitle"><i class="fa-solid fa-door-open" style="color: var(--brand-gold);"></i> قاعة أفــُـق</h2>
+            <p id="heroHallDesc">مساحة تدريبية وتفاعلية ملهمة ومرنة مجهزة بالكامل للورش والفعاليات</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Notification Banner -->
+    <div id="standalone-alert-box" class="alert-banner" style="display: none; margin-bottom: 20px;"></div>
+
+    <form id="standaloneBookingForm" onsubmit="handleStandaloneBookingSubmit(event)">
+      
+      <!-- QUESTION CARD 1: RESPONSIBLE PERSON & ENTITY INFO -->
+      <div class="question-card">
+        <div class="question-card-header">
+          <div class="question-card-number">1</div>
+          <div>
+            <h3 class="question-card-title">معلومات المسؤول والجهة المنفذة <span class="required-star">*</span></h3>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="organizerName"><i class="fa-solid fa-user"></i> الاسم الكامل للمسؤول <span class="required-star">*</span></label>
+            <input type="text" id="organizerName" placeholder="الاسم والكنية الكاملة" required class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="whatsappNumber"><i class="fa-brands fa-whatsapp"></i> رقم الهاتف (واتساب) <span class="required-star">*</span></label>
+            <input type="tel" id="whatsappNumber" placeholder="مثال: +90 538 000 00 00" dir="ltr" style="font-family: monospace; font-weight: 700; text-align: left;" required class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="email"><i class="fa-solid fa-envelope"></i> البريد الإلكتروني <span class="required-star">*</span></label>
+            <input type="email" id="email" placeholder="example@domain.com" required class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="entityType"><i class="fa-solid fa-users-gear"></i> نوع الجهة <span class="required-star">*</span></label>
+            <select id="entityType" required class="form-control">
+              <option value="">-- اختر نوع الجهة --</option>
+              <option value="فرد مستقل">فرد مستقل</option>
+              <option value="فريق تطوعي">فريق تطوعي</option>
+              <option value="منظمة غير ربحية">منظمة غير ربحية</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="executorName"><i class="fa-solid fa-building-flag"></i> الجهة المنفذة <span class="required-star">*</span></label>
+            <input type="text" id="executorName" placeholder="اسم الفريق / المبادرة / الجهة" required class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <!-- QUESTION CARD 2: EVENT DETAILS & CONFIRMED HALL -->
+      <div class="question-card">
+        <div class="question-card-header">
+          <div class="question-card-number">2</div>
+          <div>
+            <h3 class="question-card-title">تفاصيل الفعالية والقاعة المختارة <span class="required-star">*</span></h3>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="eventType"><i class="fa-solid fa-list-check"></i> نوع النشاط <span class="required-star">*</span></label>
+            <select id="eventType" required class="form-control">
+              <option value="">-- اختر نوع النشاط --</option>
+              <option value="اجتماع">اجتماع</option>
+              <option value="تدريب">تدريب</option>
+              <option value="ورشة عمل">ورشة عمل</option>
+              <option value="فعالية">فعالية</option>
+              <option value="معرض">معرض</option>
+              <option value="نادي ثقافي">نادي ثقافي</option>
+              <option value="أخرى">أخرى</option>
+            </select>
+          </div>
+
+          <!-- FIXED PRE-SELECTED HALL DISPLAY BOX -->
+          <div class="form-group">
+            <label><i class="fa-solid fa-door-open"></i> القاعة التأكيدية المختارة <span class="required-star">*</span></label>
+            <div class="selected-hall-box">
+              <i class="fa-solid fa-building-circle-check hall-box-icon"></i>
+              <span id="selectedHallText" class="selected-hall-title">قاعة أفــُـق (سعة القاعة 20)</span>
+              <input type="hidden" id="hallName" value="قاعة أفــُـق (سعة القاعة 20)">
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="eventTitle"><i class="fa-solid fa-heading"></i> عنوان النشاط <span class="required-star">*</span></label>
+            <input type="text" id="eventTitle" placeholder="عنوان النشاط المخطط له" required class="form-control">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="eventDescription"><i class="fa-solid fa-align-left"></i> وصف النشاط <span class="required-star">*</span></label>
+            <textarea id="eventDescription" rows="3" placeholder="اشرح هدف وأجندة النشاط بالتفصيل..." required class="form-control"></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="attendeesCount"><i class="fa-solid fa-users"></i> عدد الحضور المتوقع <span class="required-star">*</span></label>
+            <input type="number" id="attendeesCount" min="1" placeholder="مثال: 20" required class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <!-- QUESTION CARD 3: DATES & TIME SLOTS -->
+      <div class="question-card">
+        <div class="question-card-header">
+          <div class="question-card-number">3</div>
+          <div>
+            <h3 class="question-card-title">التاريخ والتوقيت الزمني للفعالية <span class="required-star">*</span></h3>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;" dir="rtl">
+          <!-- MAJARRA CUSTOM SINGLE CONSOLIDATED DATE TRIGGER INPUT -->
+          <div class="form-group" style="margin: 0;">
+            <label style="font-weight: 800; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+              <span><i class="fa-solid fa-calendar-days" style="color: var(--brand-purple);"></i> تاريخ الفعالية <span class="required-star">*</span></span>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--brand-gold);"><i class="fa-solid fa-square-poll-vertical"></i> يغطي يوم واحد أو عدة أيام متتالية</span>
+            </label>
+            <div class="date-picker-trigger-box" id="startDateTriggerBox" onclick="openMajarraCalendarModal('start')">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-calendar-days" style="color: var(--brand-gold); font-size: 1.15rem;"></i>
+                <span id="startDateDisplayVal" style="font-weight: 800; font-size: 1.02rem; letter-spacing: 0.5px;">اختر التاريخ...</span>
+              </div>
+              <i class="fa-solid fa-chevron-down" style="color: var(--brand-gold); font-size: 0.85rem;"></i>
+            </div>
+            <input type="hidden" id="startDateInput" name="startDateInput">
+            <input type="hidden" id="endDateInput" name="endDateInput">
+          </div>
+
+          <!-- Hidden Date Inputs for Backward Compatibility -->
+          <input type="hidden" id="startDate" name="startDate" value="">
+          <input type="hidden" id="endDate" name="endDate" value="">
+
+          <!-- START TIME & END TIME ROW WITH LUXURY CUSTOM SELECT WIDGETS -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+            <!-- START TIME CUSTOM SELECT -->
+            <div class="form-group" style="margin: 0;">
+              <label style="font-weight: 800; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-clock" style="color: var(--brand-gold);"></i> وقت بداية الفعالية اليومي <span class="required-star">*</span>
+              </label>
+              <input type="hidden" id="startTime" name="startTime" value="13:00">
+              
+              <div class="custom-select-wrapper" id="startTimeSelectWrapper">
+                <div class="custom-select-trigger" onclick="toggleCustomSelect('startTimeSelectWrapper')">
+                  <span id="startTimeTriggerText" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-sun" style="color: var(--brand-gold);"></i> 01:00 ظهراً <span class="custom-option-badge purple" style="font-size: 0.72rem; padding: 2px 7px;">الافتراضي</span>
+                  </span>
+                  <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </div>
+                
+                <div class="custom-select-menu">
+                  <div class="custom-select-group-header">
+                    <i class="fa-solid fa-star"></i> الفترة الرئيسية الموصى بها (1:00 ظهراً - 9:00 مساءً)
+                  </div>
+                  <div class="custom-option selected" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '13:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 01:00 ظهراً <span class=\'custom-option-badge purple\' style=\'font-size: 0.72rem; padding: 2px 7px;\'>الافتراضي</span>', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">01:00 ظهراً</span>
+                    </div>
+                    <span class="custom-option-badge purple">الافتراضي</span>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '14:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 02:00 ظهراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">02:00 ظهراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '15:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 03:00 عصراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">03:00 عصراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '16:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 04:00 عصراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">04:00 عصراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '17:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 05:00 عصراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">05:00 عصراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '18:00', '<i class=\'fa-solid fa-moon\' style=\'color: var(--brand-purple);\'></i> 06:00 مساءً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">06:00 مساءً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '19:00', '<i class=\'fa-solid fa-moon\' style=\'color: var(--brand-purple);\'></i> 07:00 مساءً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">07:00 مساءً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '20:00', '<i class=\'fa-solid fa-moon\' style=\'color: var(--brand-purple);\'></i> 08:00 مساءً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">08:00 مساءً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '21:00', '<i class=\'fa-solid fa-moon\' style=\'color: var(--brand-purple);\'></i> 09:00 مساءً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">09:00 مساءً</span>
+                    </div>
+                  </div>
+
+                  <div class="custom-select-group-header">
+                    <i class="fa-solid fa-cloud-sun"></i> الفترة الصباحية
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '08:00', '<i class=\'fa-solid fa-cloud-sun\' style=\'color: var(--brand-gold);\'></i> 08:00 صباحاً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">08:00 صباحاً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '09:00', '<i class=\'fa-solid fa-cloud-sun\' style=\'color: var(--brand-gold);\'></i> 09:00 صباحاً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">09:00 صباحاً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '10:00', '<i class=\'fa-solid fa-cloud-sun\' style=\'color: var(--brand-gold);\'></i> 10:00 صباحاً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">10:00 صباحاً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '11:00', '<i class=\'fa-solid fa-cloud-sun\' style=\'color: var(--brand-gold);\'></i> 11:00 صباحاً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">11:00 صباحاً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('startTimeSelectWrapper', 'startTime', 'startTimeTriggerText', '12:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 12:00 ظهراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">12:00 ظهراً</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- END TIME CUSTOM SELECT -->
+            <div class="form-group" style="margin: 0;">
+              <label style="font-weight: 800; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-clock-rotate-left" style="color: var(--brand-gold);"></i> وقت نهاية الفعالية اليومي <span class="required-star">*</span>
+              </label>
+              <input type="hidden" id="endTime" name="endTime" value="16:00">
+              
+              <div class="custom-select-wrapper" id="endTimeSelectWrapper">
+                <div class="custom-select-trigger" onclick="toggleCustomSelect('endTimeSelectWrapper')">
+                  <span id="endTimeTriggerText" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-sun" style="color: var(--brand-gold);"></i> 04:00 عصراً
+                  </span>
+                  <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </div>
+                
+                <div class="custom-select-menu">
+                  <div class="custom-select-group-header">
+                    <i class="fa-solid fa-star"></i> الفترة الرئيسية الموصى بها (1:00 ظهراً - 9:00 مساءً)
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '14:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 02:00 ظهراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">02:00 ظهراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '15:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 03:00 عصراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">03:00 عصراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option selected" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '16:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 04:00 عصراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">04:00 عصراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '17:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 05:00 عصراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">05:00 عصراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '18:00', '<i class=\'fa-solid fa-moon\' style=\'color: var(--brand-purple);\'></i> 06:00 مساءً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">06:00 مساءً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '19:00', '<i class=\'fa-solid fa-moon\' style=\'color: var(--brand-purple);\'></i> 07:00 مساءً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">07:00 مساءً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '20:00', '<i class=\'fa-solid fa-moon\' style=\'color: var(--brand-purple);\'></i> 08:00 مساءً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">08:00 مساءً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '21:00', '<i class=\'fa-solid fa-moon\' style=\'color: var(--brand-purple);\'></i> 09:00 مساءً <span class=\'custom-option-badge purple\' style=\'font-size: 0.72rem; padding: 2px 7px;\'>الافتراضي</span>', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">09:00 مساءً</span>
+                    </div>
+                    <span class="custom-option-badge purple">الافتراضي</span>
+                  </div>
+
+                  <div class="custom-select-group-header">
+                    <i class="fa-solid fa-cloud-sun"></i> الفترة الصباحية
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '09:00', '<i class=\'fa-solid fa-cloud-sun\' style=\'color: var(--brand-gold);\'></i> 09:00 صباحاً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">09:00 صباحاً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '10:00', '<i class=\'fa-solid fa-cloud-sun\' style=\'color: var(--brand-gold);\'></i> 10:00 صباحاً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">10:00 صباحاً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '11:00', '<i class=\'fa-solid fa-cloud-sun\' style=\'color: var(--brand-gold);\'></i> 11:00 صباحاً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">11:00 صباحاً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '12:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 12:00 ظهراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">12:00 ظهراً</span>
+                    </div>
+                  </div>
+                  <div class="custom-option" onclick="selectCustomTime('endTimeSelectWrapper', 'endTime', 'endTimeTriggerText', '13:00', '<i class=\'fa-solid fa-sun\' style=\'color: var(--brand-gold);\'></i> 01:00 ظهراً', this)">
+                    <div class="custom-option-left">
+                      <i class="fa-regular fa-clock custom-option-icon"></i>
+                      <span class="custom-option-title">01:00 ظهراً</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LIVE SLOT CONFLICT ALERT CONTAINER -->
+          <div id="slot-conflict-alert" style="margin-top: 4px; display: none;"></div>
+        </div>
+      </div>
+
+      <!-- QUESTION CARD 4: PACKAGES & SERVICES -->
+      <div class="question-card">
+        <div class="question-card-header">
+          <div class="question-card-number">4</div>
+          <div>
+            <h3 class="question-card-title">تجهيزات القاعة والباقات والخدمات الإضافية <span class="required-star">*</span></h3>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label><i class="fa-solid fa-toolbox"></i> احتياجات القاعة الأساسية (اختر التجهيزات المطلوبة)</label>
+            <div class="checkbox-grid">
+              <label class="checkbox-card">
+                <input type="checkbox" name="equipment" value="كراسي" checked>
+                <span class="custom-checkbox"><i class="fa-solid fa-check"></i></span>
+                <span class="check-label"><i class="fa-solid fa-chair"></i> كراسي</span>
+              </label>
+              <label class="checkbox-card">
+                <input type="checkbox" name="equipment" value="طاولات" checked>
+                <span class="custom-checkbox"><i class="fa-solid fa-check"></i></span>
+                <span class="check-label"><i class="fa-solid fa-table"></i> طاولات</span>
+              </label>
+              <label class="checkbox-card">
+                <input type="checkbox" name="equipment" value="بروجكتر">
+                <span class="custom-checkbox"><i class="fa-solid fa-check"></i></span>
+                <span class="check-label"><i class="fa-solid fa-video"></i> بروجكتر</span>
+              </label>
+              <label class="checkbox-card">
+                <input type="checkbox" name="equipment" value="قرطاسية">
+                <span class="custom-checkbox"><i class="fa-solid fa-check"></i></span>
+                <span class="check-label"><i class="fa-solid fa-box-archive"></i> قرطاسية</span>
+              </label>
+              <label class="checkbox-card">
+                <input type="checkbox" name="equipment" value="لوح كتابة">
+                <span class="custom-checkbox"><i class="fa-solid fa-check"></i></span>
+                <span class="check-label"><i class="fa-solid fa-pen-board"></i> لوح كتابة</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- PACKAGE SELECTION WITH VISUAL CARDS -->
+          <div class="form-group full-width">
+            <label><i class="fa-solid fa-cubes" style="color: var(--brand-gold);"></i> اختر الباقة المناسبة لفعاليتك <span class="required-star">*</span></label>
+            <input type="hidden" id="packageType" value="كفو">
+            
+            <div class="packages-cards-container">
+              <!-- KAFO PACKAGE CARD -->
+              <div class="pkg-card active" id="pkgCardKafo" onclick="selectPackageDirect('كفو')">
+                <div class="pkg-card-header">
+                  <span class="pkg-badge free">الباقة الأساسية</span>
+                  <i class="fa-solid fa-circle-check pkg-check-icon"></i>
+                </div>
+                <h3 class="pkg-title"><i class="fa-solid fa-star" style="color: var(--brand-gold);"></i> باقة كفـــو</h3>
+                <p class="pkg-simple-desc">تجهيزات القاعة الأساسية (كراسي، طاولات، بروجكتر / شاشة عرض)</p>
+                <ul class="pkg-features-list">
+                  <li><i class="fa-solid fa-check"></i> استخدام القاعة والتجهيزات الأساسية بالكامل</li>
+                  <li><i class="fa-solid fa-check"></i> كراسي، طاولات، وشاشة عرض / بروجكتر</li>
+                  <li><i class="fa-solid fa-check"></i> مجاناً بالكامل للأنشطة والفرق غير الربحية</li>
+                </ul>
+                <div class="pkg-price-footer">
+                  <span class="pkg-price-tag">مجاناً (للأنشطة غير الربحية)</span>
+                </div>
+              </div>
+
+              <!-- ALA AINI PACKAGE CARD -->
+              <div class="pkg-card" id="pkgCardAlaAini" onclick="selectPackageDirect('على عيني')">
+                <div class="pkg-card-header">
+                  <span class="pkg-badge luxury">الباقة الشاملة + الضيافة</span>
+                  <i class="fa-solid fa-circle-check pkg-check-icon"></i>
+                </div>
+                <h3 class="pkg-title"><i class="fa-solid fa-crown" style="color: var(--brand-gold);"></i> باقة علــى عينــي</h3>
+                <p class="pkg-simple-desc">تجهيزات باقة كفو الأساسية + بوفيه مشروبات ساخنة</p>
+                <ul class="pkg-features-list">
+                  <li><i class="fa-solid fa-check"></i> تشمل كافة خدمات وتجهيزات باقة كفو بالكامل</li>
+                  <li><i class="fa-solid fa-mug-hot" style="color: var(--brand-gold);"></i> <strong>بوفيه مشروبات ساخنة طوال فترة الفعالية</strong></li>
+                  <li><i class="fa-solid fa-check"></i> رسوم تشغيلية رمزية حسب القاعة (225 - 350 TL/يوم)</li>
+                </ul>
+                <div class="pkg-price-footer">
+                  <span class="pkg-price-tag gold">225 - 350 TL / اليوم (غير ربحي)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FUNDING & EVENT TYPE CUSTOM DROPDOWN -->
+          <div class="form-group">
+            <label><i class="fa-solid fa-hand-holding-dollar" style="color: var(--brand-gold); margin-left: 8px; font-family: 'Font Awesome 6 Free' !important;"></i> نوع النشاط والتمويل <span class="required-star">*</span></label>
+            <input type="hidden" id="isPaidEventSelect" value="لا">
+            
+            <div class="custom-select-wrapper" id="activityTypeSelectWrapper">
+              <div class="custom-select-trigger" onclick="toggleCustomSelect('activityTypeSelectWrapper')">
+                <span id="activityTypeTriggerText">
+                  <i class="fa-solid fa-heart-pulse" style="color: var(--brand-gold); margin-left: 8px;"></i> نشاط غير ربحي (رمزية: 225 - 350 TL/يوم)
+                </span>
+                <i class="fa-solid fa-chevron-down arrow-icon"></i>
+              </div>
+              
+              <div class="custom-select-menu">
+                <div class="custom-option selected" onclick="chooseCustomActivityType('activityTypeSelectWrapper', 'لا', '<i class=\'fa-solid fa-heart-pulse\' style=\'color: var(--brand-gold); margin-left: 8px;\'></i> نشاط غير ربحي (رمزية: 225 - 350 TL/يوم)', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-heart-pulse custom-option-icon" style="color: var(--brand-gold);"></i>
+                    <div>
+                      <div class="custom-option-title">نشاط غير ربحي (فرق تطوعية ومجتمعية)</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">فعاليات مجانية أو ورشات خيرة بدون تذاكر مدفوعة</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge free">225 - 350 TL / اليوم (رمزية)</span>
+                </div>
+
+                <div class="custom-option" onclick="chooseCustomActivityType('activityTypeSelectWrapper', 'نعم_منظمات', '<i class=\'fa-solid fa-building-flag\' style=\'color: var(--brand-gold); margin-left: 8px;\'></i> نشاط مدعوم / منظمات (السعر الرسمي: 2500 - 5000 TL)', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-building-flag custom-option-icon" style="color: var(--brand-gold);"></i>
+                    <div>
+                      <div class="custom-option-title">نشاط مدعوم / منظمات ومؤسسات</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">فعاليات ممولة من جمعيات أو مؤسسات أو شركات</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge gold">2500 - 5000 TL / اليوم</span>
+                </div>
+
+                <div class="custom-option" onclick="chooseCustomActivityType('activityTypeSelectWrapper', 'نعم_افراد', '<i class=\'fa-solid fa-user-graduate\' style=\'color: var(--brand-gold); margin-left: 8px;\'></i> نشاط مأجور للأفراد (نسبة 10% من الأرباح)', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-user-graduate custom-option-icon" style="color: var(--brand-gold);"></i>
+                    <div>
+                      <div class="custom-option-title">نشاط مأجور للأفراد (دورات ورشات بمقابل)</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">دورات وتدريبات مأجورة يتقاضى فيها المنظم رسوم من الحضور</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge gold">نسبة 10% من الأرباح</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLEEK CUSTOM DROPDOWN COMPONENT FOR ADDITIONAL SERVICES -->
+          <div class="form-group full-width">
+            <label><i class="fa-solid fa-utensils"></i> الخدمات الإضافية واللوجستيات <span class="required-star">*</span></label>
+            <input type="hidden" id="additionalService" value="بدون خدمات إضافية">
+            
+            <div class="custom-select-wrapper" id="servicesSelectWrapper">
+              <div class="custom-select-trigger" onclick="toggleCustomSelect('servicesSelectWrapper')">
+                <span id="servicesTriggerText">
+                  <i class="fa-solid fa-ban" style="color: var(--brand-purple); margin-left: 8px;"></i> بدون خدمات إضافية (استخدام القاعة والتجهيزات فقط)
+                </span>
+                <i class="fa-solid fa-chevron-down arrow-icon"></i>
+              </div>
+              
+              <div class="custom-select-menu">
+                <div class="custom-option selected" onclick="chooseCustomService('servicesSelectWrapper', 'بدون خدمات إضافية', '<i class=\'fa-solid fa-ban\' style=\'color: var(--brand-purple); margin-left: 8px;\'></i> بدون خدمات إضافية (استخدام القاعة والتجهيزات فقط)', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-ban custom-option-icon"></i>
+                    <div>
+                      <div class="custom-option-title">بدون خدمات إضافية</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">استخدام القاعة والتجهيزات المختارة فقط</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge free">0 TL (مجاني)</span>
+                </div>
+
+                <div class="custom-option" onclick="chooseCustomService('servicesSelectWrapper', 'صندوق قرطاسية متكامل', '<i class=\'fa-solid fa-box-archive\' style=\'color: var(--brand-purple); margin-left: 8px;\'></i> صندوق قرطاسية متكامل', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-box-archive custom-option-icon"></i>
+                    <div>
+                      <div class="custom-option-title">صندوق قرطاسية متكامل</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">أقلام ملونة + أوراق + نوت بوك لكل شخص</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge gold">80 TL غير ربحي | 250 TL مدفوع</span>
+                </div>
+
+                <div class="custom-option" onclick="chooseCustomService('servicesSelectWrapper', 'إحضار ضيافة خارجية', '<i class=\'fa-solid fa-truck-ramp-box\' style=\'color: var(--brand-purple); margin-left: 8px;\'></i> إحضار ضيافة خارجية (+200 TL)', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-truck-ramp-box custom-option-icon"></i>
+                    <div>
+                      <div class="custom-option-title">إحضار ضيافة خارجية</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">السماح بإدخال وجبات وضيافة خاصة من الخارج</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge gold">200 TL رسوم تشغيل تنظيف</span>
+                </div>
+
+                <div class="custom-option" onclick="chooseCustomService('servicesSelectWrapper', 'بوفيه اكسترا | مشروبات ساخنة + باردة', '<i class=\'fa-solid fa-mug-hot\' style=\'color: var(--brand-purple); margin-left: 8px;\'></i> بوفيه إكسترا (مشروبات ساخنة + باردة)', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-mug-hot custom-option-icon"></i>
+                    <div>
+                      <div class="custom-option-title">بوفيه إكسترا</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">مشروبات ساخنة + مياه وعصائر باردة طوال اليوم</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge gold">500 TL غير ربحي | 1000 TL مدفوع</span>
+                </div>
+
+                <div class="custom-option" onclick="chooseCustomService('servicesSelectWrapper', 'بوفيه اوبها | بوفيه إكسترا + سناكس', '<i class=\'fa-solid fa-cookie-bite\' style=\'color: var(--brand-purple); margin-left: 8px;\'></i> بوفيه أوبـهـا (إكسترا + سناكس)', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-cookie-bite custom-option-icon"></i>
+                    <div>
+                      <div class="custom-option-title">بوفيه أوبـهـا</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">بوفيه إكسترا + تشكيلة سناكس ومقرمشات فاخرة</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge gold">1000 TL غير ربحي | 2000 TL مدفوع</span>
+                </div>
+
+                <div class="custom-option" onclick="chooseCustomService('servicesSelectWrapper', 'بوفيه على عيني | بوفيه أوبها + سناكس لوكس', '<i class=\'fa-solid fa-crown\' style=\'color: var(--brand-gold); margin-left: 8px;\'></i> بوفيه على عيني (لوكس)', this)">
+                  <div class="custom-option-left">
+                    <i class="fa-solid fa-crown custom-option-icon" style="color: var(--brand-gold);"></i>
+                    <div>
+                      <div class="custom-option-title">بوفيه على عيني (ضيافة فاخرة)</div>
+                      <div style="font-size: 0.78rem; color: var(--text-secondary);">بوفيه أوبها + فواكه وسناكس وضيافة لوكس</div>
+                    </div>
+                  </div>
+                  <span class="custom-option-badge gold">2000 TL غير ربحي | 3500 TL مدفوع</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- COMPACT DYNAMIC FEES SUMMARY CARD INSIDE CARD 4 -->
+          <div id="booking-fees-box" style="margin-top: 14px; background: rgba(15, 23, 42, 0.7); border: 1px dashed rgba(232, 198, 119, 0.4); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 0.85rem; color: var(--brand-gold); font-weight: 800;">
+                <i class="fa-solid fa-coins"></i> المبلغ النهائي المستحق:
+              </span>
+              <span id="fees-amount-display" style="font-size: 0.95rem; font-weight: 900; color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 10px; border-radius: 14px;">
+                0 TL (نشاط مجاني 100%)
+              </span>
+            </div>
+
+            <div style="font-size: 0.78rem; color: #cbd5e1;" id="fees-note-text">
+              <i class="fa-solid fa-circle-info" style="color: var(--brand-purple); margin-left: 4px;"></i> <strong>التفاصيل:</strong> باقة كفو (مجاني 100%)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- QUESTION CARD 5: OFFICIAL PACKAGES PDF & REFERENCE TABLE -->
+      <div class="question-card">
+        <div class="question-card-header">
+          <div class="question-card-number">5</div>
+          <div>
+            <h3 class="question-card-title"><i class="fa-solid fa-file-invoice-dollar" style="color: var(--brand-gold); margin-left: 6px;"></i> دليل الباقات والأسعار المعتمد (PDF)</h3>
+            <p class="question-card-subtitle">الجدول المعتمد للائحة الرسمية للأسعار لمركز مجرّة المجتمعي</p>
+          </div>
+        </div>
+
+        <!-- OFFICIAL PACKAGES REFERENCE CARD -->
+        <div style="background: rgba(232, 198, 119, 0.04); border: 1px solid rgba(232, 198, 119, 0.25); border-radius: 12px; padding: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-file-pdf" style="color: var(--brand-gold); font-size: 1rem;"></i>
+              <h4 style="margin: 0; font-weight: 800; font-size: 0.88rem; color: var(--text-primary);">دليل الباقات والأسعار المعتمد بمركز مجرّة (PDF)</h4>
+            </div>
+            <a href="bakat_majarra.pdf" target="_blank" class="btn btn-outline btn-sm" style="color: var(--brand-gold); border-color: rgba(232, 198, 119, 0.4); font-weight: 700; padding: 4px 12px; font-size: 0.8rem;" title="فتح ملف PDF المعتمد">
+              <i class="fa-solid fa-file-pdf"></i> استعراض الدليل (PDF)
+            </a>
+          </div>
+
+          <div style="overflow-x: auto; border-radius: 10px; border: 1px solid var(--border-color);">
+            <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.85rem; color: var(--text-primary);">
+              <thead>
+                <tr style="background: rgba(138, 111, 178, 0.25); border-bottom: 1px solid var(--border-color);">
+                  <th style="padding: 10px; font-weight: 800;">الباقة والمعيار</th>
+                  <th style="padding: 10px; font-weight: 800;">غير ربحي / تطوعي</th>
+                  <th style="padding: 10px; font-weight: 800;">منظمات ومؤسسات</th>
+                  <th style="padding: 10px; font-weight: 800;">أفراد / نشاط مأجور</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 10px; font-weight: 700; color: var(--brand-purple);">كفو (أفق 20)</td>
+                  <td style="color: #10b981; font-weight: 800;">مجاناً 100%</td>
+                  <td>2500 TL + KDV</td>
+                  <td>10% من الربح</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 10px; font-weight: 700; color: var(--brand-purple);">كفو (ديوان 30)</td>
+                  <td style="color: #10b981; font-weight: 800;">مجاناً 100%</td>
+                  <td>3000 TL + KDV</td>
+                  <td>10% من الربح</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 10px; font-weight: 700; color: var(--brand-purple);">كفو (سديم 18)</td>
+                  <td style="color: #10b981; font-weight: 800;">مجاناً 100%</td>
+                  <td>2750 TL + KDV</td>
+                  <td>10% من الربح</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(232, 198, 119, 0.08);">
+                  <td style="padding: 10px; font-weight: 700; color: var(--brand-gold);">على عيني (أفق 20)</td>
+                  <td>250 TL / يوم</td>
+                  <td>3500 TL + KDV</td>
+                  <td>15% من الربح</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(232, 198, 119, 0.08);">
+                  <td style="padding: 10px; font-weight: 700; color: var(--brand-gold);">على عيني (ديوان 30)</td>
+                  <td>350 TL / يوم</td>
+                  <td>4000 TL + KDV</td>
+                  <td>15% من الربح</td>
+                </tr>
+                <tr style="background: rgba(232, 198, 119, 0.08);">
+                  <td style="padding: 10px; font-weight: 700; color: var(--brand-gold);">على عيني (سديم 18)</td>
+                  <td>225 TL / يوم</td>
+                  <td>3750 TL + KDV</td>
+                  <td>15% من الربح</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUESTION CARD 6: OFFICIAL TERMS & AGREEMENT CHECKBOXES -->
+      <div class="question-card">
+        <div class="question-card-header">
+          <div class="question-card-number">6</div>
+          <div>
+            <h3 class="question-card-title">الموافقة على شروط وتنظيمات الحجز (6 بنود) <span class="required-star">*</span></h3>
+            <p class="question-card-subtitle">يجب الموافقة على كافة البنود التنظيمية أدناه لإتمام طلب الحجز المباشر</p>
+          </div>
+        </div>
+
+        <div class="terms-card-box">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <label class="terms-check-item">
+              <input type="checkbox" required>
+              <span class="custom-checkbox-btn"><i class="fa-solid fa-check"></i></span>
+              <span style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; flex: 1;">
+                <strong>1-</strong> يجب تقديم طلب الحجز قبل موعد النشاط بـ 10 أيام على الأقل.
+              </span>
+              <span class="agree-badge">(موافق)</span>
+            </label>
+
+            <label class="terms-check-item">
+              <input type="checkbox" required>
+              <span class="custom-checkbox-btn"><i class="fa-solid fa-check"></i></span>
+              <span style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; flex: 1;">
+                <strong>2-</strong> يحق للفرد أو الجهة الواحدة حجز القاعة 3 مرات كحد أقصى خلال الشهر الواحد.
+              </span>
+              <span class="agree-badge">(موافق)</span>
+            </label>
+
+            <label class="terms-check-item">
+              <input type="checkbox" required>
+              <span class="custom-checkbox-btn"><i class="fa-solid fa-check"></i></span>
+              <span style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; flex: 1;">
+                <strong>3-</strong> في حال توفر القاعات وعدم وجود حجوزات، يمكن استخدام القاعة مرة أخرى وفق التنسيق مع إدارة المركز.
+              </span>
+              <span class="agree-badge">(موافق)</span>
+            </label>
+
+            <label class="terms-check-item">
+              <input type="checkbox" required>
+              <span class="custom-checkbox-btn"><i class="fa-solid fa-check"></i></span>
+              <span style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; flex: 1;">
+                <strong>4-</strong> يتم فتح حجوزات الشهر الجديد قبل 10 أيام من انتهاء الشهر الحالي.
+              </span>
+              <span class="agree-badge">(موافق)</span>
+            </label>
+
+            <label class="terms-check-item">
+              <input type="checkbox" required>
+              <span class="custom-checkbox-btn"><i class="fa-solid fa-check"></i></span>
+              <span style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; flex: 1;">
+                <strong>5-</strong> يجب على الجهة المنفذة ذكر اسم المركز كمكان مستضيف في الإعلانات.
+              </span>
+              <span class="agree-badge">(موافق)</span>
+            </label>
+
+            <label class="terms-check-item">
+              <input type="checkbox" required>
+              <span class="custom-checkbox-btn"><i class="fa-solid fa-check"></i></span>
+              <span style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.5; flex: 1;">
+                <strong>6-</strong> يُطلب من الجهة المنفذة إرسال صور ومقاطع فيديو من الفعالية لإدارة المركز.
+              </span>
+              <span class="agree-badge">(موافق)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMIT ACTION BUTTON -->
+      <div style="margin-top: 28px; margin-bottom: 30px;">
+        <button type="submit" class="btn btn-primary full-width btn-lg" style="background: linear-gradient(135deg, var(--brand-purple), #6b21a8); font-size: 1.15rem; font-weight: 800; padding: 18px 24px; border-radius: 14px; box-shadow: 0 10px 30px rgba(107,33,168,0.4);">
+          <i class="fa-solid fa-paper-plane"></i> إرسال طلب الحجز المباشر إلى إدارة مركز مجرّة
+        </button>
+      </div>
+
+    </form>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <a href="/" class="footer-brand-badge">
+        <img src="assets/majarra_official_icon.png" alt="Majarra">
+        <span>مركز مجـرّة المجتمعـي</span>
+      </a>
+
+      <div class="social-icons-wrapper">
+        <a href="https://wa.me/905385062989" target="_blank" rel="noopener" class="social-icon-btn whatsapp" title="تواصل مباشر عبر الواتساب">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="mailto:nur.beik1237@gmail.com" class="social-icon-btn email" title="إرسال بريد إلكتروني">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="https://www.instagram.com/majarracommunity/" target="_blank" rel="noopener" class="social-icon-btn instagram" title="متابعة صفحتنا على انستغرام">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <p class="footer-copy-text">© 2026 جميع الحقوق محفوظة لمركز مجرّة المجتمعي (Majarra Community Center)</p>
+    </div>
+  </footer>
+
+  <!-- MAJARRA CALENDAR POPOVER MODAL -->
+  <div id="majarraCalendarModalOverlay" class="majarra-calendar-modal-overlay" onclick="onCalendarModalBackdropClick(event)">
+    <div class="majarra-calendar-modal-container" dir="rtl">
+      
+      <!-- Modal Header -->
+      <div class="majarra-calendar-modal-header">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(107,33,168,0.25); border: 1px solid rgba(168,85,247,0.4); display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-calendar-days" style="color: var(--brand-gold); font-size: 1.25rem;"></i>
+          </div>
+          <div>
+            <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: var(--text-primary);" id="calModalTitle">
+              تحديد تاريخ الفعالية
+            </h3>
+            <span style="font-size: 0.82rem; color: var(--text-muted);" id="calModalSubtitle">
+              اختر تواريخ البداية والنهاية من التقويم
+            </span>
+          </div>
+        </div>
+        <button type="button" class="majarra-calendar-modal-close-btn" onclick="closeMajarraCalendarModal()" title="إغلاق">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Date Selection Target Tabs -->
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 10px; padding: 4px; border-radius: 12px; background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.08);">
+        <button type="button" id="tabSetStart" onclick="setCalendarTargetMode('start')" class="cal-target-tab active" style="flex: 1; padding: 6px 8px; border-radius: 8px; border: 1px solid #a855f7; background: rgba(107,33,168,0.45); color: #ffffff; font-weight: 800; font-size: 0.78rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;">
+          <i class="fa-solid fa-calendar-plus" style="color: #e8c677;"></i>
+          <span>البداية:</span>
+          <span id="badgeStartDateText" style="color: #e8c677;"></span>
+        </button>
+
+        <button type="button" id="tabSetEnd" onclick="setCalendarTargetMode('end')" class="cal-target-tab" style="flex: 1; padding: 6px 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(15,23,42,0.6); color: #cbd5e1; font-weight: 700; font-size: 0.78rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;">
+          <i class="fa-solid fa-calendar-check" style="color: #c084fc;"></i>
+          <span>النهاية:</span>
+          <span id="badgeEndDateText" style="color: #c084fc;"></span>
+        </button>
+      </div>
+
+      <!-- Calendar Month / Year Selector Header -->
+      <div class="cal-header-bar">
+        <button type="button" onclick="navCalendarMonth(1)" class="cal-nav-btn" title="الشهر التالي">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="cal-month-year-pill">
+          <select id="calMonthSelect" onchange="onCalendarSelectChange()">
+            <option value="0">يناير</option>
+            <option value="1">فبراير</option>
+            <option value="2">مارس</option>
+            <option value="3">أبريل</option>
+            <option value="4">مايو</option>
+            <option value="5">يونيو</option>
+            <option value="6">يوليو</option>
+            <option value="7">أغسطس</option>
+            <option value="8">سبتمبر</option>
+            <option value="9">أكتوبر</option>
+            <option value="10">نوفمبر</option>
+            <option value="11">ديسمبر</option>
+          </select>
+          <i class="fa-solid fa-chevron-down" style="color: var(--brand-purple); font-size: 0.75rem;"></i>
+          <select id="calYearSelect" onchange="onCalendarSelectChange()">
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+          </select>
+        </div>
+
+        <button type="button" onclick="navCalendarMonth(-1)" class="cal-nav-btn" title="الشهر السابق">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+      </div>
+
+      <!-- Arabic Weekday Headers Grid -->
+      <div class="cal-weekdays-grid">
+        <div class="cal-weekday-badge">سبت</div>
+        <div class="cal-weekday-badge">أحد</div>
+        <div class="cal-weekday-badge">اثنين</div>
+        <div class="cal-weekday-badge">ثلاثاء</div>
+        <div class="cal-weekday-badge">أربعاء</div>
+        <div class="cal-weekday-badge">خميس</div>
+        <div class="cal-weekday-badge">جمعة</div>
+      </div>
+
+      <!-- Dynamic Days Grid -->
+      <div id="majarraCalendarDaysGrid" class="cal-days-grid"></div>
+
+      <!-- Modal Footer Actions -->
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <button type="button" onclick="setSingleDayBooking()" style="padding: 8px 14px; border-radius: 10px; border: 1px solid rgba(232, 198, 119, 0.4); background: rgba(232, 198, 119, 0.12); color: var(--brand-gold); font-weight: 800; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
+          <i class="fa-solid fa-bolt"></i> حجز يوم واحد فقط
+        </button>
+
+        <button type="button" onclick="closeMajarraCalendarModal()" style="padding: 8px 20px; border-radius: 10px; border: none; background: linear-gradient(135deg, #6b21a8, #9333ea); color: #ffffff; font-weight: 800; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(107,33,168,0.4); transition: all 0.2s;">
+          <i class="fa-solid fa-check"></i> تأكيد وحفظ
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- App Standalone Script -->
+  <script>
+    // --- THEME TOGGLE FUNCTIONALITY ---
+    function toggleMajarraTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('majarra-theme', newTheme);
+      
+      const icon = document.getElementById('theme-icon');
+      if (icon) {
+        icon.className = newTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+      }
+    }
+
+    // Initialize saved theme on load
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('majarra-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const updateIcon = () => {
+        const icon = document.getElementById('theme-icon');
+        if (icon) {
+          icon.className = savedTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+        }
+      };
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', updateIcon);
+      } else {
+        updateIcon();
+      }
+    })();
+
+    // --- MAJARRA LUXURY EMBEDDED ARABIC CALENDAR ENGINE ---
+    const ARABIC_MONTHS = [
+      "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+      "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+    ];
+
+    const todayDate = new Date();
+    todayDate.setHours(0,0,0,0);
+
+    let selectedStartDate = new Date(todayDate);
+    let selectedEndDate = new Date(todayDate);
+
+    let calendarViewYear = todayDate.getFullYear();
+    let calendarViewMonth = todayDate.getMonth();
+    let calendarTargetMode = 'start'; // 'start' or 'end'
+
+    function formatArabicDate(d) {
+      if (!d) return '';
+      const dd = String(d.getDate()).padStart(2, '0');
+      return dd + " " + ARABIC_MONTHS[d.getMonth()] + " " + d.getFullYear();
+    }
+
+    function toYMDDate(d) {
+      if (!d) return '';
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return yyyy + "-" + mm + "-" + dd;
+    }
+
+    function openMajarraCalendarModal(targetMode = 'start') {
+      setCalendarTargetMode(targetMode);
+      const overlay = document.getElementById('majarraCalendarModalOverlay');
+      if (overlay) {
+        overlay.classList.add('active');
+        initLuxuryCalendar();
+      }
+    }
+
+    function closeMajarraCalendarModal() {
+      const overlay = document.getElementById('majarraCalendarModalOverlay');
+      if (overlay) {
+        overlay.classList.remove('active');
+      }
+    }
+
+    function onCalendarModalBackdropClick(e) {
+      if (e.target.id === 'majarraCalendarModalOverlay') {
+        closeMajarraCalendarModal();
+      }
+    }
+
+    function initLuxuryCalendar() {
+      if (selectedStartDate) {
+        calendarViewYear = selectedStartDate.getFullYear();
+        calendarViewMonth = selectedStartDate.getMonth();
+      }
+      renderLuxuryCalendar();
+    }
+
+    function renderLuxuryCalendar() {
+      const daysGrid = document.getElementById('majarraCalendarDaysGrid');
+      const monthSel = document.getElementById('calMonthSelect');
+      const yearSel = document.getElementById('calYearSelect');
+
+      if (!daysGrid) return;
+
+      if (monthSel) monthSel.value = String(calendarViewMonth);
+      if (yearSel) yearSel.value = String(calendarViewYear);
+
+      daysGrid.innerHTML = '';
+
+      const firstDayObj = new Date(calendarViewYear, calendarViewMonth, 1);
+      const startCol = (firstDayObj.getDay() + 1) % 7;
+
+      const totalDaysInMonth = new Date(calendarViewYear, calendarViewMonth + 1, 0).getDate();
+      const prevMonthTotalDays = new Date(calendarViewYear, calendarViewMonth, 0).getDate();
+
+      const startYMD = selectedStartDate ? toYMDDate(selectedStartDate) : '';
+      const endYMD = selectedEndDate ? toYMDDate(selectedEndDate) : startYMD;
+
+      // 1. Prev month trailing days
+      for (let i = startCol - 1; i >= 0; i--) {
+        const dayNum = prevMonthTotalDays - i;
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell other-month';
+        cell.innerText = dayNum;
+        daysGrid.appendChild(cell);
+      }
+
+      // 2. Current month days
+      for (let day = 1; day <= totalDaysInMonth; day++) {
+        const curDate = new Date(calendarViewYear, calendarViewMonth, day);
+        curDate.setHours(0,0,0,0);
+        const curYMD = toYMDDate(curDate);
+
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell';
+        cell.innerText = day;
+
+        const isToday = curDate.getTime() === todayDate.getTime();
+        const isStart = curYMD === startYMD;
+        const isEnd = curYMD === endYMD;
+        const isRange = startYMD && endYMD && curYMD > startYMD && curYMD < endYMD;
+
+        if (isStart) cell.classList.add('is-start');
+        if (isEnd && !isStart) cell.classList.add('is-end');
+        if (isRange) cell.classList.add('is-range');
+        if (isToday) cell.classList.add('is-today');
+
+        cell.onclick = () => onLuxuryCalendarDayClick(curDate);
+        daysGrid.appendChild(cell);
+      }
+
+      // 3. Next month leading days
+      const renderedCount = startCol + totalDaysInMonth;
+      const targetTotal = renderedCount > 35 ? 42 : 35;
+      for (let nextDay = 1; nextDay <= (targetTotal - renderedCount); nextDay++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell other-month';
+        cell.innerText = nextDay;
+        daysGrid.appendChild(cell);
+      }
+
+      updateCalendarBadges();
+    }
+
+    function onLuxuryCalendarDayClick(date) {
+      if (calendarTargetMode === 'start') {
+        selectedStartDate = new Date(date);
+        selectedEndDate = new Date(date);
+        updateDateDisplays();
+        renderLuxuryCalendar();
+        checkSlotAvailabilityLive();
+        // Auto transition target mode to 'end' for the second click
+        setCalendarTargetMode('end');
+      } else {
+        if (date < selectedStartDate) {
+          // If user picked a date prior to start date, reset start & end and stay in end mode
+          selectedStartDate = new Date(date);
+          selectedEndDate = new Date(date);
+          updateDateDisplays();
+          renderLuxuryCalendar();
+          checkSlotAvailabilityLive();
+          setCalendarTargetMode('end');
+        } else {
+          // Pick end date, update UI, and auto confirm & close modal smoothly
+          selectedEndDate = new Date(date);
+          updateDateDisplays();
+          renderLuxuryCalendar();
+          checkSlotAvailabilityLive();
+          setTimeout(() => {
+            closeMajarraCalendarModal();
+          }, 250);
+        }
+      }
+    }
+
+    function setCalendarTargetMode(mode) {
+      calendarTargetMode = mode;
+      const tabStart = document.getElementById('tabSetStart');
+      const tabEnd = document.getElementById('tabSetEnd');
+      const subtitle = document.getElementById('calModalSubtitle');
+
+      if (subtitle) {
+        if (mode === 'start') {
+          subtitle.innerText = 'حدد تاريخ البداية (اختر اليوم الأول للفعالية)';
+          subtitle.style.color = 'var(--brand-gold)';
+        } else {
+          subtitle.innerText = 'الآن اختر تاريخ النهاية (أو انقر نفس اليوم للحجز اليومي)';
+          subtitle.style.color = '#c084fc';
+        }
+      }
+
+      if (tabStart && tabEnd) {
+        if (mode === 'start') {
+          tabStart.style.background = 'rgba(107,33,168,0.55)';
+          tabStart.style.borderColor = 'var(--brand-gold)';
+          tabStart.style.boxShadow = '0 0 10px rgba(232, 198, 119, 0.3)';
+          tabEnd.style.background = 'rgba(15,23,42,0.6)';
+          tabEnd.style.borderColor = 'rgba(255,255,255,0.15)';
+          tabEnd.style.boxShadow = 'none';
+        } else {
+          tabEnd.style.background = 'rgba(124,58,237,0.55)';
+          tabEnd.style.borderColor = '#c084fc';
+          tabEnd.style.boxShadow = '0 0 10px rgba(192, 132, 252, 0.3)';
+          tabStart.style.background = 'rgba(15,23,42,0.6)';
+          tabStart.style.borderColor = 'rgba(255,255,255,0.15)';
+          tabStart.style.boxShadow = 'none';
+        }
+      }
+    }
+
+    function setSingleDayBooking() {
+      selectedEndDate = new Date(selectedStartDate);
+      updateDateDisplays();
+      renderLuxuryCalendar();
+      checkSlotAvailabilityLive();
+      closeMajarraCalendarModal();
+    }
+
+    function navCalendarMonth(delta) {
+      calendarViewMonth += delta;
+      if (calendarViewMonth > 11) {
+        calendarViewMonth = 0;
+        calendarViewYear++;
+      } else if (calendarViewMonth < 0) {
+        calendarViewMonth = 11;
+        calendarViewYear--;
+      }
+      renderLuxuryCalendar();
+    }
+
+    function onCalendarSelectChange() {
+      const mSel = document.getElementById('calMonthSelect');
+      const ySel = document.getElementById('calYearSelect');
+      if (mSel) calendarViewMonth = parseInt(mSel.value);
+      if (ySel) calendarViewYear = parseInt(ySel.value);
+      renderLuxuryCalendar();
+    }
+
+    function updateCalendarBadges() {
+      const bStart = document.getElementById('badgeStartDateText');
+      const bEnd = document.getElementById('badgeEndDateText');
+      if (bStart && selectedStartDate) {
+        bStart.innerText = formatArabicDate(selectedStartDate);
+      }
+      if (bEnd && selectedEndDate) {
+        bEnd.innerText = formatArabicDate(selectedEndDate);
+      }
+    }
+
+    function updateDateDisplays() {
+      let combinedDisplayStr = 'اختر التاريخ...';
+
+      if (selectedStartDate) {
+        const sd = String(selectedStartDate.getDate()).padStart(2, '0');
+        const sm = String(selectedStartDate.getMonth() + 1).padStart(2, '0');
+        const sy = String(selectedStartDate.getFullYear());
+        const ymdStart = sy + "-" + sm + "-" + sd;
+
+        const startInp = document.getElementById('startDateInput');
+        if (startInp) startInp.value = ymdStart;
+
+        if (document.getElementById('startDate')) {
+          document.getElementById('startDate').value = ymdStart;
+        }
+
+        combinedDisplayStr = formatArabicDate(selectedStartDate);
+
+        if (selectedEndDate) {
+          const ed = String(selectedEndDate.getDate()).padStart(2, '0');
+          const em = String(selectedEndDate.getMonth() + 1).padStart(2, '0');
+          const ey = String(selectedEndDate.getFullYear());
+          const ymdEnd = ey + "-" + em + "-" + ed;
+
+          const endInp = document.getElementById('endDateInput');
+          if (endInp) endInp.value = ymdEnd;
+
+          if (document.getElementById('endDate')) {
+            document.getElementById('endDate').value = ymdEnd;
+          }
+
+          if (toYMDDate(selectedStartDate) !== toYMDDate(selectedEndDate)) {
+            combinedDisplayStr += ' ➔ ' + formatArabicDate(selectedEndDate);
+          }
+        }
+      }
+
+      const startValEl = document.getElementById('startDateDisplayVal');
+      if (startValEl) startValEl.innerText = combinedDisplayStr;
+
+      const endValEl = document.getElementById('endDateDisplayVal');
+      if (endValEl) endValEl.innerText = selectedEndDate ? formatArabicDate(selectedEndDate) : combinedDisplayStr;
+
+      updateCalendarBadges();
+      if (typeof calculateExactFees === 'function') calculateExactFees();
+    }
+
+    function toggleCustomSelect(wrapperId) {
+      const wrapper = document.getElementById(wrapperId);
+      if (!wrapper) return;
+      const isOpen = wrapper.classList.contains('open');
+      
+      document.querySelectorAll('.custom-select-wrapper').forEach(w => {
+        w.classList.remove('open');
+        const card = w.closest('.question-card');
+        if (card) card.style.zIndex = '1';
+      });
+
+      if (!isOpen) {
+        wrapper.classList.add('open');
+        const card = wrapper.closest('.question-card');
+        if (card) card.style.zIndex = '100';
+      }
+    }
+
+    function chooseCustomService(wrapperId, value, displayText, el) {
+      const wrapper = document.getElementById(wrapperId);
+      if (wrapper) {
+        wrapper.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+        if (el) el.classList.add('selected');
+        wrapper.classList.remove('open');
+        const card = wrapper.closest('.question-card');
+        if (card) card.style.zIndex = '1';
+      }
+      document.getElementById('servicesTriggerText').innerHTML = displayText;
+      document.getElementById('additionalService').value = value;
+      calculateExactFees();
+    }
+
+    function chooseCustomActivityType(wrapperId, value, displayText, el) {
+      const wrapper = document.getElementById(wrapperId);
+      if (wrapper) {
+        wrapper.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+        if (el) el.classList.add('selected');
+        wrapper.classList.remove('open');
+        const card = wrapper.closest('.question-card');
+        if (card) card.style.zIndex = '1';
+      }
+      document.getElementById('activityTypeTriggerText').innerHTML = displayText;
+      document.getElementById('isPaidEventSelect').value = value;
+      if (typeof calculateExactFees === 'function') calculateExactFees();
+    }
+
+    function selectCustomTime(wrapperId, inputId, triggerTextId, value, displayText, el) {
+      const hiddenInp = document.getElementById(inputId);
+      if (hiddenInp) hiddenInp.value = value;
+      
+      const trigSpan = document.getElementById(triggerTextId);
+      if (trigSpan) trigSpan.innerHTML = displayText;
+      
+      const wrapper = document.getElementById(wrapperId);
+      if (wrapper) {
+        wrapper.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+        if (el) el.classList.add('selected');
+        wrapper.classList.remove('open');
+        const card = wrapper.closest('.question-card');
+        if (card) card.style.zIndex = '1';
+      }
+
+      if (typeof checkSlotAvailabilityLive === 'function') checkSlotAvailabilityLive();
+      if (typeof calculateExactFees === 'function') calculateExactFees();
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.custom-select-wrapper')) {
+        document.querySelectorAll('.custom-select-wrapper').forEach(w => {
+          w.classList.remove('open');
+          const card = w.closest('.question-card');
+          if (card) card.style.zIndex = '1';
+        });
+      }
+    });
+
+    function selectPackageDirect(pkgVal) {
+      document.getElementById('packageType').value = pkgVal;
+      
+      const kafoCard = document.getElementById('pkgCardKafo');
+      const alaAiniCard = document.getElementById('pkgCardAlaAini');
+
+      if (pkgVal === 'كفو') {
+        if (kafoCard) kafoCard.classList.add('active');
+        if (alaAiniCard) alaAiniCard.classList.remove('active');
+      } else {
+        if (alaAiniCard) alaAiniCard.classList.add('active');
+        if (kafoCard) kafoCard.classList.remove('active');
+      }
+
+      calculateExactFees();
+    }
+
+    const HALL_DATA = {
+      ofoq: {
+        title: 'قاعة أفــُـق (Ofoq Hall)',
+        desc: 'مساحة تدريبية وتفاعلية ملهمة ومرنة مجهزة بالكامل للورش والفعاليات',
+        capacity: 'سعة القاعة: حتى 20 شخصاً',
+        image: 'assets/workshop.jpg',
+        fullName: 'قاعة أفــُـق (سعة القاعة 20)'
+      },
+      diwan: {
+        title: 'قاعة ديـــوان (Diwan Hall)',
+        desc: 'القاعة الكبرى للمؤتمرات والفعاليات الرسمية والندوات العامة والجلسات الموسعة',
+        capacity: 'سعة القاعة: حتى 30 شخصاً',
+        image: 'assets/grand.jpg',
+        fullName: 'قاعة ديـــوان (سعة القاعة 30)'
+      },
+      sadeem: {
+        title: 'قاعة ســديم (Sadeem Hall)',
+        desc: 'قاعة الاجتماعات والورشات المصغرة والجلسات الهادئة',
+        capacity: 'سعة القاعة: 16 - 18 شخصاً',
+        image: 'assets/meeting.jpg',
+        fullName: 'قاعة ســديم (سعة القاعة 16-18)'
+      },
+      full: {
+        title: 'المركــز كليـّـاً (Full Center Booking)',
+        desc: 'حجز واستخدام كافة قاعات ومرافق مركز مجرّة المجتمعي حصرياً لفعاليتك (أفق + ديوان + سديم + البهو)',
+        capacity: 'سعة المركز: حتى 70 شخصاً',
+        image: 'assets/grand.jpg',
+        fullName: 'المركز كلياً (أفق + ديوان + سديم)'
+      }
+    };
+
+    function switchHallDirect(hallKey) {
+      const data = HALL_DATA[hallKey] || HALL_DATA.ofoq;
+      
+      const imgEl = document.getElementById('heroHallImg');
+      const titleEl = document.getElementById('heroHallTitle');
+      const descEl = document.getElementById('heroHallDesc');
+      const capEl = document.getElementById('heroHallCapacity');
+      const textEl = document.getElementById('selectedHallText');
+      const inputEl = document.getElementById('hallName');
+
+      if (imgEl) imgEl.src = data.image;
+      if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-door-open" style="color: var(--brand-gold);"></i> ${data.title}`;
+      if (descEl) descEl.innerText = data.desc;
+      if (capEl) capEl.innerHTML = `<i class="fa-solid fa-users"></i> ${data.capacity}`;
+      if (textEl) textEl.innerText = data.fullName;
+      if (inputEl) inputEl.value = data.fullName;
+
+      calculateExactFees();
+      checkSlotAvailabilityLive();
+    }
+
+    async function checkSlotAvailabilityLive() {
+      let startDate = document.getElementById('startDate')?.value;
+      if (!startDate) {
+        startDate = new Date().toISOString().split('T')[0];
+      }
+      let endDate = document.getElementById('endDate')?.value || startDate;
+      const startTime = document.getElementById('startTime')?.value || '13:00';
+      const endTime = document.getElementById('endTime')?.value || '21:00';
+      const hallName = document.getElementById('hallName')?.value || '';
+      const alertEl = document.getElementById('slot-conflict-alert');
+      const submitBtn = document.querySelector('button[type="submit"]');
+
+      if (!alertEl) return;
+
+      if (startTime >= endTime) {
+        alertEl.style.display = 'block';
+        alertEl.innerHTML = `
+          <div style="background: rgba(244, 63, 94, 0.15); border: 2px solid #f43f5e; border-radius: 12px; padding: 12px 16px; color: #fda4af; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-circle-exclamation" style="font-size: 1.4rem; color: #f43f5e;"></i>
+            <span>⚠️ تنبيه: وقت نهاية الفعالية (${endTime}) يجب أن يكون بعد وقت البداية (${startTime}).</span>
+          </div>
+        `;
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.5';
+          submitBtn.style.cursor = 'not-allowed';
+        }
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/public/check-availability', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ hallName, startDate, endDate, startTime, endTime })
+        });
+        const data = await res.json();
+
+        alertEl.style.display = 'block';
+        if (!data.available) {
+          alertEl.innerHTML = `
+            <div style="background: rgba(244, 63, 94, 0.18); border: 2px solid #f43f5e; border-radius: 12px; padding: 14px 18px; color: #fda4af; font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; gap: 12px;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.6rem; color: #f43f5e;"></i>
+              <div>
+                <div style="color: #ffffff; font-size: 0.98rem; font-weight: 800; margin-bottom: 2px;">⚠️ تعارض في توقيت الحجز!</div>
+                <div>${(data.message || '').replace(/^[⚠️✅]\s*/, '')}</div>
+              </div>
+            </div>
+          `;
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.5';
+            submitBtn.style.cursor = 'not-allowed';
+          }
+        } else {
+          alertEl.innerHTML = `
+            <div style="background: rgba(16, 185, 129, 0.15); border: 1.5px solid #10b981; border-radius: 12px; padding: 12px 16px; color: #34d399; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 10px;">
+              <i class="fa-solid fa-circle-check" style="font-size: 1.3rem; color: #10b981;"></i>
+              <span>${(data.message || 'القاعة والتوقيت متاحان للحجز فوراً دون أي تعارض.').replace(/^[⚠️✅]\s*/, '')}</span>
+            </div>
+          `;
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.cursor = 'pointer';
+          }
+        }
+      } catch (err) {
+        console.error('Check availability error:', err);
+      }
+    }
+
+    // Auto-parse hall & date parameters from URL e.g. book.html?hall=diwan
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const hall = params.get('hall') || 'ofoq';
+      let selectedKey = 'ofoq';
+
+      if (hall.includes('diwan') || hall.includes('ديوان')) {
+        selectedKey = 'diwan';
+      } else if (hall.includes('sadeem') || hall.includes('سديم')) {
+        selectedKey = 'sadeem';
+      } else if (hall.includes('full') || hall.includes('المركز') || hall.includes('مركز')) {
+        selectedKey = 'full';
+      } else if (hall.includes('ofoq') || hall.includes('أفق')) {
+        selectedKey = 'ofoq';
+      }
+
+      switchHallDirect(selectedKey);
+      initLuxuryCalendar();
+      updateDateDisplays();
+    });
+
+    function calculateExactFees() {
+      const typeVal = document.getElementById('isPaidEventSelect')?.value || 'لا';
+      const hall = document.getElementById('hallName')?.value || '';
+      const pkg = document.getElementById('packageType')?.value || 'كفو';
+      const service = document.getElementById('additionalService')?.value || 'بدون خدمات إضافية';
+
+      let totalTL = 0;
+      let notes = [];
+      const isNonProfit = (typeVal === 'لا');
+
+      if (isNonProfit) {
+        if (pkg === 'على عيني') {
+          if (hall.includes('ديوان')) { totalTL += 350; notes.push('باقة على عيني (ديوان): 350 TL'); }
+          else if (hall.includes('سديم')) { totalTL += 225; notes.push('باقة على عيني (سديم): 225 TL'); }
+          else if (hall.includes('المركز كلياً')) { totalTL += 450; notes.push('باقة على عيني (المركز كلياً): 450 TL'); }
+          else { totalTL += 250; notes.push('باقة على عيني (أفق): 250 TL'); }
+        } else {
+          notes.push('باقة كفو للأنشطة غير الربحية: مجاناً (0 TL)');
+        }
+      } else if (typeVal === 'نعم_منظمات') {
+        if (pkg === 'على عيني') {
+          if (hall.includes('ديوان')) { totalTL += 4000; notes.push('منظمات - ديوان (على عيني): 4000 TL + KDV'); }
+          else if (hall.includes('سديم')) { totalTL += 3750; notes.push('منظمات - سديم (على عيني): 3750 TL + KDV'); }
+          else if (hall.includes('المركز كلياً')) { totalTL += 6000; notes.push('منظمات - المركز كلياً: 6000 TL + KDV'); }
+          else { totalTL += 3500; notes.push('منظمات - أفق (على عيني): 3500 TL + KDV'); }
+        } else {
+          if (hall.includes('ديوان')) { totalTL += 3000; notes.push('منظمات - ديوان (كفو): 3000 TL + KDV'); }
+          else if (hall.includes('سديم')) { totalTL += 2750; notes.push('منظمات - سديم (كفو): 2750 TL + KDV'); }
+          else if (hall.includes('المركز كلياً')) { totalTL += 5000; notes.push('منظمات - المركز كلياً: 5000 TL + KDV'); }
+          else { totalTL += 2500; notes.push('منظمات - أفق (كفو): 2500 TL + KDV'); }
+        }
+      } else {
+        const pct = (pkg === 'على عيني') ? '15%' : '10%';
+        notes.push(`نشاط مأجور للأفراد/الفرق: نسبة ${pct} من إجمالي الربح`);
+      }
+
+      if (service.includes('قرطاسية')) {
+        const sCost = isNonProfit ? 80 : 250;
+        totalTL += sCost;
+        notes.push(`قرطاسية: +${sCost} TL`);
+      } else if (service.includes('اكسترا')) {
+        const sCost = isNonProfit ? 500 : 1000;
+        totalTL += sCost;
+        notes.push(`بوفيه إكسترا: +${sCost} TL`);
+      } else if (service.includes('اوبها')) {
+        const sCost = isNonProfit ? 1000 : 2000;
+        totalTL += sCost;
+        notes.push(`بوفيه أوبها: +${sCost} TL`);
+      } else if (service.includes('على عيني')) {
+        const sCost = isNonProfit ? 2000 : 3500;
+        totalTL += sCost;
+        notes.push(`بوفيه على عيني: +${sCost} TL`);
+      } else if (service.includes('خارجية')) {
+        totalTL += 200;
+        notes.push('رسوم ضيافة خارجية: +200 TL');
+      }
+
+      const displayEl = document.getElementById('fees-amount-display');
+      const noteEl = document.getElementById('fees-note-text');
+
+      if (displayEl) {
+        if (totalTL > 0) {
+          displayEl.innerText = `${totalTL} TL`;
+          displayEl.style.color = '#fbbf24';
+          displayEl.style.background = 'rgba(245, 158, 11, 0.18)';
+          displayEl.style.borderColor = 'rgba(245, 158, 11, 0.4)';
+        } else if (typeVal === 'نعم_افراد') {
+          const pct = (pkg === 'على عيني') ? '15%' : '10%';
+          displayEl.innerText = `نسبة ${pct} من أرباح الدورة`;
+          displayEl.style.color = '#c084fc';
+          displayEl.style.background = 'rgba(168, 85, 247, 0.18)';
+          displayEl.style.borderColor = 'rgba(168, 85, 247, 0.4)';
+        } else {
+          displayEl.innerText = '0 TL (نشاط مجاني 100%)';
+          displayEl.style.color = '#34d399';
+          displayEl.style.background = 'rgba(16, 185, 129, 0.18)';
+          displayEl.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+        }
+      }
+      if (noteEl) {
+        noteEl.innerHTML = `<i class="fa-solid fa-circle-info" style="color: var(--brand-purple); margin-left: 6px;"></i> <strong>التفاصيل المعتمدة:</strong> ${notes.join(' | ')}`;
+      }
+    }
+
+    function calculateClientFeeText() {
+      const hallName = document.getElementById('hallName')?.value || 'قاعة أفــُـق';
+      const packageType = document.getElementById('packageType')?.value || 'كفو';
+      const isPaidVal = document.getElementById('isPaidEventSelect')?.value || 'لا';
+      const startDate = document.getElementById('startDate')?.value || '';
+      const endDate = document.getElementById('endDate')?.value || startDate;
+
+      let days = 1;
+      if (startDate && endDate) {
+        const s = new Date(startDate);
+        const e = new Date(endDate);
+        if (!isNaN(s) && !isNaN(e)) {
+          const diffTime = Math.abs(e - s);
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+          if (diffDays > 1) days = diffDays;
+        }
+      }
+
+      const isPaid = isPaidVal !== 'لا';
+      const hall = hallName.toLowerCase();
+      let dailyFee = 0;
+      let feeLabel = '';
+
+      if (isPaid) {
+        if (hall.includes('المركز كلياً') || hall.includes('full')) dailyFee = 750;
+        else if (hall.includes('ديوان') || hall.includes('diwan')) dailyFee = 450;
+        else dailyFee = 350;
+
+        if (packageType === 'على عيني') {
+          let extra = 225;
+          if (hall.includes('ديوان')) extra = 275;
+          if (hall.includes('المركز كلياً')) extra = 350;
+          dailyFee += extra;
+        }
+        feeLabel = 'نشاط مأجور / إجار قاعة';
+      } else if (packageType === 'على عيني') {
+        if (hall.includes('المركز كلياً')) dailyFee = 350;
+        else if (hall.includes('ديوان')) dailyFee = 275;
+        else dailyFee = 225;
+        feeLabel = 'رسوم ضيافة وباقة على عيني';
+      } else {
+        return '0 TL (نشاط مجاني)';
+      }
+
+      const total = dailyFee * days;
+      return `${total} TL (${feeLabel}${days > 1 ? ` - ${days} أيام` : ''})`;
+    }
+
+    async function handleStandaloneBookingSubmit(e) {
+      e.preventDefault();
+      
+      const equipmentChecked = Array.from(document.querySelectorAll('input[name="equipment"]:checked')).map(c => c.value);
+      const feeAmountCalculated = calculateClientFeeText();
+      const isPaidValue = (document.getElementById('isPaidEventSelect')?.value === 'لا') ? 'لا' : 'نعم';
+
+      const payload = {
+        organizerName: document.getElementById('organizerName').value.trim(),
+        whatsappNumber: document.getElementById('whatsappNumber').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        entityType: document.getElementById('entityType').value,
+        executorName: document.getElementById('executorName').value.trim(),
+        eventType: document.getElementById('eventType').value,
+        hallName: document.getElementById('hallName').value,
+        eventTitle: document.getElementById('eventTitle').value.trim(),
+        eventDescription: document.getElementById('eventDescription').value.trim(),
+        attendeesCount: parseInt(document.getElementById('attendeesCount').value, 10),
+        startDate: document.getElementById('startDate').value,
+        endDate: document.getElementById('endDate').value || document.getElementById('startDate').value,
+        startTime: document.getElementById('startTime').value,
+        endTime: document.getElementById('endTime').value,
+        equipmentNeeded: equipmentChecked.join(' - '),
+        packageType: document.getElementById('packageType').value,
+        additionalService: document.getElementById('additionalService').value,
+        isSponsored: 'لا',
+        isPaidEvent: isPaidValue,
+        feeAmount: feeAmountCalculated,
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      };
+
+      const alertBox = document.getElementById('standalone-alert-box');
+
+      try {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          const bookingId = data.bookingId || ('MJR-' + Math.floor(100000 + Math.random() * 900000));
+          
+          const mainContainer = document.querySelector('.booking-standalone-container');
+          mainContainer.innerHTML = `
+            <div style="text-align: center; padding: 20px 10px;">
+              <div style="font-size: 3.5rem; color: #10b981; margin-bottom: 12px;"><i class="fa-solid fa-circle-check"></i></div>
+              <h2 style="font-size: 1.8rem; color: var(--text-primary); margin-bottom: 8px;">تم تقديم طلب حجز القاعة بنجاح!</h2>
+              <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 24px;">
+                رمز تتبع الحجز الخاص بك: <strong style="color: var(--brand-gold); background: rgba(232,198,119,0.15); padding: 4px 12px; border-radius: 8px;">${bookingId}</strong>
+              </p>
+
+              <!-- Clean Printable/Downloadable A4 Voucher -->
+              <div id="voucherToDownload" class="clean-white-voucher" style="text-align: right; margin-bottom: 24px; padding: 24px; border-radius: 16px; background: #ffffff; color: #0f172a; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+                <div class="a4-paper-indicator">
+                  <span>مركز مجرة المجتمعي — إيصال حجز مبدئي معتمد</span>
+                  <span>MJR RECEPTION VOUCHER</span>
+                </div>
+                <div class="clean-voucher-header" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #8a6fb2; padding-bottom: 14px; margin-bottom: 18px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <img src="assets/majarra_official_icon.png" style="width: 54px; height: 54px; object-fit: contain;" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' width=\'50\' height=\'50\'><circle cx=\'50\' cy=\'50\' r=\'46\' fill=\'%238a6fb2\'/><text x=\'50%\' y=\'55%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23fff\' font-size=\'32\'>M</text></svg>';">
+                    <div>
+                      <h3 style="margin: 0; font-size: 1.3rem; color: #0f172a; font-weight: 800;">مركز مجرّة المجتمعي</h3>
+                      <p style="margin: 2px 0 0; font-size: 0.82rem; color: #8a6fb2; font-weight: 700;">إيصال حجز قاعة معتمد مبدئياً</p>
+                    </div>
+                  </div>
+                  <div style="text-align: left;">
+                    <div style="font-weight: 900; color: #8a6fb2; font-size: 1.2rem; background: #f3f0f7; padding: 4px 12px; border-radius: 8px;">#${bookingId}</div>
+                    <div style="font-size: 0.78rem; color: #64748b; margin-top: 4px;">تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}</div>
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; font-size: 0.88rem; color: #1e293b; background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                  <div><strong>اسم المسؤول:</strong> ${payload.organizerName}</div>
+                  <div><strong>رقم الواتساب:</strong> ${payload.whatsappNumber}</div>
+                  <div><strong>الجهة المنفذة:</strong> ${payload.executorName}</div>
+                  <div><strong>نوع النشاط:</strong> ${payload.eventType}</div>
+                  <div><strong>عنوان الفعالية:</strong> ${payload.eventTitle}</div>
+                  <div><strong>عدد الحضور:</strong> ${payload.attendeesCount} شخص</div>
+                  <div><strong>القاعة المطلوبة:</strong> <span style="color: #8a6fb2; font-weight: 800;">${payload.hallName}</span></div>
+                  <div><strong>التاريخ والتوقيت:</strong> ${payload.startDate} (${payload.startTime} - ${payload.endTime})</div>
+                </div>
+
+                <div style="background: #fdf8ec; border: 1.5px solid #fcd34d; border-radius: 12px; padding: 16px; margin-bottom: 18px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-weight: 800; color: #92400e; font-size: 0.95rem;">
+                      <i class="fa-solid fa-crown" style="color: #d97706; margin-left: 6px;"></i> الباقة المختارة: <strong>باقة ${payload.packageType}</strong>
+                    </span>
+                    <span style="font-size: 0.82rem; color: #78350f; font-weight: 700;">نوع التمويل: ${payload.isPaidEvent === 'لا' ? 'نشاط غير ربحي' : 'نشاط مأجور / مدعوم'}</span>
+                  </div>
+                  
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #f59e0b; padding-top: 10px; margin-top: 8px;">
+                    <span style="font-weight: 800; color: #0f172a; font-size: 0.95rem;">إجمالي الرسوم المستحقة للفعالية:</span>
+                    <span style="font-size: 1.25rem; font-weight: 900; color: #b45309; background: #ffffff; padding: 4px 14px; border-radius: 8px; border: 1px solid #fde68a;">
+                      ${payload.feeAmount}
+                    </span>
+                  </div>
+                </div>
+
+                <div style="font-size: 0.84rem; color: #475569; margin-bottom: 16px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px;">
+                  <div style="margin-bottom: 4px;"><strong>التجهيزات المطلوبة:</strong> ${payload.equipmentNeeded || 'كراسي - طاولات'}</div>
+                  <div><strong>الخدمات الإضافية:</strong> ${payload.additionalService}</div>
+                </div>
+
+                <div style="border-top: 1px dashed #cbd5e1; padding-top: 14px; font-size: 0.82rem; color: #475569; display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <span>حالة الطلب: <strong style="color: #d97706; background: #fef3c7; padding: 2px 10px; border-radius: 6px;">⏳ قيد الدراسة والمراجعة</strong></span>
+                  </div>
+                  <div style="text-align: left; font-size: 0.78rem; color: #64748b;">
+                    <span>مركز مجرّة المجتمعي ✨ 2026</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px;">
+                <button onclick="downloadVoucherPDF('${bookingId}')" class="btn btn-primary" style="background: var(--brand-purple);">
+                  <i class="fa-solid fa-file-pdf"></i> تحميل الإيصال (PDF)
+                </button>
+
+                <a href="https://wa.me/905385062989?text=${encodeURIComponent('مرحباً، قمت بتقديم طلب حجز قاعة جديد برقم: ' + bookingId)}" target="_blank" class="btn btn-outline" style="border-color: #25D366; color: #25D366; font-weight: 700;">
+                  <i class="fa-brands fa-whatsapp"></i> التواصل المباشر عبر واتساب
+                </a>
+
+                <a href="/" class="btn btn-outline" style="border-color: var(--brand-gold); color: var(--brand-gold); font-weight: 700;">
+                  <i class="fa-solid fa-house"></i> العودة للموقع الرئيسي
+                </a>
+              </div>
+            </div>
+          `;
+        } else {
+          alertBox.style.display = 'block';
+          alertBox.className = 'alert-banner alert-error';
+          alertBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${data.message || 'حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى.'}`;
+        }
+      } catch (err) {
+        alertBox.style.display = 'block';
+        alertBox.className = 'alert-banner alert-error';
+        alertBox.innerHTML = `<i class="fa-solid fa-wifi"></i> تم تقديم الطلب وإرساله لإدارة المركز.`;
+      }
+    }
+
+    function downloadVoucherPDF(bookingId) {
+      const element = document.getElementById('voucherToDownload');
+      if (!element) return;
+      const opt = {
+        margin: 10,
+        filename: `Majarra_Booking_Voucher_${bookingId}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>
